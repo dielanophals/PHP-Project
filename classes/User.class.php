@@ -65,7 +65,6 @@
                 else{
                     return false;
                 }
-                return true;
             }
             catch(Throwable $t){
                 return false;
