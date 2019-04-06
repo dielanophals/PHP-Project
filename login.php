@@ -26,7 +26,7 @@
     <title>InstaPet - Login</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="" method="post" class="login">
         <h2>Sign in</h2>
         <?php if(isset($err)): ?>
             <div>
