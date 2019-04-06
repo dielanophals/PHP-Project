@@ -50,4 +50,17 @@
         public function getPasswordConfirmation(){
             return $this->passwordConfirmation;
         }
+
+        public function login($p_sEmail, $p_sPassword, ){
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
+                $statement->bindParam(":email", $this->email);
+                $result = $statement->execute();
+                return $result;
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
     }
