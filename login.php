@@ -23,6 +23,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <title>InstaPet - Login</title>
 </head>
 <body>
