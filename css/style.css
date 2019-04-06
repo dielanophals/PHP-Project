@@ -4,19 +4,44 @@
 
 body{
     font-family: 'Quicksand', sans-serif;
-    padding: 10%;
 }
 
-form.login input {
+nav{
+    display: flex;
+    background: #000;
+    padding: 2%;
+}
+
+nav a, nav form{
+    margin-top: 0%;
+    color: #fff;
+    flex: 1 0 20%;
+    text-transform: lowercase;
+    text-align: center;
+}
+
+form.login{
+    margin: 100px;
+}
+
+form.login input{
     margin-bottom: 20px;
     border: 0;
     outline: 0;
     background: transparent;
     border-bottom: 2px solid #000;
 }
+
 form.login input[type=submit]{
     padding: 10px;
     background-color: #000;
     color: #fff;
     border-radius: 10%;
+}
+
+nav form input{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #fff;
 }
