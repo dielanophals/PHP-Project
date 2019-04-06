@@ -1,7 +1,8 @@
 <?php
+    require_once("bootstrap.php");
 
-
-
+    if(!empty($_POST)){
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
