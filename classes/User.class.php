@@ -51,14 +51,21 @@
             return $this->passwordConfirmation;
         }
 
-        public function login($p_sEmail){
+        public function login($p_sEmail, $p_sPassword){
             try{
                 $conn = Db::getInstance();
-                $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
-                $statement->bindParam(":email", $this->email);
+                $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+                $statement->bindParam(":email", $p_sEmail);
                 $statement->execute();
-                $result = $statement->fetch(PDO::FETCH_ASSOC);
-                return $result;
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+                if(password_verify($p_sPassword, $user['password'])){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+                return true;
             }
             catch(Throwable $t){
                 return false;
