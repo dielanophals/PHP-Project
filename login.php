@@ -30,7 +30,7 @@
         <h2>Sign in</h2>
         <?php if(isset($err)): ?>
             <div>
-                <p>Unable to sign in.</p>
+                <p>The email address and/or password you entered is invalid.</p>
             </div>
         <?php endif; ?>
         <label for="email">Email</label>
