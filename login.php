@@ -8,6 +8,7 @@
         $u = new User();
         $isLogged = $u->login($email, $password);
         if($isLogged){
+            Session::create();
             header("Location: index.php");
         }
         else{
