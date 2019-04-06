@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Quicksand', sans-serif;
+    padding: 10%;
+}
+
+form.login input {
+    margin-bottom: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #000;
+}
+form.login input[type=submit]{
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10%;
+}
