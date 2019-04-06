@@ -1,7 +1,9 @@
 <?php
-
-
-
+    require_once("bootstrap.php");
+    $s = Session::check();
+    if($s === false){
+        header("Location: login.php");
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
