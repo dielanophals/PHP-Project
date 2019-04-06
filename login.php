@@ -2,6 +2,17 @@
     require_once("bootstrap.php");
 
     if(!empty($_POST)){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $u = new User();
+        $isLogged = $u->login($email, $password);
+        if($isLogged){
+            header("Location: index.php");
+        }
+        else{
+            $err = true;
+        }
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -10,12 +21,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "style.css"/>
+    <!--<link rel = "stylesheet" type = "text/css" href = "css/style.css"/>-->
     <title>InstaPet - Login</title>
 </head>
 <body>
     <form action="" method="post">
         <h2>Sign in</h2>
+        <?php if(isset($err)): ?>
+            <div>
+                <p>Unable to sign in.</p>
+            </div>
+        <?php endif; ?>
         <label for="email">Email</label>
         <input type="text" name="email">
 
