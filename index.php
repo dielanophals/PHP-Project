@@ -11,6 +11,8 @@
     <title>InstaPet - Feed</title>
 </head>
 <body>
-    
+    <header>
+        <?php require_once("nav.inc.php"); ?>
+    </header>
 </body>
 </html>
