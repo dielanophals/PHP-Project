@@ -30,4 +30,24 @@
             $this->password = $password;
             return $this;
         }
+
+        public function getEmail(){
+            return $this->email;
+        }
+
+        public function getFirstname(){
+            return $this->firstname;
+        }
+
+        public function getLastname(){
+            return $this->lastname;
+        }
+
+        public function getPassword(){
+            return $this->password;
+        }
+
+        public function getPasswordConfirmation(){
+            return $this->passwordConfirmation;
+        }
     }
