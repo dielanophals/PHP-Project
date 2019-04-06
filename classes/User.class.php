@@ -51,12 +51,13 @@
             return $this->passwordConfirmation;
         }
 
-        public function login($p_sEmail, $p_sPassword, ){
+        public function login($p_sEmail){
             try{
                 $conn = Db::getInstance();
                 $statement = $conn->prepare("SELECT * FROM `users` WHERE `email` = :email");
                 $statement->bindParam(":email", $this->email);
-                $result = $statement->execute();
+                $statement->execute();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
                 return $result;
             }
             catch(Throwable $t){
