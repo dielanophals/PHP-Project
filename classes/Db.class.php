@@ -16,15 +16,19 @@
                 // CREATE a new connection
 
                 // get the configuration for our connection from one central settings file
-                $config = self::getConfig();
-                $host = $config['host'];
-                $database = $config['database'];
-                $user = $config['user'];
-                $password = $config['password'];
-
-                self::$conn = new PDO("mysql:host= $host ;dbname= $database", $user, $password);
-                var_Dump(self::$conn);
-                return self::$conn;
+                try{
+                    $config = self::getConfig();
+                    $host = $config['host'];
+                    $database = $config['database'];
+                    $user = $config['user'];
+                    $password = $config['password'];
+    
+                    self::$conn = new PDO("mysql:host=$host;dbname=$database;", $user, $password);
+                    return self::$conn;
+                }
+                catch (\PDOException $e) {
+                    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+               }
             }
         }
     }
