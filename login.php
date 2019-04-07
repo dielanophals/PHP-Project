@@ -69,13 +69,13 @@
             </div>
         <?php endif; ?>
         <label for="email">Email</label>
-        <input type="text" name="email"><br>
+        <input type="text" name="email" id="email"><br>
 
         <label for="password">Password</label>
-        <input type="password" name="password"><br>
+        <input type="password" name="password" id="password"><br>
 
         <input type="submit" value="Sign in"><br>
-        <input type="checkbox"><label for="rememberMe">Remember me</label>
+        <input type="checkbox"><label for="rememberMe" id="submit">Remember me</label>
     </form>
 </body>
 </html>
