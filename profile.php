@@ -8,13 +8,8 @@
 
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      $charactersLength = strlen($characters);
-      $randomString = '';
-      for ($i = 0; $i < $charactersLength; $i++) {
-          $randomString .= $characters[rand(0, $charactersLength - 1)];
-      }
-      mkdir("uploads/posts/" . $randomString, 0777);
+      $post = new Post();
+      $post->createDirectory();
 
       $target_dir = "uploads/posts/" . $randomString;
       $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
