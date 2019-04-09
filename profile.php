@@ -9,9 +9,9 @@
   // Check if image file is a actual image or fake image
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
-    $description = $_FILES["description"];
+    $description = $_POST["description"];
     if(empty($description)){
-      echo "please add a description.";
+      echo "Please add a description.";
     }else{
       $post = new Post();
       if($post->checkType($imagePost) === false){
