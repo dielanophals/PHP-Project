@@ -7,10 +7,25 @@
     //     header("Location: login.php");
     // }
 
-    $conn = Db::getInstance();
+    if ( !empty($_POST) ) {
+        $imagePost = $_FILES["profileImage"];
+        $update = new Post();
 
-    if (isset($_POST['submit'])) {
-        echo "<script type='text/javascript'>alert('Gelukt!');</script>";
+        if ( $update->checkType($imagePost) === false ) {
+            $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        } else {
+            if ( $update->fileSize($imagePost) === false ) {
+                $feedback = "Sorry, your file is too big.";
+            } else {
+                $update->createDirectory("profile");
+                if ( $update->fileExists() === false ) {
+                    $feedback = "Sorry, this file already exists. Please try again.";
+                } else {
+                    $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
+                    $feedback = "File has been uploaded.";
+                }
+            }
+        }
     }
 
 ?><!DOCTYPE html>
@@ -29,23 +44,33 @@
 <body>
     <?php include_once("nav.inc.php"); ?>
     <div class="container">
-        <form action="" method="post">
+        <?php 
+            $information = new showUserInfo(); 
+            $openProfilePicture = new ShowUserPosts();
+        ?>
+        <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
-                <div class="profile" style="background-image: url('https://www.elastic.co/assets/bltada7771f270d08f6/enhanced-buzz-1492-1379411828-15.jpg');">
-                    <div class="overlay">
-                        <input type="file" name="image">
-                        <i class="fas fa-pencil-alt"></i>
-                    </div>
-                </div>
+                <?php foreach ($openProfilePicture->getUserPosts($_SESSION['userID']) as $profilePicture): ?>
+                    <div class="profile" style="background-image: <?php echo $profilePicture['image']; ?>;"></div>
+                <?php endforeach; ?>
                 <div class="information">
                     <label for="name">Name</label><br>
-                    <textarea name="name" id="name"><?php echo "User name" ?></textarea><br>
+                    <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <textarea name="name" id="name"><?php echo $info['username'] ?></textarea><br>
                     <label for="bio">Biography</label>
-                    <textarea name="bio" id="bio"><?php echo "User bio" ?></textarea>
+                    <textarea name="bio" id="bio"><?php echo $info['description'] ?></textarea>
+                    <?php endforeach; ?>
+                    <label for="image">Upload profile image</label><br>
+                    <input type="file" name="profileImage" id="profileImage"><br>
                     <input type="submit" value="Save"><br>
                 </div>
             </div>
         </form>
+        <?php
+            if ( isset($feedback) ) {
+                echo $feedback;
+            }
+        ?>
     </div>
 </body>
 </html>

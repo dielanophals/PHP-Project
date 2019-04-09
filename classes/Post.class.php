@@ -23,7 +23,7 @@ class Post{
       return true;
     }
   }
-
+  
   public function createDirectory($dir){
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -50,6 +50,14 @@ class Post{
     return $target_file;
   }
 
+  public function uploadProfileImage(){
+    $target_dir = $this->newDirectory;
+    $target_file = $target_dir . "/" . basename($_FILES["profileImage"]["name"]);
+    move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file);
+
+    return $target_file;
+  }
+
   public function insertIntoDB($filePath, $des, $userID){
     try{
         $timestamp = date('Y-m-d H:i:s');
@@ -57,6 +65,19 @@ class Post{
         $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, active) VALUES ('$userID', :path, :des, '$timestamp', 1)");
         $statement->bindParam(":path", $filePath);
         $statement->bindParam(":des", $des);
+        $statement->execute();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(Throwable $t){
+        return false;
+    }
+  }
+
+  public function insertProfilePictureIntoDB($filePath, $userID){
+    try{
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE users (picture) VALUES (:path) WHERE id = '$userID'");
+        $statement->bindParam(":path", $filePath);
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
     }

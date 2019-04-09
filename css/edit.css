@@ -72,6 +72,10 @@
     margin-bottom: 10px;
 }
 
+#profileImage {
+    margin: 10px 0;
+}
+
 .information input[type=submit] {
     padding: 10px;
     background-color: #000;
