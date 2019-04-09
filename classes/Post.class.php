@@ -8,5 +8,7 @@ class Post{
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     mkdir("uploads/posts/" . $randomString, 0777);
+
+    return $randomString;
   }
 }
