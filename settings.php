@@ -1,11 +1,11 @@
 <?php
 
     require_once("bootstrap.php");
-    // $s = Session::check();
-    
-    // if($s === false){
-    //     header("Location: login.php");
-    // }
+    $s = Session::check();
+
+    if($s === false){
+        header("Location: login.php");
+    }
 
     if ( !empty($_POST) ) {
         $imagePost = $_FILES["profileImage"];
@@ -44,8 +44,8 @@
 <body>
     <?php include_once("nav.inc.php"); ?>
     <div class="container">
-        <?php 
-            $information = new showUserInfo(); 
+        <?php
+            $information = new showUserInfo();
             $openProfilePicture = new ShowUserPosts();
         ?>
         <form action="#" method="post" enctype="multipart/form-data">

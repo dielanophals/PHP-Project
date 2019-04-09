@@ -1,10 +1,10 @@
 <?php
   require_once("bootstrap.php");
-  // $s = Session::check();
-  // if($s === false){
-  //     header("Location: login.php");
-  // }
-  
+  $s = Session::check();
+  if($s === false){
+      header("Location: login.php");
+  }
+
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
     $description = htmlspecialchars($_POST["description"]);
@@ -57,7 +57,7 @@
             <a href="settings.php">Edit profile</a>
           </div>
         </div>
-        <div class="profile__posts">  
+        <div class="profile__posts">
       </div>
     </div>
     <div class="imageUpload">
@@ -73,7 +73,7 @@
       }
     ?>
     </div>
-  <main>
+  <main class="profilePosts">
     <div class="container">
       <?php
         $sup = new ShowUserPosts();
@@ -95,12 +95,14 @@
 
       foreach($openPost->showImage($_GET['image']) as $p){
         echo '<div class="popup">';
+        echo '<div class="post">';
         echo '<img src="' . $p['image'] . '">';
+        echo '<p>' . $p['description'] . '</p>';
+        echo '</div>';
         echo '<a href="profile.php" class="close">X</a>';
         echo '</div>';
       }
     }
   ?>
-  </div>
 </body>
 </html>

@@ -37,14 +37,23 @@
     border-radius: 10%;
 }
 
-.userPosts {
-    width:500px;
-  }
-  
-.userPosts img {
-    width:500px;
+.profilePosts .container{
+  background-color: rgba(148, 148, 148, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  padding:25px 15px;
 }
-  
+
+.userPosts {
+    width:450px;
+  }
+
+.userPosts img {
+    width:450px;
+}
+
 .popup {
     position: fixed;
     height: 100vh;
@@ -62,11 +71,20 @@
     text-decoration: none;
 }
 
-.popup img {
+.popup .post {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     width:80%;
 }
-  
+
+.popup img{
+  width:100%;
+}
+
+.popup p{
+  text-align: center;
+  color:white;
+  width:100%;
+}
