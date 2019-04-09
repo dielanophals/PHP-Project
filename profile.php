@@ -52,5 +52,11 @@
       <input type="submit" value="Upload Image" name="submit">
   </form>
   </div>
+  <main>
+    <?php
+      $sup = new ShowUserPosts();
+      echo $sup->getUserPosts($_SESSION["userID"]);
+    ?>
+  </main>
 </body>
 </html>
