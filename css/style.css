@@ -59,3 +59,28 @@ nav form input{
 .userPosts img{
   width:500px;
 }
+
+.popup{
+  position: fixed;
+  height: 100vh;
+  width:100%;
+  top:0;
+  background:rgba(0,0,0,0.6);
+}
+
+.popup .close{
+  position: absolute;
+  right:10px;
+  top: 15px;
+  color:white;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+.popup img{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width:80%;
+}

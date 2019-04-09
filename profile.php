@@ -30,12 +30,6 @@
     }
   }
 
-  if(!empty($_GET['image'])){
-    echo $_GET['image'];
-    $openPost = new OpenPost();
-    $openPost->showImage();
-  }
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,8 +67,19 @@
     </div>
   </main>
 
-  <div class="popup">
-    <img src="" alt="">
+  <?php
+    if(!empty($_GET['image'])){
+      $openPost = new OpenPost();
+      $openPost->showImage($_GET['image']);
+
+      foreach($openPost->showImage($_GET['image']) as $p){
+        echo '<div class="popup">';
+        echo '<img src="' . $p['image'] . '">';
+        echo '<a href="profile.php" class="close">X</a>';
+        echo '</div>';
+      }
+    }
+  ?>
   </div>
 </body>
 </html>
