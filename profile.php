@@ -20,7 +20,9 @@
         if($post->fileExists() === false){
           echo "Sorry, this file already exists. Please try again.";
         }else{
-          //$post->uploadImage();
+          if($post->uploadImage()){
+            echo "File has been uploaded.";
+          }
         }
       }
     }
