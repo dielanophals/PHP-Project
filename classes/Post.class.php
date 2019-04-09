@@ -1,8 +1,8 @@
 <?php
 class Post{
 
-  public function checkType(){
-    $target_file = basename($_FILES["fileToUpload"]["name"]);
+  public function checkType($imagePost){
+    $target_file = basename($imagePost);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
