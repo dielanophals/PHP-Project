@@ -7,21 +7,26 @@
 
 
   // Check if image file is a actual image or fake image
-  if(isset($_POST["submit"])) {
+  if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
-    $post = new Post();
-    if($post->checkType($imagePost) === false){
-      echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $description = $_FILES["description"];
+    if(empty($description)){
+      echo "please add a description.";
     }else{
-      if($post->fileSize($imagePost) === false){
-        echo "Sorry, your file is too big.";
+      $post = new Post();
+      if($post->checkType($imagePost) === false){
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       }else{
-        $post->createDirectory("posts");
-        if($post->fileExists() === false){
-          echo "Sorry, this file already exists. Please try again.";
+        if($post->fileSize($imagePost) === false){
+          echo "Sorry, your file is too big.";
         }else{
-          if($post->uploadImage()){
-            echo "File has been uploaded.";
+          $post->createDirectory("posts");
+          if($post->fileExists() === false){
+            echo "Sorry, this file already exists. Please try again.";
+          }else{
+            if($post->uploadImage()){
+              echo "File has been uploaded.";
+            }
           }
         }
       }
@@ -46,6 +51,7 @@
     <form action="#" method="post" enctype="multipart/form-data">
       Select image to upload:
       <input type="file" name="fileToUpload" id="fileToUpload">
+      <input type="text" name="description">
       <input type="submit" value="Upload Image" name="submit">
   </form>
   </div>
