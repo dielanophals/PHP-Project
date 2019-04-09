@@ -22,7 +22,7 @@
           if($post->fileExists() === false){
             echo "Sorry, this file already exists. Please try again.";
           }else{
-            $post->insertIntoDB($post->uploadImage(), $description);
+            $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
             echo "File has been uploaded.";
           }
         }

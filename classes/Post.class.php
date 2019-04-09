@@ -50,11 +50,11 @@ class Post{
     return $this->newDirectory;
   }
 
-  public function insertIntoDB($filePath, $des){
+  public function insertIntoDB($filePath, $des, $userID){
     try{
         $timestamp = date('Y-m-d H:i:s');
         $conn = Db::getInstance();
-        $statement = $conn->prepare("INSERT INTO posts (image, description, timestamp, active) VALUES (:path, :des, '$timestamp', 1)");
+        $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, active) VALUES ('$userID', :path, :des, '$timestamp', 1)");
         $statement->bindParam(":path", $filePath);
         $statement->bindParam(":des", $des);
         $statement->execute();

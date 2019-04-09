@@ -5,6 +5,7 @@
         private $lastname;
         private $username;
         private $password;
+        protected $userID;
 
         public function setEmail($email){
             $this->email = $email;
@@ -60,7 +61,8 @@
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if(password_verify($p_sPassword, $user['password'])){
-                    return true;
+                  $this->userID = $user['id'];
+                  return true;
                 }
                 else{
                     return false;
@@ -69,5 +71,9 @@
             catch(Throwable $t){
                 return false;
             }
+        }
+
+        public function userID(){
+          return $this->userID;
         }
     }
