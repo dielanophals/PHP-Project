@@ -5,11 +5,9 @@
       header("Location: login.php");
   }
 
-
-  // Check if image file is a actual image or fake image
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
-    $description = $_POST["description"];
+    $description = htmlspecialchars($_POST["description"]);
     if(empty($description)){
       echo "Please add a description.";
     }else{
@@ -24,9 +22,8 @@
           if($post->fileExists() === false){
             echo "Sorry, this file already exists. Please try again.";
           }else{
-            if($post->uploadImage()){
-              echo "File has been uploaded.";
-            }
+            $post->insertIntoDB($post->uploadImage(), $description);
+            echo "File has been uploaded.";
           }
         }
       }

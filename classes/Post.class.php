@@ -47,7 +47,22 @@ class Post{
     $target_file = $target_dir . "/" . basename($_FILES["fileToUpload"]["name"]);
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 
-    return true;
+    return $this->newDirectory;
+  }
+
+  public function insertIntoDB($filePath, $des){
+    try{
+        $timestamp = date('Y-m-d H:i:s');
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("INSERT INTO posts (image, description, timestamp, active) VALUES (:path, :des, '$timestamp', 1)");
+        $statement->bindParam(":path", $filePath);
+        $statement->bindParam(":des", $des);
+        $statement->execute();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(Throwable $t){
+        return false;
+    }
   }
 
 }
