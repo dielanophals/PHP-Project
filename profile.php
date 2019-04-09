@@ -9,9 +9,11 @@
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
       $post = new Post();
-      $post->createDirectory();
-
-      
+      if($post->checkType() === false){
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      }else{
+        $post->createDirectory();
+      }
   }
 
 ?><!DOCTYPE html>
