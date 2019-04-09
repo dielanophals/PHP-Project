@@ -44,13 +44,15 @@
   <header>
       <?php require_once("nav.inc.php"); ?>
   </header>
-  <div class="image_upload">
-    <form action="#" method="post" enctype="multipart/form-data">
-      Select image to upload:
-      <input type="file" name="fileToUpload" id="fileToUpload">
-      <input type="text" name="description">
-      <input type="submit" value="Upload Image" name="submit">
-  </form>
+  <div class="popUp">
+    <div class="imageUpload">
+      <form action="#" method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="text" name="description">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+    </div>
   </div>
   <main>
     <div class="container">
