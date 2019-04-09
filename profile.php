@@ -1,10 +1,10 @@
 <?php
   require_once("bootstrap.php");
-  $s = Session::check();
-  if($s === false){
-      header("Location: login.php");
-  }
-
+  // $s = Session::check();
+  // if($s === false){
+  //     header("Location: login.php");
+  // }
+  
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
     $description = htmlspecialchars($_POST["description"]);
@@ -49,8 +49,11 @@
       <div class="profile__information">
         <div class="profile" style="background-image: url('https://www.elastic.co/assets/bltada7771f270d08f6/enhanced-buzz-1492-1379411828-15.jpg');"></div>
           <div class="information">
-            <h2 class="name">Robin Van Buggenhout</h2>
-            <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda consectetur sunt necessitatibus placeat molestiae qui, saepe doloremque culpa ullam cupiditate alias eveniet ipsa quam reiciendis optio eos natus numquam quod?</p>
+            <?php $information = new showUserInfo(); ?>
+            <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+              <h2 class="name"><?php echo $info['username'] ?></h2>
+              <p class="bio"><?php echo $info['description'] ?></p>
+            <?php endforeach; ?>
             <a href="settings.php">Edit profile</a>
           </div>
         </div>

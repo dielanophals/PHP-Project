@@ -1,10 +1,16 @@
 <?php
 
     require_once("bootstrap.php");
-    $s = Session::check();
+    // $s = Session::check();
     
-    if($s === false){
-        header("Location: login.php");
+    // if($s === false){
+    //     header("Location: login.php");
+    // }
+
+    $conn = Db::getInstance();
+
+    if (isset($_POST['submit'])) {
+        echo "<script type='text/javascript'>alert('Gelukt!');</script>";
     }
 
 ?><!DOCTYPE html>
@@ -23,7 +29,7 @@
 <body>
     <?php include_once("nav.inc.php"); ?>
     <div class="container">
-        <form action="settingsSave.php" method="post">
+        <form action="" method="post">
             <div class="profile__information">
                 <div class="profile" style="background-image: url('https://www.elastic.co/assets/bltada7771f270d08f6/enhanced-buzz-1492-1379411828-15.jpg');">
                     <div class="overlay">
