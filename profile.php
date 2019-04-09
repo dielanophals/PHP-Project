@@ -8,12 +8,16 @@
 
   // Check if image file is a actual image or fake image
   if(isset($_POST["submit"])) {
-    $imagePost = $_FILES["fileToUpload"]["name"];
+    $imagePost = $_FILES["fileToUpload"];
     $post = new Post();
     if($post->checkType($imagePost) === false){
       echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
     }else{
-      $post->createDirectory("posts");
+      if($post->fileSize($imagePost) === false){
+        echo "Sorry, your file is too big.";
+      }else{
+        $post->createDirectory("posts");
+      }
     }
   }
 

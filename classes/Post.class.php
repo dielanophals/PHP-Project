@@ -2,11 +2,19 @@
 class Post{
 
   public function checkType($imagePost){
-    $target_file = basename($imagePost);
+    $target_file = basename($imagePost["name"]);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
-        return false;
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  public function fileSize($imagePost){
+    if ($imagePost["size"] > 500000) {
+      return false;
     }else{
       return true;
     }
@@ -19,9 +27,11 @@ class Post{
     for ($i = 0; $i < $charactersLength; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
-    mkdir("uploads/" . $dir . "/" . $randomString, 0777);
+    $newDirectory = "uploads/" . $dir . "/" . $randomString;
+    mkdir($newDirectory, 0777);
 
-    return $randomString;
+    return $newDirectory;
   }
+
 
 }
