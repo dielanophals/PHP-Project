@@ -38,12 +38,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
     <title>InstaPet - Profile</title>
 </head>
 <body>
   <header>
       <?php require_once("nav.inc.php"); ?>
   </header>
+    <div class="profile__container">
+      <div class="profile__information">
+        <div class="profile" style="background-image: url('https://www.elastic.co/assets/bltada7771f270d08f6/enhanced-buzz-1492-1379411828-15.jpg');"></div>
+          <div class="information">
+            <h2 class="name">Robin Van Buggenhout</h2>
+            <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda consectetur sunt necessitatibus placeat molestiae qui, saepe doloremque culpa ullam cupiditate alias eveniet ipsa quam reiciendis optio eos natus numquam quod?</p>
+            <a href="settings.php">Edit profile</a>
+          </div>
+        </div>
+        <div class="profile__posts">  
+      </div>
+    </div>
     <div class="imageUpload">
       <form action="#" method="post" enctype="multipart/form-data">
         Select image to upload:

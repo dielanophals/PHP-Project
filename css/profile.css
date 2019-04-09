@@ -1,0 +1,72 @@
+.profile__information {
+    background-color: rgba(148, 148, 148, 0.1);
+    width: 960px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px auto 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.profile {
+    flex: 1 20%;
+    background-image: url("http://wowslider.com/sliders/demo-81/data1/images/redkite50498.jpg");
+    height: 168px;
+    border-radius: 50%;
+    margin: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.information {
+    flex: 1 80%;
+    margin: 20px;
+}
+
+.information p {
+    line-height: 1.5em;
+    margin-bottom: 30px;
+}
+
+.information a {
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10%;
+}
+
+.userPosts {
+    width:500px;
+  }
+  
+.userPosts img {
+    width:500px;
+}
+  
+.popup {
+    position: fixed;
+    height: 100vh;
+    width:100%;
+    top:0;
+    background:rgba(0,0,0,0.6);
+}
+
+.popup .close {
+    position: absolute;
+    right:10px;
+    top: 15px;
+    color:white;
+    font-size: 32px;
+    text-decoration: none;
+}
+
+.popup img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width:80%;
+}
+  
