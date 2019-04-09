@@ -31,6 +31,11 @@
             return $this;
         }
 
+        public function setPasswordConfirmation($passwordconfirmation){
+            $this->passwordconfirmation = $passwordconfirmation;
+            return $this;
+        }
+
         public function getEmail(){
             return $this->email;
         }
@@ -65,6 +70,29 @@
                 else{
                     return false;
                 }
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
+
+        public function register() {
+            //2^12 hashen
+            $options = [
+                'cost' => 12
+            ];
+            //ww hashen
+            $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
+            
+        //connection with database
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("INSERT INTO users(email, password) VALUES (:email,:password)");
+                $statement->bindParam(":email", $this->email);
+                $statement->bindParam(":password", $password);
+                $statement->execute();
+                $result = $statement->execute();
+                return($result);
             }
             catch(Throwable $t){
                 return false;
