@@ -30,6 +30,12 @@
     }
   }
 
+  if(!empty($_GET['image'])){
+    echo $_GET['image'];
+    $openPost = new OpenPost();
+    $openPost->showImage();
+  }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +50,6 @@
   <header>
       <?php require_once("nav.inc.php"); ?>
   </header>
-  <div class="popUp">
     <div class="imageUpload">
       <form action="#" method="post" enctype="multipart/form-data">
         Select image to upload:
@@ -53,16 +58,23 @@
         <input type="submit" value="Upload Image" name="submit">
     </form>
     </div>
-  </div>
   <main>
     <div class="container">
       <?php
         $sup = new ShowUserPosts();
         foreach($sup->getUserPosts($_SESSION["userID"]) as $p){
-          echo '<img class="userPosts" src="' . $p['image'] . '">';
+          echo '<a href="?image='. $p['id'] .'">';
+          echo '<div class="userPosts">';
+          echo '<img src="' . $p['image'] . '">';
+          echo '</div>';
+          echo '</a>';
         }
       ?>
     </div>
   </main>
+
+  <div class="popup">
+    <img src="" alt="">
+  </div>
 </body>
 </html>
