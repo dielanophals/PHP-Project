@@ -9,21 +9,21 @@
     $imagePost = $_FILES["fileToUpload"];
     $description = htmlspecialchars($_POST["description"]);
     if(empty($description)){
-      echo "Please add a description.";
+      $feedback = "Please add a description.";
     }else{
       $post = new Post();
       if($post->checkType($imagePost) === false){
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       }else{
         if($post->fileSize($imagePost) === false){
-          echo "Sorry, your file is too big.";
+          $feedback = "Sorry, your file is too big.";
         }else{
           $post->createDirectory("posts");
           if($post->fileExists() === false){
-            echo "Sorry, this file already exists. Please try again.";
+            $feedback = "Sorry, this file already exists. Please try again.";
           }else{
             $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
-            echo "File has been uploaded.";
+            $feedback = "File has been uploaded.";
           }
         }
       }
@@ -51,6 +51,11 @@
         <input type="text" name="description">
         <input type="submit" value="Upload Image" name="submit">
     </form>
+    <?php
+      if(isset($feedback)){
+        echo $feedback;
+      }
+    ?>
     </div>
   <main>
     <div class="container">
