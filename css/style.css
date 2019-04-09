@@ -46,6 +46,11 @@ nav form input{
     border-bottom: 2px solid #fff;
 }
 
+.container{
+  width:1024px;
+  margin:auto;
+}
+
 .userPosts{
-  width:600px;
+  width:500px;
 }

@@ -53,10 +53,14 @@
   </form>
   </div>
   <main>
-    <?php
-      $sup = new ShowUserPosts();
-      echo $sup->getUserPosts($_SESSION["userID"]);
-    ?>
+    <div class="container">
+      <?php
+        $sup = new ShowUserPosts();
+        foreach($sup->getUserPosts($_SESSION["userID"]) as $p){
+          echo '<img class="userPosts" src="' . $p['image'] . '">';
+        }
+      ?>
+    </div>
   </main>
 </body>
 </html>
