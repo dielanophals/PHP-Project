@@ -24,6 +24,7 @@
           }else{
             $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
             $feedback = "File has been uploaded.";
+            header("Location: profile.php");
           }
         }
       }
@@ -55,23 +56,11 @@
               <p class="bio"><?php echo $info['description'] ?></p>
             <?php endforeach; ?>
             <a href="settings.php">Edit profile</a>
+            <a href="?upload=yes">Upload image</a>
           </div>
         </div>
         <div class="profile__posts">
       </div>
-    </div>
-    <div class="imageUpload">
-      <form action="#" method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="text" name="description">
-        <input type="submit" value="Upload Image" name="submit">
-    </form>
-    <?php
-      if(isset($feedback)){
-        echo $feedback;
-      }
-    ?>
     </div>
   <main class="profilePosts">
     <div class="container">
@@ -102,6 +91,29 @@
         echo '<a href="profile.php" class="close">X</a>';
         echo '</div>';
       }
+    }
+
+    if(!empty($_GET['upload'])){
+      ?>
+
+      <div class="popup">
+        <div class="imageUpload">
+          <form action="#" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Select image to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+            <label for="description">Description:</label>
+            <input type="text" name="description" id="description" required><br><br>
+            <input type="submit" value="Upload Image" name="submit">
+          </form>
+          <?php
+            if(isset($feedback)){
+              echo $feedback;
+            }
+          ?>
+        </div>
+        <a href="profile.php" class="close">X</a>
+      </div>
+  <?php
     }
   ?>
 </body>
