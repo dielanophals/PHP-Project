@@ -1,6 +1,8 @@
 <?php
 class Post{
 
+  protected $newDirectory;
+
   public function checkType($imagePost){
     $target_file = basename($imagePost["name"]);
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -27,11 +29,16 @@ class Post{
     for ($i = 0; $i < $charactersLength; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
-    $newDirectory = "uploads/" . $dir . "/" . $randomString;
-    mkdir($newDirectory, 0777);
-
-    return $newDirectory;
+    $this->newDirectory = "uploads/" . $dir . "/" . $randomString;
+    mkdir($this->newDirectory, 0777);
   }
 
+  public function fileExists(){
+    if (file_exists($this->newDirectory)) {
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 }

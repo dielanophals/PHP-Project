@@ -17,6 +17,11 @@
         echo "Sorry, your file is too big.";
       }else{
         $post->createDirectory("posts");
+        if($post->fileExists() === false){
+          echo "Sorry, this file already exists. Please try again.";
+        }else{
+          //$post->uploadImage();
+        }
       }
     }
   }
