@@ -1,5 +1,5 @@
 <?php
-class Post{
+Class Post{
 
   protected $newDirectory;
   protected $targetFile;

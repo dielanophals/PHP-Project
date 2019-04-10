@@ -1,15 +1,21 @@
 <?php
 
     require_once("bootstrap.php");
-    $s = Session::check();
+    // $s = Session::check();
 
-    if($s === false){
-        header("Location: login.php");
-    }
+    // if($s === false){
+    //     header("Location: login.php");
+    // }
 
     if ( !empty($_POST) ) {
         $imagePost = $_FILES["profileImage"];
         $update = new Post();
+
+        $username = $_POST['name'];
+        $bio = $_POST['bio'];
+        $updateInfo = new PostUserInfo();
+
+        $updateInfo->updateInfo($username, $bio, $_SESSION['userID']);
 
         if ( $update->checkType($imagePost) === false ) {
             $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -45,12 +51,12 @@
     <?php include_once("nav.inc.php"); ?>
     <div class="container">
         <?php
-            $information = new showUserInfo();
-            $openProfilePicture = new ShowUserPosts();
+            $information = new ShowUserInfo();
+            // $openProfilePicture = new ShowUserPosts();
         ?>
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
-                <?php foreach ($openProfilePicture->getUserPosts($_SESSION['userID']) as $profilePicture): ?>
+                <?php foreach ($information->getUserInfo($_SESSION['userID']) as $profilePicture): ?>
                     <div class="profile" style="background-image: <?php echo $profilePicture['image']; ?>;"></div>
                 <?php endforeach; ?>
                 <div class="information">

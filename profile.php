@@ -1,9 +1,9 @@
 <?php
   require_once("bootstrap.php");
-  $s = Session::check();
-  if($s === false){
-      header("Location: login.php");
-  }
+  // $s = Session::check();
+  // if($s === false){
+  //     header("Location: login.php");
+  // }
 
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
