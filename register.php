@@ -11,7 +11,6 @@ if(!empty($_POST)) {
     
     $result = $user->register();
     var_dump($result);
-
 }
 
 ?><!DOCTYPE html>
@@ -23,15 +22,12 @@ if(!empty($_POST)) {
     <title>InstaPet - Register</title>
 </head>
 <body>
-    
     <form action="" method="post">
         <h2 form__title>Sign up for an account</h2>
 
-            <div class="form__error hidden">
                 <p>
                     Some error here.
                 </p>
-            </div>
 
             <div class="form__field">
                 <label for="email">Email</label>
@@ -56,4 +52,4 @@ if(!empty($_POST)) {
 
 
 </body>
-</html></html>
+</html>
