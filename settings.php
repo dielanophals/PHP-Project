@@ -9,28 +9,39 @@
 
     if ( !empty($_POST) ) {
         $imagePost = $_FILES["profileImage"];
-        $update = new Post();
-
         $username = $_POST['name'];
         $bio = $_POST['bio'];
-        $updateInfo = new PostUserInfo();
+        $password = $_POST['password'];
 
-        $updateInfo->updateInfo($username, $bio, $_SESSION['userID']);
-
-        if ( $update->checkType($imagePost) === false ) {
-            $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        } else {
-            if ( $update->fileSize($imagePost) === false ) {
-                $feedback = "Sorry, your file is too big.";
-            } else {
-                $update->createDirectory("profile");
-                if ( $update->fileExists() === false ) {
-                    $feedback = "Sorry, this file already exists. Please try again.";
+        if ( !empty($password) ) {
+            $check = new User();
+            if ( $check->passwordCheck($password, $_SESSION['userID']) == true ) {
+                $update = new Post();
+                $updateInfo = new PostUserInfo();
+    
+                $updateInfo->updateInfo($username, $bio, $_SESSION['userID']);
+    
+                if ( $update->checkType($imagePost) === false ) {
+                    $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 } else {
-                    $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
-                    $feedback = "File has been uploaded.";
+                    if ( $update->fileSize($imagePost) === false ) {
+                        $feedback = "Sorry, your file is too big.";
+                    } else {
+                        $update->createDirectory("profile");
+                        if ( $update->fileExists() === false ) {
+                            $feedback = "Sorry, this file already exists. Please try again.";
+                        } else {
+                            $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
+                            $feedback = "File has been uploaded.";
+                        }
+                    }
                 }
+            } else {
+                $feedback = "Password is incorrect.";
             }
+
+        } else {
+            $feedback = "Password cannot be empty.";
         }
     }
 
@@ -50,14 +61,11 @@
 <body>
     <?php include_once("nav.inc.php"); ?>
     <div class="container">
-        <?php
-            $information = new ShowUserInfo();
-            // $openProfilePicture = new ShowUserPosts();
-        ?>
+        <?php $information = new ShowUserInfo(); ?>
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
                 <?php foreach ($information->getUserInfo($_SESSION['userID']) as $profilePicture): ?>
-                    <div class="profile" style="background-image: <?php echo $profilePicture['image']; ?>;"></div>
+                    <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
                 <?php endforeach; ?>
                 <div class="information">
                     <label for="name">Name</label><br>
@@ -68,6 +76,7 @@
                     <?php endforeach; ?>
                     <label for="image">Upload profile image</label><br>
                     <input type="file" name="profileImage" id="profileImage"><br>
+                    <input type="password" name="password" id="password" placeholder="Password"><br>
                     <input type="submit" value="Save"><br>
                 </div>
             </div>

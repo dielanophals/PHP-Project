@@ -73,6 +73,25 @@
             }
         }
 
+        public function passwordCheck($password ,$userID){
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("SELECT * FROM users WHERE id = '$userID'");
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+                if(password_verify($password, $user['password'])){
+                  return true;
+                }
+                else{
+                    return false;
+                }
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
+
         public function userID(){
           return $this->userID;
         }

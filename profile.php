@@ -1,9 +1,9 @@
 <?php
   require_once("bootstrap.php");
-  // $s = Session::check();
-  // if($s === false){
-  //     header("Location: login.php");
-  // }
+  $s = Session::check();
+  if($s === false){
+      header("Location: login.php");
+  }
 
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
@@ -48,9 +48,11 @@
   </header>
     <div class="profile__container">
       <div class="profile__information">
-        <div class="profile" style="background-image: url('https://www.elastic.co/assets/bltada7771f270d08f6/enhanced-buzz-1492-1379411828-15.jpg');"></div>
+      <?php $information = new ShowUserInfo(); ?>
+        <?php foreach ($information->getUserInfo($_SESSION['userID']) as $profilePicture): ?>
+          <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
+        <?php endforeach; ?>
           <div class="information">
-            <?php $information = new showUserInfo(); ?>
             <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
               <h2 class="name"><?php echo $info['username'] ?></h2>
               <p class="bio"><?php echo $info['description'] ?></p>
