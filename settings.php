@@ -10,16 +10,30 @@
     if ( !empty($_POST) ) {
         if ( !empty($_POST['currentPassword']) ) {
             $check = new User();
-
-            $check->setUsername($_POST['name']);
-            $check->setDescription($_POST['bio']);
             $check->setPassword($_POST['currentPassword']);
 
             if ( $check->passwordCheck($_SESSION['userID']) == true ) {
                 $update = new Post();
 
-                $imagePost = $_FILES["profileImage"];
-                $check->updateInfo($username, $bio, $_SESSION['userID']);
+                if ( !empty($_POST['email']) ) {
+                    $check->setEmail($_POST['email']);
+                } else {
+                    $feedback = "email cannot be empty.";
+                }
+
+                if ( !empty($_POST['name']) ) {
+                    $check->setUsername($_POST['name']);
+                } else {
+                    $feedback = "username cannot be empty.";
+                }
+
+                if ( !empty($_POST['bio']) ) {
+                    $check->setDescription($_POST['bio']);
+                } else {
+                    $feedback = "description cannot be empty.";
+                }
+
+                $check->updateInfo($_SESSION['userID']);
                 
                 if ( !empty($_POST['newPassword']) ) {
                     if ( !empty($_POST['confirmPassword']) ) {
@@ -33,7 +47,9 @@
                         $feedback = "You need to confirm your password.";
                     }
                 }
-        
+
+                $imagePost = $_FILES["profileImage"];
+
                 if ( $update->checkType($imagePost) === false ) {
                     $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 } else {
@@ -81,12 +97,13 @@
                     <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
                 <?php endforeach; ?>
                 <div class="information">
-                    <label for="name">Name</label><br>
                     <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <label for="name">Name</label><br>
                     <textarea name="name" id="name"><?php echo $info['username'] ?></textarea><br>
                     <label for="bio">Biography</label>
                     <textarea name="bio" id="bio"><?php echo $info['description'] ?></textarea>
                     <?php endforeach; ?>
+                    
                     <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
                     <label for="email">Email</label><br>
                     <textarea name="email" id="email"><?php echo $info['email'] ?></textarea>
@@ -101,6 +118,7 @@
 
                     <label for="image">Upload profile image</label><br>
                     <input type="file" name="profileImage" id="profileImage"><br>
+
                     <input type="submit" value="Save"><br>
                 </div>
             </div>
