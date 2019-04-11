@@ -8,19 +8,32 @@
     // }
 
     if ( !empty($_POST) ) {
-        $imagePost = $_FILES["profileImage"];
-        $username = $_POST['name'];
-        $bio = $_POST['bio'];
-        $password = $_POST['password'];
-
-        if ( !empty($password) ) {
+        if ( !empty($_POST['currentPassword']) ) {
             $check = new User();
-            if ( $check->passwordCheck($password, $_SESSION['userID']) == true ) {
+
+            $check->setUsername($_POST['name']);
+            $check->setDescription($_POST['bio']);
+            $check->setPassword($_POST['currentPassword']);
+
+            if ( $check->passwordCheck($_SESSION['userID']) == true ) {
                 $update = new Post();
-                $updateInfo = new PostUserInfo();
-    
-                $updateInfo->updateInfo($username, $bio, $_SESSION['userID']);
-    
+
+                $imagePost = $_FILES["profileImage"];
+                $check->updateInfo($username, $bio, $_SESSION['userID']);
+                
+                if ( !empty($_POST['newPassword']) ) {
+                    if ( !empty($_POST['confirmPassword']) ) {
+                        if ( $_POST['newPassword'] == $_POST['confirmPassword'] ) {
+                            $check->setPassword($_POST['newPassword']);
+                            $check->updatePassword($_SESSION['userID']);
+                        } else {
+                            $feedback = "Your new password is not confirmed correctly.";
+                        }
+                    } else {
+                        $feedback = "You need to confirm your password.";
+                    }
+                }
+        
                 if ( $update->checkType($imagePost) === false ) {
                     $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 } else {
@@ -74,9 +87,20 @@
                     <label for="bio">Biography</label>
                     <textarea name="bio" id="bio"><?php echo $info['description'] ?></textarea>
                     <?php endforeach; ?>
+                    <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <label for="email">Email</label><br>
+                    <textarea name="email" id="email"><?php echo $info['email'] ?></textarea>
+                    <?php endforeach; ?>
+
+                    <label for="newPassword">New password</label><br>
+                    <input type="password" name="newPassword" id="newPassword" class="passwords" placeholder="New password"><br>
+                    <label for="confirmPassword">Confirm password</label><br>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="passwords" placeholder="Confirm password"><br>
+                    <label for="currentassword">Current password <span style="color:red">*</span><label><br>
+                    <input type="password" name="currentPassword" id="currentPassword" class="passwords" placeholder="Current password"><br>
+
                     <label for="image">Upload profile image</label><br>
                     <input type="file" name="profileImage" id="profileImage"><br>
-                    <input type="password" name="password" id="password" placeholder="Password"><br>
                     <input type="submit" value="Save"><br>
                 </div>
             </div>

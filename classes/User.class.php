@@ -27,8 +27,14 @@
             return $this;
         }
 
+        public function setDescription($description) {
+            $this->description = $description;
+            return $this;
+        }
+
         public function setPassword($password){
             $this->password = $password;
+            echo $this->password;
             return $this;
         }
 
@@ -42,6 +48,14 @@
 
         public function getLastname(){
             return $this->lastname;
+        }
+
+        public function getUsername(){
+            return $this->username;
+        }
+
+        public function getDescription(){
+            return $this->description;
         }
 
         public function getPassword(){
@@ -73,21 +87,51 @@
             }
         }
 
-        public function passwordCheck($password ,$userID){
+        public function passwordCheck($userID){
             try{
                 $conn = Db::getInstance();
-                $statement = $conn->prepare("SELECT * FROM users WHERE id = '$userID'");
+                $statement = $conn->prepare("SELECT * FROM users WHERE id = $userID");
                 $statement->execute();
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-                if(password_verify($password, $user['password'])){
-                  return true;
+                if(password_verify($this->password, $user['password'])){
+                    return true;
+                    echo "gelukt!";
                 }
-                else{
+                else {
                     return false;
+                    echo "niet gelukt!";
                 }
             }
             catch(Throwable $t){
+                return false;
+            }
+        }
+
+        public function updateInfo($username, $bio, $userID) {
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("UPDATE users SET username=:name, description=:desc, password=:password WHERE id='$userID'");
+                $statement->bindParam(":name", $username);
+                $statement->bindParam(":desc", $bio);
+                $statement->bindParam(":password", $newPassword);
+                $statement->execute();
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
+
+        public function updatePassword($userID) {
+            $password = Security::hash($this->password);
+
+            try {
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("UPDATE users SET password:password WHERE id='$userID'");
+                $statement->bindParam(":password", $password);
+                $statement->execute();
+            }
+            catch(Throwable $t) {
                 return false;
             }
         }
