@@ -4,7 +4,7 @@
     <a href="profile.php">Profile</a>
 
     <form action="" method="get">
-      <input type="text" name="search">
+      <input type="text" name="search" placeholder="Search">
     </form>
 
     <a href="logout.php" class="navbar__logout">logout</a>
