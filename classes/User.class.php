@@ -34,7 +34,6 @@
 
         public function setPassword($password){
             $this->password = $password;
-            echo $this->password;
             return $this;
         }
 
@@ -108,13 +107,13 @@
             }
         }
 
-        public function updateInfo($username, $bio, $userID) {
+        public function updateInfo($userID) {
             try{
                 $conn = Db::getInstance();
-                $statement = $conn->prepare("UPDATE users SET username=:name, description=:desc, password=:password WHERE id='$userID'");
-                $statement->bindParam(":name", $username);
-                $statement->bindParam(":desc", $bio);
-                $statement->bindParam(":password", $newPassword);
+                $statement = $conn->prepare("UPDATE users SET email=:email, username=:name, description=:description WHERE id='$userID'");
+                $statement->bindParam(":email", $this->email);
+                $statement->bindParam(":name", $this->username);
+                $statement->bindParam(":description", $this->description);
                 $statement->execute();
             }
             catch(Throwable $t){
