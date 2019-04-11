@@ -70,8 +70,8 @@
         $sup = new ShowUserPosts();
         foreach($sup->getUserPosts($_SESSION["userID"]) as $p){
           echo '<a href="?image='. $p['id'] .'">';
-          echo '<div class="userPosts">';
-          echo '<img src="' . $p['image'] . '">';
+          echo '<div class="userPosts" style="background:url(' . $p['image'] . '); background-size: cover; background-position: center;">';
+          // echo '<img src="' . $p['image'] . '">';
           echo '</div>';
           echo '</a>';
         }
