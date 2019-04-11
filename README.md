@@ -12,3 +12,5 @@
 * Duidelijker CSS tussen het veranderen van wachtwoord en het huidige wachtwoord.
 ### Profile - upload profiel foto
 * De juist geüploade foto is nergens zichtbaar op de website.
+### Profile - feedback bij wijziging beschrijving
+* Wanneer je de beschrijving wijzigt en jouw huidige wachtwoord toevoegt, dan krijg je de feedback over de afbeelding extension. Dit is dan niet van toepassing. If-else moet hiervoor worden aangepast. Misschien best de gebruiker de wijziging laten zien.
