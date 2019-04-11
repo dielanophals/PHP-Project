@@ -11,6 +11,7 @@ if(!empty($_POST)) {
     
     $result = $user->register();
     var_dump($result);
+    //if bool true >> go to homepage
 }
 
 ?><!DOCTYPE html>
@@ -25,9 +26,11 @@ if(!empty($_POST)) {
     <form action="" method="post">
         <h2 form__title>Sign up for an account</h2>
 
+            <!---<div class="form__error hidden">
                 <p>
                     Some error here.
                 </p>
+            </div>--->
 
             <div class="form__field">
                 <label for="email">Email</label>
