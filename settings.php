@@ -1,11 +1,11 @@
 <?php
 
     require_once("bootstrap.php");
-    // $s = Session::check();
+    $s = Session::check();
 
-    // if($s === false){
-    //     header("Location: login.php");
-    // }
+    if($s === false){
+        header("Location: login.php");
+    }
 
     if ( !empty($_POST) ) {
         if ( !empty($_POST['currentPassword']) ) {
@@ -20,7 +20,7 @@
 
                 $imagePost = $_FILES["profileImage"];
                 $check->updateInfo($username, $bio, $_SESSION['userID']);
-                
+
                 if ( !empty($_POST['newPassword']) ) {
                     if ( !empty($_POST['confirmPassword']) ) {
                         if ( $_POST['newPassword'] == $_POST['confirmPassword'] ) {
@@ -33,7 +33,7 @@
                         $feedback = "You need to confirm your password.";
                     }
                 }
-        
+
                 if ( $update->checkType($imagePost) === false ) {
                     $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 } else {
