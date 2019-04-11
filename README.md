@@ -10,8 +10,9 @@
 * Je kan iets met .gitignore en .keep doen om de folders te bewaren maar niet de content.
 ### Profile - Edit profile wachtwoord
 * branch 'master'
-* Geen feedback op niet ingevulde wachtwoord of foute wachtwoord.
-* Duidelijker CSS tussen het veranderen van wachtwoord en het huidige wachtwoord.
+* Wanneer alles juist werd ingegeven (qua wachtwoorden) zonder een afbeelding te uploaden, dan krijg volgende melding bij het opslaan van de wijzigingen: "Sorry, only JPG, JPEG, PNG & GIF files are allowed.".
+* Eventuele feedback bij het noteren van 3 dezelfde wachtwoorden (nieuw wachtwoord mag niet hetzelfde zijn als oud wachtwoord).
+* Duidelijker CSS tussen het veranderen van wachtwoord en het huidige wachtwoord vb. Current Password, New Password & Confirm Password. Zo weet de gebruiker ook beter wat hij/zij moet invullen. Nu moet je eerst jouw nieuw ww invullen en daarna jouw oude om het te wijzigen. Dit kan verwarrend zijn.
 ### Profile - upload profiel foto
 * De juist geüploade foto is nergens zichtbaar op de website.
 ### Profile - feedback bij wijziging beschrijving
