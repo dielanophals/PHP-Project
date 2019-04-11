@@ -1,6 +1,6 @@
 <?php
     Abstract class Security{
-        public function hash($password){
+        public static function hash($password){
             $options = [
                 'cost' => 10
             ];
