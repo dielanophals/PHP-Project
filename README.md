@@ -9,3 +9,5 @@
 * branch 'master'
 * Geen feedback op niet ingevulde wachtwoord of foute wachtwoord.
 * Duidelijker CSS tussen het veranderen van wachtwoord en het huidige wachtwoord.
+### Profile - upload profiel foto
+* De juist geüploade foto is nergens zichtbaar op de website.
