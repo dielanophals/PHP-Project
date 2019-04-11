@@ -9,3 +9,4 @@ TBA
 
 * branch 'master'
 * Geen feedback op niet ingevulde wachtwoord of foute wachtwoord.
+* Duidelijker CSS tussen het veranderen van wachtwoord en het huidige wachtwoord.
