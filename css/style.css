@@ -15,7 +15,8 @@ nav{
 nav a, nav form{
     margin-top: 0%;
     color: #fff;
-    flex: 1 0 20%;
+    flex-flow: row wrap;
+    flex: 1 0 10%;
     text-transform: lowercase;
     text-align: center;
 }
