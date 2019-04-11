@@ -48,23 +48,26 @@
                     }
                 }
 
-                $imagePost = $_FILES["profileImage"];
+                if ( !empty($_FILES['profileImage']) ) {
+                    $imagePost = $_FILES["profileImage"];
 
-                if ( $update->checkType($imagePost) === false ) {
-                    $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                } else {
-                    if ( $update->fileSize($imagePost) === false ) {
-                        $feedback = "Sorry, your file is too big.";
+                    if ( $update->checkType($imagePost) === false ) {
+                        $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     } else {
-                        $update->createDirectory("profile");
-                        if ( $update->fileExists() === false ) {
-                            $feedback = "Sorry, this file already exists. Please try again.";
+                        if ( $update->fileSize($imagePost) === false ) {
+                            $feedback = "Sorry, your file is too big.";
                         } else {
-                            $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
-                            $feedback = "File has been uploaded.";
+                            $update->createDirectory("profile");
+                            if ( $update->fileExists() === false ) {
+                                $feedback = "Sorry, this file already exists. Please try again.";
+                            } else {
+                                $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
+                                $feedback = "File has been uploaded.";
+                            }
                         }
                     }
                 }
+
             } else {
                 $feedback = "Password is incorrect.";
             }
