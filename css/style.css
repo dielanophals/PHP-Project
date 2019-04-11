@@ -10,15 +10,18 @@ nav{
     display: flex;
     background: #000;
     padding: 2%;
+    flex-flow: row wrap;
+    justify-content: space-around;
 }
 
 nav a, nav form{
     margin-top: 0%;
+    padding: 1%;
     color: #fff;
-    flex-flow: row wrap;
-    flex: 1 0 10%;
+    flex: 0 0 100%;
     text-transform: lowercase;
     text-align: center;
+    width: 600px;
 }
 
 form.login{
@@ -52,3 +55,12 @@ nav form input{
   margin:auto;
   display:flex;
 }
+
+@media only screen and (min-width: 600px) {
+    nav a, nav form{
+        flex-flow: row wrap;
+        flex: 1 0 10%;
+        text-transform: lowercase;
+        text-align: center;
+    }
+  }
