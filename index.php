@@ -41,5 +41,10 @@
             <?php endforeach; ?>
         <?php endforeach; ?>
     </main>
+    <footer>
+        <div class="btnFeedback">
+            <button class="feedback">Load more</button>
+        </div>
+    </footer>
 </body>
 </html>
