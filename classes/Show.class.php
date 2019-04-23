@@ -19,7 +19,7 @@
 
         public static function getFriendsPosts($id, $limit){
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' LIMIT $limit");
+            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $limit");
             $statement->execute();
             $posts = $statement->fetchAll();
             return $posts;
