@@ -48,12 +48,11 @@
   </header>
     <div class="profile__container">
       <div class="profile__information">
-      <?php $information = new ShowUserInfo(); ?>
-        <?php foreach ($information->getUserInfo($_SESSION['userID']) as $profilePicture): ?>
+        <?php foreach (Show::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
           <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
         <?php endforeach; ?>
           <div class="information">
-            <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+            <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
               <h2 class="name"><?php echo $info['username'] ?></h2>
               <p class="bio"><?php echo $info['description'] ?></p>
             <?php endforeach; ?>
@@ -67,8 +66,7 @@
   <main class="profilePosts">
     <div class="container">
       <?php
-        $sup = new ShowUserPosts();
-        foreach($sup->getUserPosts($_SESSION["userID"]) as $p){
+        foreach(Show::getUserPosts($_SESSION["userID"]) as $p){
           echo '<a href="?image='. $p['id'] .'">';
           echo '<div class="userPosts" style="background:url(' . $p['image'] . '); background-size: cover; background-position: center;">';
           // echo '<img src="' . $p['image'] . '">';
