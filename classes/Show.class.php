@@ -1,0 +1,4 @@
+<?php
+    Abstract class Show{
+        
+    }
