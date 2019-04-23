@@ -93,21 +93,20 @@
 <body>
     <?php include_once("nav.inc.php"); ?>
     <div class="container">
-        <?php $information = new ShowUserInfo(); ?>
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
-                <?php foreach ($information->getUserInfo($_SESSION['userID']) as $profilePicture): ?>
+                <?php foreach (Show::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
                     <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
                 <?php endforeach; ?>
                 <div class="information">
-                    <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
                     <label for="name">Name</label><br>
                     <textarea name="name" id="name"><?php echo $info['username'] ?></textarea><br>
                     <label for="bio">Biography</label>
                     <textarea name="bio" id="bio"><?php echo $info['description'] ?></textarea>
                     <?php endforeach; ?>
 
-                    <?php foreach($information->getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
                     <label for="email">Email</label><br>
                     <textarea name="email" id="email"><?php echo $info['email'] ?></textarea>
                     <?php endforeach; ?>
