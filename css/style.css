@@ -20,11 +20,11 @@ nav a, nav form{
     text-align: center;
 }
 
-form.login{
+form.login, form.register{
     margin: 100px;
 }
 
-form.login input{
+form.login input, form.register input{
     margin-bottom: 20px;
     border: 0;
     outline: 0;
@@ -32,7 +32,7 @@ form.login input{
     border-bottom: 2px solid #000;
 }
 
-form.login input[type=submit]{
+form.login input[type=submit], form.register input[type=submit]{
     padding: 10px;
     background-color: #000;
     color: #fff;
