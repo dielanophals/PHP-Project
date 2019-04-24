@@ -1,4 +1,5 @@
 <?php
+
     class User{
         private $email;
         private $firstname;
@@ -63,6 +64,22 @@
 
         public function getPasswordConfirmation(){
             return $this->passwordConfirmation;
+        }
+
+        public function register() {
+            $password = Security::hash($this->password);
+
+            try{
+                $conn = Db::getInstance();
+
+                $statement = $conn->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+                $statement->bindParam(":email", $this->email);
+                $statement->bindParam(":password", $password);
+                $result = $statement->execute();
+                return($result);
+            } catch(Throwable $t){
+                return false;
+            }
         }
 
         public function login($p_sEmail, $p_sPassword){
