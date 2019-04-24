@@ -8,6 +8,7 @@
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
     $description = htmlspecialchars($_POST["description"]);
+    $tag = $_POST["tag"];
     if(empty($description)){
       $feedback = "Please add a description.";
     }else{
@@ -22,7 +23,7 @@
           if($post->fileExists() === false){
             $feedback = "Sorry, this file already exists. Please try again.";
           }else{
-            $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
+            $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"], $tag);
             $feedback = "File has been uploaded.";
             header("Location: profile.php");
           }
@@ -105,6 +106,15 @@
             <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
             <label for="description">Description:</label>
             <input type="text" name="description" id="description" required><br><br>
+            Tag:<br><br>
+            <?php
+              $showTags = new ShowTags();
+              foreach($showTags->getTags() as $t){
+                echo '<input class="radio" type="radio" name="tag" value="'.$t['id'].'" id="'. $t['tag'] .'">';
+                echo '<label class="color" for="'. $t['tag'] .'">'. $t['tag'] .'</label>';
+              }
+            ?>
+            <br><br>
             <input type="submit" value="Upload Image" name="submit">
           </form>
           <?php
