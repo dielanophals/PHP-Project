@@ -56,17 +56,16 @@ nav form input{
   display:flex;
 }
 
-div.grid{
+main.grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1%;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1em;
     grid-auto-flow: row;
 }
 
-div.post{
-    background: blue;
-    width: 500px;
-    height: 500px;
+div.post img{
+    width: inherit;
+    height: inherit;
 }
 
 .loadmore {
