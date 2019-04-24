@@ -7,8 +7,9 @@
 
     $id = $_SESSION['userID'];
     $list = Friend::getListOfFriendsIds($id);
-    
+ 
     $limit = 20;
+
     if(empty($list)){
         $err_posts = false;
     }
@@ -37,14 +38,21 @@
                 $posts = Show::getFriendsPosts($value, $limit);
                 foreach($posts as $k => $v):
             ?>
-                <img src="<?php echo $v["image"]; ?>">
+                <div id="<?php echo $v["id"]; ?>">
+                    <img src="<?php echo $v["image"]; ?>">
+                </div>
             <?php endforeach; ?>
         <?php endforeach; ?>
     </main>
     <footer>
-        <div class="btnFeedback">
-            <button class="feedback">Load more</button>
+        <div class="btnLoadmore">
+            <form action="" method="POST">
+                <input class="loadmore" type="submit" formmethod="POST" value="Load more" name="load" max="<?php echo $limit; ?>">
+            </form>
         </div>
     </footer>
+    
 </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
 </html>
