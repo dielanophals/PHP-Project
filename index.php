@@ -38,7 +38,7 @@
                 $posts = Show::getFriendsPosts($value, $limit);
                 foreach($posts as $k => $v):
             ?>
-                <div id="<?php echo $v["id"]; ?>">
+                <div id="<?php echo $v["id"]; ?>" class="post">
                     <img src="<?php echo $v["image"]; ?>">
                 </div>
             <?php endforeach; ?>
