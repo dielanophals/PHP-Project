@@ -15,7 +15,7 @@ if(!empty($_POST)) {
         $user->setPassword($password);
         
         if ( $user->register() ) {
-            Session::create();
+            $x = $_SESSION['userID'] = $user->getUserID();
             header("Location: index.php");
 		} else {
             $errLogin = true;

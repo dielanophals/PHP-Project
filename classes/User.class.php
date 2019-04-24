@@ -155,4 +155,20 @@
         public function userID(){
           return $this->userID;
         }
+
+        public function getUserID(){
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+                $statement->bindParam(":email", $this->email);
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+                  
+                $id = $this->userID = $user['id'];
+                return $id;
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
     }

@@ -8,12 +8,12 @@
         public static function create(){
             $randomId = uniqid();
             self::start();
-            $_SESSION["id"] = $randomId;
+            $_SESSION["userID"] = $randomId;
         }
 
         public static function check(){
             self::start();
-            if(!empty($_SESSION["id"])){
+            if(!empty($_SESSION["userID"])){
                 return true;
             }
             else{
