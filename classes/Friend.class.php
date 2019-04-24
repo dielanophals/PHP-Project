@@ -1,7 +1,6 @@
 <?php
 Abstract class Friend{
-    static function getListOfFriendsIds(){
-        $p_iUserid = 1;
+    static function getListOfFriendsIds($p_iUserid){
         try{
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT user1_id, user2_id FROM `friends` INNER JOIN users ON friends.user1_id = users.id WHERE friends.user1_id = :user1_id OR friends.user2_id = :user2_id");
@@ -12,9 +11,12 @@ Abstract class Friend{
 
             $listOfIds = array();
 
-            foreach($list as $key => $value){
-                if($value !== $p_iUserid){
-                    array_push($listOfIds, "{$value}");
+            //is_array() checks if $list is an array
+            if(is_array($list)){
+                foreach($list as $key => $value){
+                    if($value !== $p_iUserid){
+                        array_push($listOfIds, $value);
+                    }
                 }
             }
 
