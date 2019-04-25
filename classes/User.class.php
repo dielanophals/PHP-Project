@@ -149,7 +149,7 @@
 
             try {
                 $conn = Db::getInstance();
-                $statement = $conn->prepare("UPDATE users SET password:password WHERE id='$userID'");
+                $statement = $conn->prepare("UPDATE users SET password=:password WHERE id='$userID'");
                 $statement->bindParam(":password", $password);
                 $statement->execute();
             }
