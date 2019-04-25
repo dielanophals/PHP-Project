@@ -4,8 +4,9 @@ require_once("bootstrap.php");
 
 // check if all fields have input
 if(!empty($_POST)) {
-    $fName = $_POST['firstame'];
-    $lName = $_POST['lastname'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $c_password = $_POST['password_confirmation'];
