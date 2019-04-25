@@ -71,6 +71,28 @@
             return $this->passwordConfirmation;
         }
 
+        public function preregister() {
+            //2^12 hashen
+            $options = [
+                'cost' => 12
+            ];
+            //ww hashen
+            $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
+            
+        //connection with database
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("INSERT INTO users(email, password) VALUES (:email,:password)");
+                $statement->bindParam(":email", $this->email);
+                $statement->bindParam(":password", $password);
+                $result = $statement->execute();
+                return($result);
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
+
         public function register() {
             $password = Security::hash($this->password);
 
@@ -114,27 +136,7 @@
             }
         }
 
-        public function register() {
-            //2^12 hashen
-            $options = [
-                'cost' => 12
-            ];
-            //ww hashen
-            $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
-            
-        //connection with database
-            try{
-                $conn = Db::getInstance();
-                $statement = $conn->prepare("INSERT INTO users(email, password) VALUES (:email,:password)");
-                $statement->bindParam(":email", $this->email);
-                $statement->bindParam(":password", $password);
-                $result = $statement->execute();
-                return($result);
-            }
-            catch(Throwable $t){
-                return false;
-            }
-        }
+
 
         public function passwordCheck($userID){
             try{
