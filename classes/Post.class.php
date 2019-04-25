@@ -17,7 +17,7 @@ Class Post{
   }
 
   public function fileSize($imagePost){
-    if ($imagePost["size"] > 500000) {
+    if ($imagePost["size"] > 5000000) {
       return false;
     }else{
       return true;
@@ -30,8 +30,8 @@ Class Post{
     for ($i = 0; $i < $charactersLength; $i++) {
         $this->randomString .= $characters[rand(0, $charactersLength - 1)];
     }
-    $this->newDirectory = "uploads/" . $dir . "/" . $this->randomString;
-    mkdir($this->newDirectory, 0777);
+    $this->newDirectory = "uploads/" . $dir . DIRECTORY_SEPARATOR . $this->randomString;
+    mkdir($this->newDirectory, 0777, true);
   }
 
   public function fileExists(){
@@ -44,7 +44,7 @@ Class Post{
 
   public function uploadImage(){
     $target_dir = $this->newDirectory;
-    $target_file = $target_dir . "/" . basename($_FILES["fileToUpload"]["name"]);
+    $target_file = $target_dir . DIRECTORY_SEPARATOR . basename($_FILES["fileToUpload"]["name"]);
     move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 
     return $target_file;
@@ -52,7 +52,7 @@ Class Post{
 
   public function uploadProfileImage(){
     $target_dir = $this->newDirectory;
-    $target_file = $target_dir . "/" . basename($_FILES["profileImage"]["name"]);
+    $target_file = $target_dir . DIRECTORY_SEPARATOR . basename($_FILES["profileImage"]["name"]);
     move_uploaded_file($_FILES["profileImage"]["tmp_name"], $target_file);
 
     return $target_file;
@@ -76,7 +76,7 @@ Class Post{
   public function insertProfilePictureIntoDB($filePath, $userID){
     try{
         $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE users (picture) VALUES (:path) WHERE id = '$userID'");
+        $statement = $conn->prepare("UPDATE users SET picture=:path WHERE id = '$userID'");
         $statement->bindParam(":path", $filePath);
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
