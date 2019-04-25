@@ -72,12 +72,8 @@
         }
 
         public function preregister() {
-            //2^12 hashen
-            $options = [
-                'cost' => 12
-            ];
             //ww hashen
-            $password = password_hash($this->password, PASSWORD_DEFAULT, $options);
+            $password = Security::hash($this->password);
             
         //connection with database
             try{
