@@ -80,10 +80,10 @@
 
   <?php
     if(!empty($_GET['image'])){
-      $openPost = new OpenPost();
-      $openPost->showImage($_GET['image']);
+      $post = new Post();
+      $post->showImage($_GET['image']);
 
-      foreach($openPost->showImage($_GET['image']) as $p){
+      foreach($post->showImage($_GET['image']) as $p){
         echo '<div class="popup">';
         echo '<div class="post">';
         echo '<img src="' . $p['image'] . '">';
@@ -104,15 +104,6 @@
             <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
             <label for="description">Description:</label>
             <input type="text" name="description" id="description" required><br><br>
-            Tag:<br><br>
-            <?php
-              $showTags = new ShowTags();
-              foreach($showTags->getTags() as $t){
-                echo '<input class="radio" type="radio" name="tag" value="'.$t['id'].'" id="'. $t['tag'] .'">';
-                echo '<label class="color" for="'. $t['tag'] .'">'. $t['tag'] .'</label>';
-              }
-            ?>
-            <br><br>
             <input type="submit" value="Upload Image" name="submit">
           </form>
           <?php

@@ -50,7 +50,8 @@
 
                 if ( !empty($_FILES['profileImage']) ) {
                     $imagePost = $_FILES["profileImage"];
-
+                    
+                    $update = new Post();
                     if ( $update->checkType($imagePost) === false ) {
                         $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                     } else {
@@ -62,12 +63,11 @@
                                 $feedback = "Sorry, this file already exists. Please try again.";
                             } else {
                                 $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
-                                $feedback = "File has been uploaded.";
                             }
                         }
                     }
                 }
-
+                $feedback = "Account updated.";
             } else {
                 $feedback = "Password is incorrect.";
             }
