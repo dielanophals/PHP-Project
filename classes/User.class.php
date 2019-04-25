@@ -71,6 +71,30 @@
             return $this->passwordConfirmation;
         }
 
+         //Check if user exists based on email address
+         public static function isAccountAvailable($email){
+             echo "function account available";
+            $u = self::findByEmail($email);
+            
+            // PDO returns true if no records are found
+            if($u == false){
+                return false;
+                echo "false";
+            } else {
+                return true;
+                echo "true";
+            }
+        }
+
+        // Find user based on email addres
+        public static function findByEmail($email){
+            echo "function find by email";
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("select * from users where email = :email limit 1");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }
 
         public function register() {
             $password = Security::hash($this->password);
