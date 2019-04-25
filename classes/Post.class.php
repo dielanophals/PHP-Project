@@ -23,7 +23,7 @@ Class Post{
       return true;
     }
   }
-  
+
   public function createDirectory($dir){
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
@@ -58,11 +58,11 @@ Class Post{
     return $target_file;
   }
 
-  public function insertIntoDB($filePath, $des, $userID){
+  public function insertIntoDB($filePath, $des, $userID, $tag){
     try{
         $timestamp = date('Y-m-d H:i:s');
         $conn = Db::getInstance();
-        $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, active) VALUES ('$userID', :path, :des, '$timestamp', 1)");
+        $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, tag, timestamp, active) VALUES ('$userID', :path, :des, $tag, '$timestamp', 1)");
         $statement->bindParam(":path", $filePath);
         $statement->bindParam(":des", $des);
         $statement->execute();
