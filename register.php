@@ -18,10 +18,9 @@ if(!empty($_POST)) {
             if ( $password == $c_password ) {
                 
                 $user = new User();
-                $bool = $user->isAccountAvailable($email);
+                $u = $user->isAccountAvailable($email);
                 
-                if ($bool) {
-    
+                if ($u == 0) {
                 $user->setFirstname($firstname);
                 $user->setLastname($lastname);
                 $user->setUsername($username);
