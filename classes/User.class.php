@@ -90,7 +90,6 @@
                 $statement = $conn->prepare("INSERT INTO users(email, password) VALUES (:email,:password)");
                 $statement->bindParam(":email", $this->email);
                 $statement->bindParam(":password", $password);
-                $statement->execute();
                 $result = $statement->execute();
                 return($result);
             }
