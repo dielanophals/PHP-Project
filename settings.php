@@ -120,7 +120,7 @@
                     <input type="password" name="newPassword" id="newPassword" class="passwords" placeholder="New password"><br>
                     <label for="confirmPassword">Confirm password</label><br>
                     <input type="password" name="confirmPassword" id="confirmPassword" class="passwords" placeholder="Confirm password"><br>
-                    <label for="currentassword">Current password <span style="color:red">*</span><label><br>
+                    <label for="currentPassword" id="required">Current password <span style="color:red">*</span></label><br>
                     <input type="password" name="currentPassword" id="currentPassword" class="passwords" placeholder="Current password"><br>
 
                     <label for="image">Upload profile image</label><br>
