@@ -105,17 +105,16 @@
                 <?php endforeach; ?>
                 <div class="information">
                     <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
-                    <label for="name">Name</label><br>
-                    <textarea name="name" id="name"><?php echo $info['username'] ?></textarea><br>
-                    <label for="bio">Biography</label>
-                    <textarea name="bio" id="bio"><?php echo $info['description'] ?></textarea>
+                        <label for="name">Name</label><br>
+                        <textarea name="name" id="name"><?php echo htmlspecialchars($info['username']); ?></textarea><br>
+                        <label for="bio">Biography</label>
+                        <textarea name="bio" id="bio"><?php echo htmlspecialchars($info['description']); ?></textarea>
                     <?php endforeach; ?>
 
                     <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
-                    <label for="email">Email</label><br>
-                    <textarea name="email" id="email"><?php echo $info['email'] ?></textarea>
+                        <label for="email">Email</label><br>
+                        <textarea name="email" id="email"><?php echo htmlspecialchars($info['email']); ?></textarea>
                     <?php endforeach; ?>
-
                     <label for="newPassword">New password</label><br>
                     <input type="password" name="newPassword" id="newPassword" class="passwords" placeholder="New password"><br>
                     <label for="confirmPassword">Confirm password</label><br>
