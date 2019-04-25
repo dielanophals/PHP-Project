@@ -19,18 +19,24 @@
     <header>
         <?php require_once("nav.inc.php"); ?>
     </header>
-    <?php
-    if(!empty($search)){
-      $searchPosts = new Post();
-      foreach($searchPosts->getSearchPosts($search) as $s):
-        ?>
 
-        <div id="<?php echo $s["id"]; ?>" class="post">
-            <img src="<?php echo $s['image']; ?>">
-        </div>
+    <main class="search">
+      <div class="container searched">
         <?php
-      endforeach;
-    }
-    ?>
+        if(!empty($search)){
+          $searchPosts = new Post();
+          foreach($searchPosts->getSearchPosts($search) as $s):
+            ?>
+
+            <a href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>">
+            <div class="searchPost" style="background:url('<?php echo $s['image']; ?>'); background-size: cover; background-position: center;">
+            </div>
+            </a>
+            <?php
+          endforeach;
+        }
+        ?>
+      </div>
+    </main>
 </body>
 </html>
