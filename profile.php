@@ -80,10 +80,10 @@
 
   <?php
     if(!empty($_GET['image'])){
-      $openPost = new OpenPost();
-      $openPost->showImage($_GET['image']);
+      $post = new Post();
+      $post->showImage($_GET['image']);
 
-      foreach($openPost->showImage($_GET['image']) as $p){
+      foreach($post->showImage($_GET['image']) as $p){
         echo '<div class="popup">';
         echo '<div class="post">';
         echo '<img src="' . $p['image'] . '">';
