@@ -34,7 +34,7 @@ if(!empty($_POST)) {
                         $errLogin = "Login failed.";
                     }
                 } else {
-                $feedback = "You already have an account.";
+                $feedbackS = "You already have an account.";
                 }
             } else {
                 $feedback = "Password is incorrect.";
@@ -68,6 +68,12 @@ if(!empty($_POST)) {
         <?php if(isset($feedback)): ?>
             <div>
                 <p><?php echo $feedback; ?></p>
+            </div>
+        <?php endif; ?>
+        <?php if(isset($feedbackS)): ?>
+            <div>
+                <p><?php echo $feedbackS; ?></p>
+                <a href="login.php">Click here to log in.</a>
             </div>
         <?php endif; ?>
         <?php if(isset($errLogin)): ?>
