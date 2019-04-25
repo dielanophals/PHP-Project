@@ -19,18 +19,41 @@
     <header>
         <?php require_once("nav.inc.php"); ?>
     </header>
-    <?php
-    if(!empty($search)){
-      $searchPosts = new Post();
-      foreach($searchPosts->getSearchPosts($search) as $s):
-        ?>
 
-        <div id="<?php echo $s["id"]; ?>" class="post">
-            <img src="<?php echo $s['image']; ?>">
-        </div>
+    <main class="search">
+      <div class="container searched">
         <?php
-      endforeach;
+        if(!empty($search)){
+          $searchPosts = new Post();
+          foreach($searchPosts->getSearchPosts($search) as $s):
+            ?>
+
+            <a href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>">
+            <div class="searchPost" style="background:url('<?php echo $s['image']; ?>'); background-size: cover; background-position: center;">
+            </div>
+            </a>
+            <?php
+          endforeach;
+        }
+        ?>
+      </div>
+    </main>
+
+    <?php
+    if(!empty($_GET['image'])){
+      $post = new Post();
+      $post->showImage($_GET['image']);
+
+      foreach($post->showImage($_GET['image']) as $p){
+        echo '<div class="popup">';
+        echo '<div class="post">';
+        echo '<img src="' . $p['image'] . '">';
+        echo '<p>' . $p['description'] . '</p>';
+        echo '</div>';
+        echo '<a href="search.php?search=' . $search . '" class="close">X</a>';
+        echo '</div>';
+      }
     }
-    ?>
+     ?>
 </body>
 </html>
