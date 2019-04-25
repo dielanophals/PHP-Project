@@ -21,7 +21,7 @@
     </header>
     <?php
     if(!empty($search)){
-      $searchPosts = new SearchPosts();
+      $searchPosts = new Post();
       foreach($searchPosts->getUserPosts($searchPosts->getTag($search)) as $s):
         ?>
 
