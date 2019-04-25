@@ -4,73 +4,21 @@ require_once("bootstrap.php");
 
 // check if all fields have input
 if(!empty($_POST)) {
+    $fName = $_POST['firstame'];
+    $lName = $_POST['lastname'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $c_password = $_POST['password_confirmation'];
 
-    //Both email and password empty.
-    if(empty($email) && empty($password)){
-        $errEmail = true;
-        $errPassword = true;
-    }
-    //Only email is empty.
-    else if(empty($email)){
-        $errEmail = true;
-    }
-    //Only password is empty.
-    else if(empty($password)){
-        $errPassword = true;
-    }
-    //Only c_password is empty
-    else if(empty($c_password)){
-        $errCPassword = true;
-    }
-    //Password and confirm password aren't the same
-    else if($password != $c_password){
-        $errPassws = true;
-    }
-    //Everything is filled in.
-    else{
-        $user = new User();
-    
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setPasswordConfirmation($_POST['password_confirmation']);
-    
-        $result = $user->preregister();
-        //var_dump($result);
-        //if bool true >> go to homepage
-        if($result === true){
-            header("Location: index.php");
-        } 
-        else {
-            $err = true;
-        }
-    }
-}
-
-
-require_once("bootstrap.php");
-// check if all fields have input
-
-if(!empty($_POST)) {
-
-    $fName = $_POST['fName'];
-    $lName = $_POST['lName'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $passwordConfirmation = $_POST['password_confirmation'];
-
-    if ( !empty($_POST['fName']) && !empty($_POST['lName']) && !empty($_POST['username']) ) {
+    if ( !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['username']) ) {
 
         if ( !empty($_POST['password']) && !empty($_POST['password_confirmation']) ) {
 
-            if ( $password == $passwordConfirmation ) {
+            if ( $password == $c_password ) {
                 $user = new User();
                 
-                $user->setFirstname($fName);
-                $user->setLastname($lName);
+                $user->setFirstname($firstname);
+                $user->setLastname($lastname);
                 $user->setUsername($username);
                 $user->setEmail($email);
                 $user->setPassword($password);
@@ -90,7 +38,11 @@ if(!empty($_POST)) {
     } else {
         $feedback = "Personal details cannot be empty.";
     }
+
 }
+
+
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -106,38 +58,27 @@ if(!empty($_POST)) {
 <body>
     <form action="" method="post" class="register">
         <h2>Sign up for an account</h2>
-        <?php if(isset($errEmail) && isset($errPassword)): ?>
+        <?php if(isset($feedback)): ?>
             <div>
-                <p>Both fields can not be empty.</p>
+                <p><?php echo $feedback; ?></p>
             </div>
         <?php endif; ?>
-        <?php if(isset($errEmail) && !isset($errPassword)): ?>
+        <?php if(isset($errLogin)): ?>
             <div>
-                <p>The email address you gave can not be empty.</p>
-            </div>
-        <?php endif; ?>
-        <?php if(isset($errPassword) && !isset($errEmail)): ?>
-            <div>
-                <p>The password you gave can not be empty.</p>
-            </div>
-        <?php endif; ?>
-        <?php if(isset($errCPassword) && !isset($errEmail) && !isset($errPassword)): ?>
-            <div>
-                <p>The confirming password you gave can not be empty.</p>
-            </div>
-        <?php endif; ?>
-        <?php if(isset($errPassws) && !isset($errEmail) && !isset($errPassword) && !isset($errCPassword) ): ?>
-            <div>
-                <p>The passwords you gave aren't the same.</p>
-            </div>
-        <?php endif; ?>
-        <?php if(isset($err)): ?>
-            <div>
-                <p>The email address and/or password you entered is invalid.</p>
+                <p><?php echo $errLogin; ?></p>
             </div>
         <?php endif; ?>
 
+
+                <label for="first_name">Firstname</label>
+                <input type="text" id="firstname" name="firstname"><br>
             
+                <label for="last_name">Lastname</label>
+                <input type="text" id="lastname" name="lastname"><br>
+
+                <label for="user_name">Username</label>
+                <input type="text" id="username" name="username"><br>
+
                 <label for="email">Email</label>
                 <input type="text" id="email" name="email"><br>
          
