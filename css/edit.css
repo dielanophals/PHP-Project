@@ -1,0 +1,121 @@
+.profile__information {
+    background-color: rgba(148, 148, 148, 0.1);
+    width: 960px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 50px auto 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+
+.feedback {
+    display: block;
+    width: 100%;
+    background: #F4F4F4;
+    padding: 10px 30px;
+}
+
+.feedback p {
+    color: red;
+}
+
+.profile {
+    flex: 1 20%;
+    background-image: url("http://wowslider.com/sliders/demo-81/data1/images/redkite50498.jpg");
+    height: 168px;
+    border-radius: 50%;
+    margin: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.5);
+    height: 168px;
+    width: 168px;
+    text-align: center;
+}
+
+.overlay input[type=file] {
+    position: relative;
+    top: 70px;
+    left: 60px;
+    /* opacity: 0; */
+    transform: scale(1.5);
+}
+
+.overlay i {
+    color: white;
+    font-size: 50px;
+    margin-top: 40px;
+}
+
+.information {
+    flex: 1 80%;
+    margin: 20px;
+}
+
+.information label {
+    font-weight: bold;
+}
+
+.information textarea {
+    resize: none;
+    background: rgba(148, 148, 148, 0.1);
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#name {
+    height: 38px;
+    width: 250px;
+    margin-bottom: 10px;
+}
+
+#bio {
+    width: 100%;
+    height: 100px;
+    line-height: 1.5em;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+#profileImage {
+    margin: 10px 0;
+}
+
+#email {
+    width: 100%;
+    height: 38px;
+    margin-bottom: 10px;
+}
+
+input#newPassword,
+input#confirmPassword,
+input#currentPassword {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: #EAEAEA;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+#required {
+    color: red;
+}
+
+.information input[type=submit] {
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+i {
+    color: blue;
+}

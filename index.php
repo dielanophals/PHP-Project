@@ -5,28 +5,14 @@
         header("Location: login.php");
     }
 
-    //check if there is an update
-	if(!empty($_POST))
-	{
-		try {
-            //make a new comment
-            $comment = new Comment();
-            //set the text of the comment
-            $comment->setText($_POST['comment']);
-            //save the comment
-			var_dump($comment->Save());
-            
-            //prog.enhancement
-            //graceful.degradation
-            
-		} catch (\Throwable $th) {
-			//throw $th;
-		}
-	}
-	
-	//always get last activity updates
-	$comments = Comment::getAll();
+    $id = $_SESSION['userID'];
+    $list = Friend::getListOfFriendsIds($id);
+ 
+    $limit = 20;
 
+    if(empty($list)){
+        $err_posts = false;
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,25 +21,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <title>InstaPet - Feed</title>
 </head>
 <body>
     <header>
         <?php require_once("nav.inc.php"); ?>
     </header>
-
-    <input type="text" placeholder="Write a comment" id="comment" name="comment" />
-	<input id="btnSubmit" type="submit" value="Add comment" />
-		
-		<ul id="listupdates">
-        <?php 
-            // making a list of comments
-			foreach($comments as $c) {
-					echo "<li>". $c->getText() ."</li>";
-			}
-
-		?>
-		</ul>
-
+    <main class="grid">
+        <?php if(isset($err_posts)): ?>
+            <p>No posts to display of your friends.</p>
+        <?php endif; ?>
+        <!--in id the id of the post is displayed, in case of detail page that needs to be shown.-->
+        <?php foreach($list as $key => $value): ?>
+            <?php
+                $posts = Show::getFriendsPosts($value, $limit);
+                foreach($posts as $k => $v):
+            ?>
+                <div id="<?php echo $v["id"]; ?>" class="post">
+                    <img src="<?php echo $v["image"]; ?>">
+                </div>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </main>
+    <footer>
+        <div class="btnLoadmore">
+            <form action="" method="POST">
+                <input class="loadmore" type="submit" formmethod="POST" value="Load more" name="load" max="<?php echo $limit; ?>">
+            </form>
+        </div>
+    </footer>
+    
 </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
 </html>

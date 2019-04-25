@@ -50,7 +50,47 @@ if(!empty($_POST)) {
 }
 
 
+require_once("bootstrap.php");
+// check if all fields have input
 
+if(!empty($_POST)) {
+
+    $fName = $_POST['fName'];
+    $lName = $_POST['lName'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $passwordConfirmation = $_POST['password_confirmation'];
+
+    if ( !empty($_POST['fName']) && !empty($_POST['lName']) && !empty($_POST['username']) ) {
+
+        if ( !empty($_POST['password']) && !empty($_POST['password_confirmation']) ) {
+
+            if ( $password == $passwordConfirmation ) {
+                $user = new User();
+                
+                $user->setFirstname($fName);
+                $user->setLastname($lName);
+                $user->setUsername($username);
+                $user->setEmail($email);
+                $user->setPassword($password);
+
+                if ( $user->register() ) {
+                    $x = $_SESSION['userID'] = $user->getUserID();
+                    header("Location: index.php");
+                } else {
+                    $errLogin = "Login failed.";
+                }
+            } else {
+                $feedback = "Password is incorrect.";
+            }
+        } else {
+            $feedback = "Password cannot be empty.";
+        }
+    } else {
+        $feedback = "Personal details cannot be empty.";
+    }
+}
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -58,8 +98,8 @@ if(!empty($_POST)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel = "stylesheet" type = "text/css" href = "css/reset.css">
-    <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+    <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <title>InstaPet - Register</title>
 </head>

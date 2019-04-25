@@ -5,7 +5,7 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        //Both email and password empty.
+        //Both email and are password empty.
         if(empty($email) && empty($password)){
             $errEmail = true;
             $errPassword = true;
@@ -26,6 +26,7 @@
             //Check if user can log in.
             if($isLogged){
                 Session::create();
+                $_SESSION['userID'] = $u->userID();
                 header("Location: index.php");
             }
             //Unable to log in.
