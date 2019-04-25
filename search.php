@@ -22,7 +22,7 @@
     <?php
     if(!empty($search)){
       $searchPosts = new Post();
-      foreach($searchPosts->getUserPosts($searchPosts->getTag($search)) as $s):
+      foreach($searchPosts->getSearchPosts($search) as $s):
         ?>
 
         <div id="<?php echo $s["id"]; ?>" class="post">
