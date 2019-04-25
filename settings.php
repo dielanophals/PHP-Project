@@ -68,7 +68,6 @@
                     }
                 }
                 $feedback = "Account updated.";
-                header('Location: settings.php');
             } else {
                 $feedback = "Password is incorrect.";
             }
