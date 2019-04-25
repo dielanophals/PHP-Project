@@ -21,8 +21,8 @@
     </header>
     <?php
     if(!empty($search)){
-      $searchPosts = new SearchPosts();
-      foreach($searchPosts->getUserPosts($searchPosts->getTag($search)) as $s):
+      $searchPosts = new Post();
+      foreach($searchPosts->getSearchPosts($search) as $s):
         ?>
 
         <div id="<?php echo $s["id"]; ?>" class="post">

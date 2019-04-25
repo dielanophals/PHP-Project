@@ -86,4 +86,19 @@ Class Post{
     }
   }
 
+  public function showImage($imageID){
+    $conn = Db::getInstance();
+    $statement = $conn->prepare("SELECT * FROM posts WHERE id = '$imageID'");
+    $statement->execute();
+    $image = $statement->fetchAll();
+    return $image;
+  }
+
+  public function getSearchPosts($search){
+    $conn = Db::getInstance();
+    $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' ORDER BY id DESC");
+    $statement->execute();
+    $posts = $statement->fetchAll();
+    return $posts;
+  }
 }
