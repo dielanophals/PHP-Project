@@ -72,9 +72,15 @@
             try{
                 $conn = Db::getInstance();
 
-                $statement = $conn->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+                date_default_timezone_set("Europe/Brussels"); 
+                $timestamp = date('Y-m-d H:i:s');
+                $statement = $conn->prepare("INSERT INTO users (firstname, lastname, username, email, password, timestamp) VALUES (:firstname, :lastname, :username, :email, :password, :timestamp)");
+                $statement->bindParam(":firstname", $this->firstname);
+                $statement->bindParam(":lastname", $this->lastname);
+                $statement->bindParam(":username", $this->username);
                 $statement->bindParam(":email", $this->email);
                 $statement->bindParam(":password", $password);
+                $statement->bindParam(":timestamp", $timestamp);
                 $result = $statement->execute();
                 return($result);
             } catch(Throwable $t){
