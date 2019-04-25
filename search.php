@@ -22,9 +22,14 @@
     <?php
     if(!empty($search)){
       $searchPosts = new SearchPosts();
-      foreach($searchPosts->getUserPosts($searchPosts->getTag($search)) as $s){
-        echo $s['image'];
-      }
+      foreach($searchPosts->getUserPosts($searchPosts->getTag($search)) as $s):
+        ?>
+
+        <div id="<?php echo $s["id"]; ?>" class="post">
+            <img src="<?php echo $s['image']; ?>">
+        </div>
+        <?php
+      endforeach;
     }
     ?>
 </body>
