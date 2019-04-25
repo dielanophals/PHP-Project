@@ -37,7 +37,7 @@ if(!empty($_POST)) {
         $user->setPassword($_POST['password']);
         $user->setPasswordConfirmation($_POST['password_confirmation']);
     
-        $result = $user->register();
+        $result = $user->preregister();
         //var_dump($result);
         //if bool true >> go to homepage
         if($result === true){
