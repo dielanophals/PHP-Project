@@ -99,13 +99,13 @@ if(!empty($_POST)) {
 
             
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email"><br>
          
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password"><br>
          
                 <label for="password_confirmation">Confirm your password</label>
-                <input type="password" id="password_confirmation" name="password_confirmation">
+                <input type="password" id="password_confirmation" name="password_confirmation"><br>
           
                 <input type="submit" value="Sign me up!" class="btn btn--primary">  
           
