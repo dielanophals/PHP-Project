@@ -92,6 +92,11 @@
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
+    <?php if ( isset($feedback) ): ?>
+        <div class="feedback">
+            <p><?php echo $feedback; ?></p>
+        </div>
+    <?php endif; ?>
     <div class="container">
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
@@ -125,11 +130,6 @@
                 </div>
             </div>
         </form>
-        <?php
-            if ( isset($feedback) ) {
-                echo $feedback;
-            }
-        ?>
     </div>
 </body>
 </html>
