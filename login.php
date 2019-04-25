@@ -5,7 +5,7 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        //Both email and password empty.
+        //Both email and are password empty.
         if(empty($email) && empty($password)){
             $errEmail = true;
             $errPassword = true;

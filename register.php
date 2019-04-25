@@ -5,26 +5,41 @@ require_once("bootstrap.php");
 
 if(!empty($_POST)) {
 
+    $fName = $_POST['fName'];
+    $lName = $_POST['lName'];
+    $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $passwordConfirmation = $_POST['password_confirmation'];
 
-    if ( $password == $passwordConfirmation ) {
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPassword($password);
-        
-        if ( $user->register() ) {
-            $x = $_SESSION['userID'] = $user->getUserID();
-            header("Location: index.php");
-		} else {
-            $errLogin = true;
+    if ( !empty($_POST['fName']) && !empty($_POST['lName']) && !empty($_POST['username']) ) {
+
+        if ( !empty($_POST['password']) && !empty($_POST['password_confirmation']) ) {
+
+            if ( $password == $passwordConfirmation ) {
+                $user = new User();
+                
+                $user->setFirstname($fName);
+                $user->setLastname($lName);
+                $user->setUsername($username);
+                $user->setEmail($email);
+                $user->setPassword($password);
+
+                if ( $user->register() ) {
+                    $x = $_SESSION['userID'] = $user->getUserID();
+                    header("Location: index.php");
+                } else {
+                    $errLogin = "Login failed.";
+                }
+            } else {
+                $feedback = "Password is incorrect.";
+            }
+        } else {
+            $feedback = "Password cannot be empty.";
         }
     } else {
-        $errPwd = true;
+        $feedback = "Personal details cannot be empty.";
     }
-
-    //if bool true >> go to homepage
 }
 
 ?><!DOCTYPE html>
@@ -33,22 +48,31 @@ if(!empty($_POST)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <title>InstaPet - Register</title>
 </head>
 <body>
     <form action="" method="post">
         <h2 form__title>Sign up for an account</h2>
-        <?php if ( isset($errPwd) ): ?>
+        <?php if ( isset($feedback) ): ?>
             <div class="form__error">
-                <p>Password is incorrect.</p>
+                <p><?php echo $feedback; ?></p>
             </div>
         <?php endif; ?>
-        <?php if ( isset($errLogin) ): ?>
-            <div class="form__error">
-                <p>Login failed.</p>
-            </div>
-        <?php endif; ?>
-
+        <div class="form__field">
+            <label for="fName">First name</label>
+            <input type="text" id="fName" name="fName">
+        </div>
+        <div class="form__field">
+            <label for="lName">Last name</label>
+            <input type="text" id="lName" name="lName">
+        </div>
+        <div class="form__field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+        </div>
         <div class="form__field">
             <label for="email">Email</label>
             <input type="text" id="email" name="email">
