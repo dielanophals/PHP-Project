@@ -1,5 +1,4 @@
 <?php
-require_once("classes/User.class.php");
 require_once("bootstrap.php");
 
 // check if all fields have input
@@ -11,24 +10,32 @@ if(!empty($_POST)) {
     $password = $_POST['password'];
     $c_password = $_POST['password_confirmation'];
 
+
     if ( !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['username']) ) {
 
         if ( !empty($_POST['password']) && !empty($_POST['password_confirmation']) ) {
 
             if ( $password == $c_password ) {
-                $user = new User();
                 
+                $user = new User();
+                //$user->isAccountAvailable($email);
+                
+                if ($user->isAccountAvailable($email) ) {
+    
                 $user->setFirstname($firstname);
                 $user->setLastname($lastname);
                 $user->setUsername($username);
                 $user->setEmail($email);
                 $user->setPassword($password);
 
-                if ( $user->register() ) {
-                    $x = $_SESSION['userID'] = $user->getUserID();
-                    header("Location: index.php");
+                    if ( $user->register() ) {
+                        $x = $_SESSION['userID'] = $user->getUserID();
+                        header("Location: index.php");
+                    } else {
+                        $errLogin = "Login failed.";
+                    }
                 } else {
-                    $errLogin = "Login failed.";
+                $feedback = "You already have an account.";
                 }
             } else {
                 $feedback = "Password is incorrect.";
