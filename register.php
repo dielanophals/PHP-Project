@@ -19,10 +19,8 @@ if(!empty($_POST)) {
                 
                 $user = new User();
                 $bool = $user->isAccountAvailable($email);
-                var_dump($bool);
-/*
-                if ($bool) {
-    
+                
+                if ($u == 0) {
                 $user->setFirstname($firstname);
                 $user->setLastname($lastname);
                 $user->setUsername($username);
@@ -30,14 +28,16 @@ if(!empty($_POST)) {
                 $user->setPassword($password);
 
                     if ( $user->register() ) {
-                        $x = $_SESSION['userID'] = $user->getUserID();
+                        $id = $user->getUserID();
+                        session_start();
+                        $_SESSION['userID'];
                         header("Location: index.php");
                     } else {
                         $errLogin = "Login failed.";
                     }
                 } else {
                 $feedback = "You already have an account.";
-                }*/
+                }
             } else {
                 $feedback = "Password is incorrect.";
             }
@@ -47,12 +47,7 @@ if(!empty($_POST)) {
     } else {
         $feedback = "Personal details cannot be empty.";
     }
-
 }
-
-
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,13 +67,17 @@ if(!empty($_POST)) {
                 <p><?php echo $feedback; ?></p>
             </div>
         <?php endif; ?>
+        <?php if(isset($feedbackS)): ?>
+            <div>
+                <p><?php echo $feedbackS; ?></p>
+                <a href="login.php">Click here to log in.</a>
+            </div>
+        <?php endif; ?>
         <?php if(isset($errLogin)): ?>
             <div>
                 <p><?php echo $errLogin; ?></p>
             </div>
         <?php endif; ?>
-
-
                 <label for="first_name">Firstname</label>
                 <input type="text" id="firstname" name="firstname"><br>
             
@@ -98,11 +97,6 @@ if(!empty($_POST)) {
                 <input type="password" id="password_confirmation" name="password_confirmation"><br>
           
                 <input type="submit" value="Sign me up!" class="btn btn--primary">  
-          
     </form>
-
-
-
-
 </body>
 </html>
