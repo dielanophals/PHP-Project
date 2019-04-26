@@ -8,7 +8,6 @@
   if(!empty($_POST)) {
     $imagePost = $_FILES["fileToUpload"];
     $description = htmlspecialchars($_POST["description"]);
-    $tag = $_POST["tag"];
     if(empty($description)){
       $feedback = "Please add a description.";
     }else{
@@ -23,7 +22,7 @@
           if($post->fileExists() === false){
             $feedback = "Sorry, this file already exists. Please try again.";
           }else{
-            $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"], $tag);
+            $post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
             $feedback = "File has been uploaded.";
             header("Location: profile.php");
           }
