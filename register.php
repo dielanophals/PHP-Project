@@ -18,7 +18,7 @@ if(!empty($_POST)) {
             if ( $password == $c_password ) {
                 
                 $user = new User();
-                $bool = $user->isAccountAvailable($email);
+                $u = $user->isAccountAvailable($email);
                 
                 if ($u == 0) {
                 $user->setFirstname($firstname);
@@ -28,9 +28,7 @@ if(!empty($_POST)) {
                 $user->setPassword($password);
 
                     if ( $user->register() ) {
-                        $id = $user->getUserID();
-                        session_start();
-                        $_SESSION['userID'];
+                        Session::create();
                         header("Location: index.php");
                     } else {
                         $errLogin = "Sign up failed.";
