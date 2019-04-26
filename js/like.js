@@ -1,7 +1,7 @@
 $(document).ready(() => {
-    $('.like').on('click', () => {
-        let postid = $('.like').data('id');
-            $post = $('.like');
+    $('.like').click( function () {
+        let postid = $(this).data('id');
+        $post = $(this);
 
         $.ajax({
             url: 'ajax/likes.php',
@@ -18,9 +18,9 @@ $(document).ready(() => {
         });
     });
 
-    $('.unlike').on('click', function(){
-        var postid = $('.unlike').data('id');
-        $post = $('.unlike');
+    $('.unlike').click( function () {
+        let postid = $(this).data('id');
+        $post = $(this);
 
         $.ajax({
             url: 'ajax/likes.php',

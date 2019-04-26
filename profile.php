@@ -40,7 +40,42 @@
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>InstaPet - Profile</title>
+    <style>
+
+      a.post-image {
+        text-decoration: none;
+      }
+
+      .hide {
+        display: none;
+      }
+    
+      .searchPost {
+        margin-bottom: 20px;
+      }
+
+      .likes {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      span.like-btn {
+        cursor: pointer;
+        padding: 10px;
+        font-size: 2em;
+        color: red;
+      }
+
+      span.likes-count {
+        text-decoration: none;
+        color: #333;
+      }
+    
+    </style>
 </head>
 <body>
   <header>
@@ -71,9 +106,33 @@
           echo '<div class="userPosts" style="background:url(' . $p['image'] . '); background-size: cover; background-position: center;">';
           echo '<img src="' . $p['image'] . '">';
           echo '</div>';
-          echo '</a>';
-        }
-      ?>
+          echo '</a>'; ?>
+
+          <div class="likes">
+            <?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
+            
+            <?php if ($like['active'] == 1): ?>
+              <span data-id="<?php echo $p['id']; ?>" class="unlike like-btn fas fa-heart"></span>
+              <span data-id="<?php echo $p['id']; ?>" class="like like-btn hide far fa-heart"></span>
+            <?php endif; ?>
+
+            <?php if ($like['active'] == 0): ?>
+              <span data-id="<?php echo $p['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
+              <span data-id="<?php echo $p['id']; ?>" class="like like-btn far fa-heart"></span>
+            <?php endif; ?>
+            
+            <?php $likeCount = Post::likeCount($p['id']); ?>
+
+            <?php if ( $likeCount == 1 ): ?>
+              <span class="likes-count"><?php echo $likeCount; ?> like</span>
+            <?php endif; ?>
+
+            <?php if ( $likeCount == 0 || $likeCount > 1) : ?>
+              <span class="likes-count"><?php echo $likeCount; ?> likes</span>
+            <?php endif; ?>
+          </div>
+
+        <?php } ?>
     </div>
   </main>
 
@@ -116,5 +175,8 @@
   <?php
     }
   ?>
+  
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+  <script src="js/like.js"></script>
 </body>
 </html>

@@ -40,9 +40,6 @@
       span.like-btn {
         cursor: pointer;
         padding: 10px;
-      }
-
-      span.like-btn i {
         font-size: 2em;
         color: red;
       }
@@ -75,13 +72,13 @@
                 <?php $like = Post::like($_SESSION['userID'], $s['id']); ?>
                 
                 <?php if ($like['active'] == 1): ?>
-                  <span class="unlike like-btn" data-id="<?php echo $s['id']; ?>"><i class="fas fa-heart"></i></span>
-                  <span class="like like-btn hide" data-id="<?php echo $s['id']; ?>"><i class="far fa-heart"></i></span>
+                  <span data-id="<?php echo $s['id']; ?>" class="unlike like-btn fas fa-heart"></span>
+                  <span data-id="<?php echo $s['id']; ?>" class="like like-btn hide far fa-heart"></span>
                 <?php endif; ?>
 
                 <?php if ($like['active'] == 0): ?>
-                  <span class="unlike like-btn hide" data-id="<?php echo $s['id']; ?>"><i class="fas fa-heart"></i></span>
-                  <span class="like like-btn" data-id="<?php echo $s['id']; ?>"><i class="far fa-heart"></i></span>
+                  <span data-id="<?php echo $s['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
+                  <span data-id="<?php echo $s['id']; ?>" class="like like-btn far fa-heart"></span>
                 <?php endif; ?>
                 
                 <?php $likeCount = Post::likeCount($s['id']); ?>
