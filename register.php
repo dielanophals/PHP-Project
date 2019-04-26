@@ -33,7 +33,7 @@ if(!empty($_POST)) {
                         $_SESSION['userID'];
                         header("Location: index.php");
                     } else {
-                        $errLogin = "Login failed.";
+                        $errLogin = "Sign up failed.";
                     }
                 } else {
                 $feedback = "You already have an account.";
