@@ -21,6 +21,10 @@
       a.post-image {
         text-decoration: none;
       }
+
+      .hide {
+        display: none;
+      }
     
       .searchPost {
         margin-bottom: 20px;
@@ -69,15 +73,15 @@
 
             <div class="likes">
                 <?php $like = Post::like($_SESSION['userID'], $s['id']); ?>
-
+                
                 <?php if ($like['active'] == 1): ?>
-                  <span class="like like-btn"><i class="fas fa-heart"></i></span>
-                  <span class="unlike like-btn"><i class="far fa-heart"></i></span>
+                  <span class="unlike like-btn" data-id="<?php echo $s['id']; ?>"><i class="fas fa-heart"></i></span>
+                  <span class="like like-btn hide" data-id="<?php echo $s['id']; ?>"><i class="far fa-heart"></i></span>
                 <?php endif; ?>
 
                 <?php if ($like['active'] == 0): ?>
-                  <span class="like like-btn"><i class="fas fa-heart"></i></span>
-                  <span class="unlike like-btn"><i class="far fa-heart"></i></span>
+                  <span class="unlike like-btn hide" data-id="<?php echo $s['id']; ?>"><i class="fas fa-heart"></i></span>
+                  <span class="like like-btn" data-id="<?php echo $s['id']; ?>"><i class="far fa-heart"></i></span>
                 <?php endif; ?>
                 
                 <?php $likeCount = Post::likeCount($s['id']); ?>

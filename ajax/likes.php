@@ -1,25 +1,41 @@
 <?php  
 
+    require_once("../bootstrap.php");
+    Session::check();
+
     if (isset($_POST['liked'])) {
         $postid = $_POST['postid'];
-        $result = mysqli_query($con, "SELECT * FROM posts WHERE id=$postid");
-        $row = mysqli_fetch_array($result);
-        $n = $row['likes'];
-    
-        mysqli_query($con, "INSERT INTO likes (userid, postid) VALUES (1, $postid)");
-        mysqli_query($con, "UPDATE posts SET likes=$n+1 WHERE id=$postid");
-    
-        echo $n+1;
+        $userid = $_SESSION['userID'];
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM likes_post WHERE post_id = '$postid' AND active = '1'");
+        $statement->execute();
+        $result = $statement->fetchAll();
+
+        date_default_timezone_set("Europe/Brussels"); 
+        $timestamp = date('Y-m-d H:i:s');
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("INSERT INTO likes_post (user_id, post_id, active) VALUES ($userid, $postid, 1)");
+        $statement->execute();
+
+        $likes = count($result)+1;
+        echo $likes;
     }
 
     if (isset($_POST['unliked'])) {
         $postid = $_POST['postid'];
-        $result = mysqli_query($con, "SELECT * FROM posts WHERE id=$postid");
-        $row = mysqli_fetch_array($result);
-        $n = $row['likes'];
+        $userid = $_SESSION['userID'];
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM likes_post WHERE post_id = '$postid' AND active = '1'");
+        $statement->execute();
+        $result = $statement->fetchAll();
     
-        mysqli_query($con, "DELETE FROM likes WHERE postid=$postid AND userid=1");
-        mysqli_query($con, "UPDATE posts SET likes=$n-1 WHERE id=$postid");
-        
-        echo $n-1;
+        $conn = Db::getInstance();
+        $update = $conn->prepare("DELETE FROM likes_post WHERE user_id = '$userid' AND post_id = '$postid'");
+        $update->execute();
+
+        $likes = count($result)-1;
+        echo $likes;
     }
