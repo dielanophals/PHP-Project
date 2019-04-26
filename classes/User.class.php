@@ -38,6 +38,11 @@
             return $this;
         }
 
+        public function setPasswordConfirmation($passwordconfirmation){
+            $this->passwordconfirmation = $passwordconfirmation;
+            return $this;
+        }
+
         public function getEmail(){
             return $this->email;
         }
@@ -64,6 +69,23 @@
 
         public function getPasswordConfirmation(){
             return $this->passwordConfirmation;
+        }
+
+         //Check if user exists based on email address
+         public static function isAccountAvailable($email){
+             $u = self::findByEmail($email);
+            //Any matches?
+             return $u;
+        }
+
+        // Find user based on email addres
+        public static function findByEmail($email){
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("select * from users where email = :email limit 1");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement->rowCount();
         }
 
         public function register() {
@@ -108,6 +130,8 @@
                 return false;
             }
         }
+
+
 
         public function passwordCheck($userID){
             try{
