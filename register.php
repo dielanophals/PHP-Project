@@ -19,7 +19,8 @@ if(!empty($_POST)) {
                 
                 $user = new User();
                 $bool = $user->isAccountAvailable($email);
-                
+                var_dump($bool);
+/*
                 if ($bool) {
     
                 $user->setFirstname($firstname);
@@ -36,7 +37,7 @@ if(!empty($_POST)) {
                     }
                 } else {
                 $feedback = "You already have an account.";
-                }
+                }*/
             } else {
                 $feedback = "Password is incorrect.";
             }

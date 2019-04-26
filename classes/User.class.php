@@ -75,15 +75,16 @@
          public static function isAccountAvailable($email){
              echo "function account available";
             $u = self::findByEmail($email);
-            
+            echo $u;
+
             // PDO returns true if no records are found
-            if($u == false){
+            /*if($u == false){
                 return false;
                 echo "false";
             } else {
                 return true;
                 echo "true";
-            }
+            }*/                                                                                                
         }
 
         // Find user based on email addres
