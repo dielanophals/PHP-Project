@@ -63,6 +63,7 @@ nav form input{
     grid-auto-rows: minmax(20vw, 25vw);
     grid-gap: 1em;
     grid-auto-flow: row;
+    padding: 1em;
 }
 
 .post__img{
