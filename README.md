@@ -9,14 +9,10 @@
 ### .gitignore voor uploads
 * Je kan iets met .gitignore en .keep doen om de folders te bewaren maar niet de content.
 ### Profile - Edit profile wachtwoord
-* branch 'master'
-* Wanneer alles juist werd ingegeven (qua wachtwoorden) zonder een afbeelding te uploaden, dan krijg volgende melding bij het opslaan van de wijzigingen: "Sorry, only JPG, JPEG, PNG & GIF files are allowed.".
 * Eventuele feedback bij het noteren van 3 dezelfde wachtwoorden (nieuw wachtwoord mag niet hetzelfde zijn als oud wachtwoord).
 * Duidelijker CSS tussen het veranderen van wachtwoord en het huidige wachtwoord vb. Current Password, New Password & Confirm Password. Zo weet de gebruiker ook beter wat hij/zij moet invullen. Nu moet je eerst jouw nieuw ww invullen en daarna jouw oude om het te wijzigen. Dit kan verwarrend zijn.
 ### Profile - upload profiel foto
 * De juist geüploade foto is nergens zichtbaar op de website.
-### Profile - feedback bij wijziging beschrijving
-* Wanneer je de beschrijving wijzigt en jouw huidige wachtwoord toevoegt, dan krijg je de feedback over de afbeelding extension. Dit is dan niet van toepassing. If-else moet hiervoor worden aangepast. Misschien best de gebruiker de wijziging laten zien.
 ### Register
 * Geen CSS aanwezig
 * Eventueel een check of het een e-mailadres is.
