@@ -14,7 +14,7 @@ $(document).ready(() => {
 
                 for(let i = 0; i <= 20; i++){
                     if(typeof list.message[i] !== "undefined"){
-                        var div = `<div id=${list.message[i][0]} class="post"><img src="${list.message[i][1]}"></div>`;
+                        var div = `<div id=${list.message[i][0]} class="post"><img class="post__img" src="${list.message[i][1]}"></div>`;
                         $(".grid").append(div);
                     }
                 }
