@@ -6,6 +6,8 @@
 * `$_SESSION['userID]` en `$_SESSION['id']` zijn bijna indentiek. Echter is 1 hardcoded en 1 in de klasse `Session.class.php`.
 * `passwordVerify()` in aparte functie steken zodat het gebruikt kan worden in de klasse `User.class.php` voor de functies passwordCheck() en login(). Zie DRY.
 * Niet alle content/pagina's zijn responsive.
+### AJAX
+* De like en posts laden werken afzonderlijk van elkaar. Op dit moment werkt de like feature. Als je de like feature wegcomment in index.php dan werken de posts. Het probleem ligt niet aan de script like.js. 
 ### .gitignore voor uploads
 * Je kan iets met .gitignore en .keep doen om de folders te bewaren maar niet de content.
 ### Profile - Edit profile wachtwoord
