@@ -73,7 +73,7 @@
                 foreach($posts as $k => $v):
             ?>
                 <div id="<?php echo $v["id"]; ?>" class="post">
-                    <img src="<?php echo $v["image"]; ?>">
+                    <img class="post__img" src="<?php echo $v["image"]; ?>">
                     <div class="likes">
                         <?php $like = Post::like($_SESSION['userID'], $v['id']); ?>
                         
