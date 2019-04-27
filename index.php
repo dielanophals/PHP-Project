@@ -74,6 +74,7 @@
             ?>
                 <div id="<?php echo $v["id"]; ?>" class="post">
                     <img class="post__img" src="<?php echo $v["image"]; ?>">
+                    <!--
                     <div class="likes">
                         <?php $like = Post::like($_SESSION['userID'], $v['id']); ?>
                         
@@ -95,8 +96,8 @@
 
                         <?php if ( $likeCount == 0 || $likeCount > 1) : ?>
                         <span class="likes-count"><?php echo $likeCount; ?> likes</span>
-                        <?php endif; ?>
-                    </div>
+                        <?php endif; ?> 
+                    </div>-->
                 </div>
             <?php endforeach; ?>
         <?php endforeach; ?>
