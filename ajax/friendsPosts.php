@@ -1,7 +1,7 @@
 <?php
     require('../bootstrap.php');
 
-    Session::check();
+    session_start();
 
     if(!empty($_POST)){
         $id = $_SESSION['userID'];
