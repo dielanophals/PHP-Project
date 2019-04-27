@@ -18,8 +18,5 @@
 ### Profile - feedback bij wijziging beschrijving
 * Wanneer je de beschrijving wijzigt en jouw huidige wachtwoord toevoegt, dan krijg je de feedback over de afbeelding extension. Dit is dan niet van toepassing. If-else moet hiervoor worden aangepast. Misschien best de gebruiker de wijziging laten zien.
 ### Register
-* Bij een "geslaagde" aanmaak word je niet doorverwezen naar de volgende pagina (= header() ) en geeft de var_dump() false aan.
-* Debug/test variabelen zitten nog in de code.
-* Geen feedback bij vb. wachtwoorden die niet overeenkomen, geen geldig e-mailadres, lege velden...
 * Geen CSS aanwezig
-* Require de bootstrap, dit kan handig zijn voor uitgebreidere code
+* Eventueel een check of het een e-mailadres is.
