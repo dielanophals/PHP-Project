@@ -67,7 +67,6 @@
         <?php if(isset($err_posts)): ?>
             <p>No posts to display of your friends.</p>
         <?php endif; ?>
-        <!--in id the id of the post is displayed, in case of detail page that needs to be shown.-->
         <?php foreach($list as $key => $value): ?>
             <?php
                 $posts = Show::getFriendsPosts($value, $limit);
@@ -75,7 +74,6 @@
             ?>
                 <div id="<?php echo $v["id"]; ?>" class="post">
                     <img src="<?php echo $v["image"]; ?>">
-                    
                     <div class="likes">
                         <?php $like = Post::like($_SESSION['userID'], $v['id']); ?>
                         
