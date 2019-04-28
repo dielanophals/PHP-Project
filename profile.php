@@ -137,21 +137,19 @@
         </div>
     </div>
 </main>
+	<?php if(!empty($_GET['image'])): ?>
+		<?php $post = new Post(); $post->showImage($_GET['image']);?>
+		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+			<div class="popup">
+				<div class="post">
+					<img src="<?php echo $p['image']; ?>">
+					<p><?php echo $p['description']; ?></p>
+				</div>
+				<a href="profile.php" class="close">X</a>';
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
 <?php
-    if(!empty($_GET['image'])){
-    	$post = new Post();
-    	$post->showImage($_GET['image']);
-
-		foreach($post->showImage($_GET['image']) as $p){
-			echo '<div class="popup">';
-			echo '<div class="post">';
-			echo '<img src="' . $p['image'] . '">';
-			echo '<p>' . $p['description'] . '</p>';
-			echo '</div>';
-			echo '<a href="profile.php" class="close">X</a>';
-			echo '</div>';
-		}
-    }
     if(!empty($_GET['upload'])){
 ?>
 	<div class="popup">
