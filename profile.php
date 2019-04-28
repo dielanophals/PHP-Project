@@ -1,5 +1,6 @@
 <?php
 	require_once("bootstrap.php");
+
 	$s = Session::check();
 	if($s === false){
     	header("Location: login.php");
@@ -100,10 +101,14 @@
 	</div>
 	<main class="profilePosts">
     	<div class="container">
-	  		<?php foreach((Show::getUserPosts($_SESSION["userID"]) as $p)): ?>
+	  		<?php foreach(Show::getUserPosts($_SESSION["userID"]) as $p): ?>
 				<a href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
-						<img src="<?php $p['image']; ?>">
+						<img src="<?php echo $p['image']; ?>">
+						<?php $colorDetection = new ColorDetection();
+							$colors = $colorDetection->detectColors($p['image']);
+							var_dump($colors);
+						?>
 					</div>
 				</a>
 			<?php endforeach; ?>
@@ -129,8 +134,7 @@
 				<?php if ( $likeCount == 0 || $likeCount > 1) : ?>
 					<span class="likes-count"><?php echo $likeCount; ?> likes</span>
 				<?php endif; ?>
-        	</div>
-        <?php } ?>
+        </div>
     </div>
 </main>
 <?php
