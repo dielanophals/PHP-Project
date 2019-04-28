@@ -30,6 +30,4 @@
 			$arr = array_filter($c); //remove all colours which are not found i.e. 0
 			return $arr;
 		}
-
-
 	}
