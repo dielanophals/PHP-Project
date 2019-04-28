@@ -140,44 +140,14 @@
 				<div class="post">
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
-					<?php
-						$colorDetection = new ColorDetection();
-						$c = $colorDetection->detectColors($p['image']);
-					?>
 					<div class="color">
-						<?php if($c["red"] != 0): ?>
-							<div class="color__item color__item--red"></div>
-						<?php endif; ?>
-						<?php if($c["orange"] != 0): ?>
-							<div class="color__item color__item--orange"></div>
-						<?php endif; ?>
-						<?php if($c["yellow"] != 0): ?>
-							<div class="color__item color__item--yellow"></div>
-						<?php endif; ?>
-						<?php if($c["green"] != 0): ?>
-							<div class="color__item color__item--green"></div>
-						<?php endif; ?>
-						<?php if($c["turquoise"] != 0): ?>
-							<div class="color__item color__item--turquoise"></div>
-						<?php endif; ?>
-						<?php if($c["blue"] != 0): ?>
-							<div class="color__item color__item--blue"></div>
-						<?php endif; ?>
-						<?php if($c["purple"] != 0): ?>
-							<div class="color__item color__item--purple"></div>
-						<?php endif; ?>
-						<?php if($c["white"] != 0): ?>
-							<div class="color__item color__item--white"></div>
-						<?php endif; ?>
-						<?php if($c["gray"] != 0): ?>
-							<div class="color__item color__item--gray"></div>
-						<?php endif; ?>
-						<?php if($c["black"] != 0): ?>
-							<div class="color__item color__item--black"></div>
-						<?php endif; ?>
-						<?php if($c["brown"] != 0): ?>
-							<div class="color__item color__item--brown"></div>
-						<?php endif; ?>
+						<?php $c = Color::getColors($p['image']); ?>
+						<!--Loop through all colors to display them from highest value to lowest.-->
+						<?php foreach($c as $key => $value): ?>
+							<?php if($value != 0): ?>
+								<div class="color__item color__item--<?php echo $key; ?>"></div>
+							<?php endif; ?>
+						<?php endforeach; ?>
 					</div>
 					<p><?php echo $p['description']; ?></p>
 				</div>
