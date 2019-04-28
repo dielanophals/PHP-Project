@@ -168,27 +168,31 @@ nav form input{
 }
 
 .color__item--orange{
-    background-color: #FFD3B6;
+    background-color: #FDCD77;
 }
 
 .color__item--yellow{
-    background-color: #F8EFC3;
+    background-color: #FFF68C;
 }
 
 .color__item--green{
-    background-color: #C6F5BE;
+    background-color: #B6D881;
 }
 
 .color__item--turquoise{
-    background-color: #B2F7EF;
+    background-color: #6BCADA;
 }
 
 .color__item--blue{
-    background-color: #92C2DF;
+    background-color: #71ABD9;
 }
 
 .color__item--purple{
-    background-color: #C9C0EF;
+    background-color: #9977B0;
+}
+
+.color__item--pink{
+    background-color: #F497A7;
 }
 
 .color__item--white{
