@@ -66,7 +66,6 @@ Class Post{
         $statement->bindParam(":path", $filePath);
         $statement->bindParam(":des", $des);
         $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
     }
     catch(Throwable $t){
         return false;
