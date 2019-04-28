@@ -143,6 +143,71 @@ nav form input{
   width:100%;
 }
 
+.color{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.color__item{
+    border-radius: 100%;
+    padding: 0.5em;
+    font-weight: bold;
+    font-size: 1.5em;
+    flex: 1 1 minmax(0.5em, auto);
+    height: auto;
+}
+
+.color__item:before{
+    content: ' ';
+    padding-top: 100%;
+}
+
+.color__item--red{
+    background-color: tomato;
+}
+
+.color__item--orange{
+    background-color: #FFD3B6;
+}
+
+.color__item--yellow{
+    background-color: #F8EFC3;
+}
+
+.color__item--green{
+    background-color: #C6F5BE;
+}
+
+.color__item--turquoise{
+    background-color: #B2F7EF;
+}
+
+.color__item--blue{
+    background-color: #92C2DF;
+}
+
+.color__item--purple{
+    background-color: #C9C0EF;
+}
+
+.color__item--white{
+    background-color: #FFF;
+    border: 1px solid #000;
+}
+
+.color__item--gray{
+    background-color: #B2B2B2;
+}
+
+.color__item--black{
+    background-color: #424242;
+}
+
+.color__item--brown{
+    background-color: #CCAF88;
+}
+
 @media only screen and (min-width: 600px) {
     nav a, nav form{
         flex-flow: row wrap;
@@ -150,4 +215,4 @@ nav form input{
         text-transform: lowercase;
         text-align: center;
     }
-  }
+}
