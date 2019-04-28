@@ -72,35 +72,62 @@
                 $posts = Show::getFriendsPosts($value, $limit);
                 foreach($posts as $k => $v):
             ?>
-                <div id="<?php echo $v["id"]; ?>" class="post">
-                    <img class="post__img" src="<?php echo $v["image"]; ?>">
-                    <!--
-                    <div class="likes">
-                        <?php $like = Post::like($_SESSION['userID'], $v['id']); ?>
-                        
-                        <?php if ($like['active'] == 1): ?>
-                        <span data-id="<?php echo $v['id']; ?>" class="unlike like-btn fas fa-heart"></span>
-                        <span data-id="<?php echo $v['id']; ?>" class="like like-btn hide far fa-heart"></span>
-                        <?php endif; ?>
+                <a href="?image=<?php echo $v["id"]; ?>">
+                    <div id="<?php echo $v["id"]; ?>" class="post">
+                        <img class="post__img" src="<?php echo $v["image"]; ?>">
+                        <!--
+                        <div class="likes">
+                            <?php $like = Post::like($_SESSION['userID'], $v['id']); ?>
+                            
+                            <?php if ($like['active'] == 1): ?>
+                            <span data-id="<?php echo $v['id']; ?>" class="unlike like-btn fas fa-heart"></span>
+                            <span data-id="<?php echo $v['id']; ?>" class="like like-btn hide far fa-heart"></span>
+                            <?php endif; ?>
 
-                        <?php if ($like['active'] == 0): ?>
-                        <span data-id="<?php echo $v['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
-                        <span data-id="<?php echo $v['id']; ?>" class="like like-btn far fa-heart"></span>
-                        <?php endif; ?>
-                        
-                        <?php $likeCount = Post::likeCount($v['id']); ?>
+                            <?php if ($like['active'] == 0): ?>
+                            <span data-id="<?php echo $v['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
+                            <span data-id="<?php echo $v['id']; ?>" class="like like-btn far fa-heart"></span>
+                            <?php endif; ?>
+                            
+                            <?php $likeCount = Post::likeCount($v['id']); ?>
 
-                        <?php if ( $likeCount == 1 ): ?>
-                        <span class="likes-count"><?php echo $likeCount; ?> like</span>
-                        <?php endif; ?>
+                            <?php if ( $likeCount == 1 ): ?>
+                            <span class="likes-count"><?php echo $likeCount; ?> like</span>
+                            <?php endif; ?>
 
-                        <?php if ( $likeCount == 0 || $likeCount > 1) : ?>
-                        <span class="likes-count"><?php echo $likeCount; ?> likes</span>
-                        <?php endif; ?> 
-                    </div>-->
-                </div>
-            <?php endforeach; ?>
+                            <?php if ( $likeCount == 0 || $likeCount > 1) : ?>
+                            <span class="likes-count"><?php echo $likeCount; ?> likes</span>
+                            <?php endif; ?> 
+                        </div>
+                        -->
+                    </div>
+                </a>
         <?php endforeach; ?>
+        <?php endforeach; ?>
+
+        <!--Pop up sceen-->
+        <?php if(!empty($_GET['image'])): ?>
+		<?php $post = new Post(); $post->showImage($_GET['image']);?>
+		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+			<div class="popup">
+				<div class="post">
+					<img src="<?php echo $p['image']; ?>">
+					<!--Show the colors of the image. -->
+					<div class="color">
+						<?php $c = Color::getColors($p['image']); ?>
+						<!--Loop through all colors to display them from highest value to lowest.-->
+						<?php foreach($c as $key => $value): ?>
+							<?php if($value != 0): ?>
+								<div class="color__item color__item--<?php echo $key; ?>"></div>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+					<p><?php echo $p['description']; ?></p>
+				</div>
+				<a href="profile.php" class="close">X</a>';
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
     </main>
     <footer>
         <div class="btnLoadmore">
