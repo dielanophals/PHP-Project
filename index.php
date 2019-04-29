@@ -128,7 +128,7 @@
 					</div>
 					<p><?php echo $p['description']; ?></p>
 				</div>
-				<a href="profile.php" class="close">X</a>';
+				<a href="index.php" class="close">X</a>';
 			</div>
 		<?php endforeach; ?>
 	<?php endif; ?>
