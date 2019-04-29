@@ -21,7 +21,7 @@
 		}
 
 		/* 
-		*	Find the colors om the post image which was inserted when the post was uploaded.
+		*	Find the colors on the post image which was inserted when the post was uploaded.
 		*	Return the found row. 
 		*/
 
@@ -31,8 +31,7 @@
 				$statement = $conn->prepare("SELECT * FROM `posts_color` WHERE posts_id = :id");
 				$statement->bindParam(":id", $id);
 				$statement->execute();
-				$result = $statement->fetch(PDO::FETCH_ASSOC);
-			
+				$result = $statement->fetchAll();
 				return $result;
 			}
 			catch(Throwable $t){
@@ -51,9 +50,26 @@
 			return $arr;
 		}
 
+		/*
+		*	Search in the database all posts which match the given color.
+		*/
+
 		public static function searchPostsByColor($color){
-			//search it in database
+			try{
+				$conn = Db::getInstance();
+				$statement = $conn->prepare("SELECT posts_id FROM `posts_color` where not $color = 0");
+				$statement->execute();
+				$result = $statement->fetchAll();
+				return $result;
+			}
+			catch(Throwable $t){
+				return false;
+			}
 		}
+
+		/*
+		*	Insert into the database the colors of the previously inserted post and its image.
+		*/
 
 		public static function insertIntoDB($id, $colorArr){
 			try{

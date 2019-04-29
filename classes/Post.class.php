@@ -110,7 +110,20 @@ Class Post{
       return $post;
     }
     catch(Throwable $t){
+      return false;
+    }
+  }
 
+  public static function getPostById($id){
+    try{
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM `posts` WHERE `id` = $id");
+      $statement->execute();
+      $result = $statement->fetchAll();
+      return $result;
+    }
+    catch(Trowable $t){
+      return false;
     }
   }
 

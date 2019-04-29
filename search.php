@@ -99,7 +99,20 @@
         ?>
       </div>
     </main>
-
+	<!--If there is a search for color X, show posts with the same color. -->
+    <?php if(!empty($_GET['color'])): ?>
+		<?php $posts = Color::searchPostsByColor('red'); ?>
+		<?php foreach($posts as $post): ?>
+			<?php $result = Post::getPostById($post["posts_id"]);?>
+			<?php foreach($result as $r):?>
+				<a href="?image=<?php echo $r["id"]; ?>">
+                    <div id="<?php echo $r["id"]; ?>" class="post">
+                		<img class="post__img" src="<?php echo $r["image"]; ?>">
+					</div>
+                </a>
+			<?php endforeach; ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
     <?php
     if(!empty($_GET['image'])){
       $post = new Post();
