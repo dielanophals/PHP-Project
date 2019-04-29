@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 29, 2019 at 06:50 AM
+-- Generation Time: Apr 29, 2019 at 07:01 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -94,6 +94,22 @@ CREATE TABLE `posts` (
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `user_id`, `image`, `description`, `timestamp`, `active`) VALUES
+(84, 5, 'uploads/posts\\tpCaNjh1DWtCnR60xC1nEdhUH5BlhVl3ulzsgUsTApMkXMhEruTxi8PGMTIXh0\\300.png', 'Placeholder', '2019-04-29 06:57:56', 1),
+(85, 5, 'uploads/posts\\djjHfY7ws8YDAVmAaUVIGpYxOkQP92JKL88nBUxcQL5ZqQdIZQYAQUgiWy2DYo\\300.png', 'Placeholder', '2019-04-29 06:58:06', 1),
+(86, 5, 'uploads/posts\\YMB05M0weNIwVSz0Al8xa6sHCj2X5FOlisRyQRqxg2ubtC1ufGoNpAqecawyGg\\300.png', 'Placeholder', '2019-04-29 06:58:16', 1),
+(87, 5, 'uploads/posts\\w2VfYEcR6AKwb1iCU0gxObsUq0clm4xiTQbeCPOfxPRXgMd0ootsVDnmlG18Bt\\300.png', 'Placeholder', '2019-04-29 06:58:24', 1),
+(88, 5, 'uploads/posts\\9QKCd3yfZEehGooy4EyH7cMCkekqRhfg2CvevxSOvqNqez7v78lo2rRsNypYYe\\300.png', 'Placeholder', '2019-04-29 06:58:37', 1),
+(89, 5, 'uploads/posts\\o1JkBVQI3waPvFflPhWOttsp5dipP9skg8jyg8Utpl8sxqokgj4Dac4TEn9a43\\300.png', 'Placeholder', '2019-04-29 06:58:46', 1),
+(90, 5, 'uploads/posts\\3jt3WZhjqlFph2hUJtfiZq6gGJg93LH0ck4q7FVV4piAv1j0y2HgvmBl9hvok3\\300.png', 'Placeholder', '2019-04-29 06:58:56', 1),
+(91, 5, 'uploads/posts\\d0Ay2q0kU5i8d5toGSwIskKwIx81kK7ulOmKZl6SUysmAgXYa8KrnkPUyUSsL1\\300.png', 'Placeholder', '2019-04-29 06:59:10', 1),
+(92, 5, 'uploads/posts\\H7HaIfZBTPOFE0M1VTQbLRbhD7Cg5IxgFAZW0SAzJgre1PrxupTcvIUAxcMUTE\\300.png', 'Placeholder', '2019-04-29 06:59:19', 1),
+(93, 5, 'uploads/posts\\fc6TMKhnqhH08YUVuIkWqFNvO5Ls9Nz11bmvDpOjBVcRnyZ23Za9fJPX5ffS9e\\300.png', 'Placeholder', '2019-04-29 06:59:35', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -118,6 +134,22 @@ CREATE TABLE `posts_color` (
   `active` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `posts_color`
+--
+
+INSERT INTO `posts_color` (`id`, `posts_id`, `red`, `orange`, `yellow`, `green`, `turquoise`, `blue`, `purple`, `pink`, `white`, `gray`, `black`, `brown`, `active`) VALUES
+(2, 84, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(3, 85, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(4, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(5, 87, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(6, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(7, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(8, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(9, 91, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(10, 92, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1),
+(11, 93, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +168,14 @@ CREATE TABLE `users` (
   `timestamp` datetime NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `firstname`, `lastname`, `username`, `password`, `description`, `picture`, `timestamp`, `active`) VALUES
+(20, 'teddy@test.be', 'Teddy', 'Bear', 'teddyBear', '$2y$10$MFJm9QwQFq6N1x4bDdAex.mXWs7V75HJmeuUofPb.w6cesnoIxyNC', '', '', '2019-04-29 08:53:52', 0),
+(21, 'hi@test.be', 'h', 'i', 'hi', '$2y$10$fwZ9o2VRwc7LncJ4XPgGhOlTng.T5LGn0SCo3AhkhA1uDQg.GBeAi', '', '', '2019-04-29 08:54:14', 0);
 
 --
 -- Indexes for dumped tables
@@ -198,7 +238,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `likes_comments`
 --
@@ -208,22 +248,22 @@ ALTER TABLE `likes_comments`
 -- AUTO_INCREMENT for table `likes_post`
 --
 ALTER TABLE `likes_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `posts_color`
 --
 ALTER TABLE `posts_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- Constraints for dumped tables
 --
