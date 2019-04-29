@@ -4,8 +4,8 @@
 		*	Use the color detection library to search for all the color values based on the url of the image.
 		*	Return them back to the page.
 		*/
-		public static function getColors($url){
-			$findColors = Self::findColors($url);
+		public static function getColors($id){
+			$findColors = Self::findColorsInDb($id);
 			$filteredColors = Self::filterColors($findColors);
 			return $filteredColors;
 		}
@@ -18,6 +18,26 @@
 			$colorDetection = new ColorDetection();
 			$c = $colorDetection->detectColors($url);
 			return $c;
+		}
+
+		/* 
+		*	Find the colors om the post image which was inserted when the post was uploaded.
+		*	Return the found row. 
+		*/
+
+		public static function findColorsInDb($id){
+			try{
+				$conn = Db::getInstance();
+				$statement = $conn->prepare("SELECT * FROM `posts_color` WHERE posts_id = :id");
+				$statement->bindParam(":id", $id);
+				$statement->execute();
+				$result = $statement->fetch(PDO::FETCH_ASSOC);
+			
+				return $result;
+			}
+			catch(Throwable $t){
+				return false;
+			}
 		}
 
 		/*
