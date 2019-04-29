@@ -30,4 +30,25 @@
 			$arr = array_filter($c); //remove all colours which are not found i.e. 0
 			return $arr;
 		}
+
+		public static function searchPostsByColor($color){
+			//search it in database
+		}
+
+		public static function insertIntoDB($id, $colorArr){
+			try{
+				$conn = Db::getInstance();
+				$statement = $conn->prepare(
+					"INSERT INTO `posts_color`(`posts_id`, `red`, `orange`, `yellow`, `green`, `turquoise`, `blue`, `purple`, `pink`, `white`, `gray`, `black`, `brown`, `active`)
+					VALUES ($id, :red, :orange, :yellow, :green, :turquoise, :blue, :purple, :pink, :white, :gray, :black, :brown, 1)");
+				foreach($colorArr as $key => &$value){
+					$key = ":{$key}";
+					$statement->bindParam($key, intval($value));
+				}
+				$statement->execute();
+			}
+			catch(Throwable $t){
+				return false;
+			}
+		}
 	}

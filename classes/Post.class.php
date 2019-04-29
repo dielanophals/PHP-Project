@@ -101,6 +101,19 @@ Class Post{
     return $posts;
   }
 
+  public static function getLastInsertedId(){
+    try{
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT 0, 1");
+      $statement->execute();
+      $post = $statement->fetchAll();
+      return $post;
+    }
+    catch(Throwable $t){
+
+    }
+  }
+
   public static function like($userID, $postID) {
     $conn = Db::getInstance();
     $statement = $conn->prepare("SELECT * FROM likes_post WHERE user_id = '$userID' AND post_id = '$postID'");

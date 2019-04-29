@@ -23,13 +23,19 @@
         			if($post->fileExists() === false){
             			$feedback = "Sorry, this file already exists. Please try again.";
         			}else{
-            			$post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
-            			$feedback = "File has been uploaded.";
+						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
+						$post = Post::getLastInsertedId();
+						foreach($post as $p){
+							$id = $p["id"];
+							$arrColor = Color::findColors($p["image"]);
+							Color::insertIntoDB($id, $arrColor);
+						}
+						$feedback = "File has been uploaded.";
             			header("Location: profile.php");
         			}
         		}
       		}
-    	}
+		}
   	}
 
 ?><!DOCTYPE html>
