@@ -6,18 +6,7 @@
 		*/
 		public static function getColors($id){
 			$findColors = Self::findColorsInDb($id);
-			$filteredColors = Self::filterColors($findColors);
-			return $filteredColors;
-		}
-
-		/*
-		* 	Search all the colors of the image url and return the found colors in an array.
-		*	Return result.
-		*/
-		public static function findColors($url){
-			$colorDetection = new ColorDetection();
-			$c = $colorDetection->detectColors($url);
-			return $c;
+			return $findColors;
 		}
 
 		/* 
@@ -28,7 +17,9 @@
 		public static function findColorsInDb($id){
 			try{
 				$conn = Db::getInstance();
-				$statement = $conn->prepare("SELECT * FROM `posts_color` WHERE posts_id = :id");
+				//Select only the colors.
+				$statement = $conn->prepare("SELECT `red`,`orange`,`yellow`,`green`,`turquoise`,`blue`,`purple`,`pink`,`white`,`gray`,`black`,`brown`
+				FROM `posts_color` WHERE posts_id = :id");
 				$statement->bindParam(":id", $id);
 				$statement->execute();
 				$result = $statement->fetchAll();
@@ -47,6 +38,7 @@
 		public static function filterColors($c){
 			arsort($c); //sort value in descending order
 			$arr = array_filter($c); //remove all colours which are not found i.e. 0
+			var_dump($arr);
 			return $arr;
 		}
 
