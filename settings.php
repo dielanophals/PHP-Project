@@ -100,18 +100,18 @@
     <div class="container">
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
-                <?php foreach (Show::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
+                <?php foreach (User::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
                     <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
                 <?php endforeach; ?>
                 <div class="information">
-                    <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <?php foreach(User::getUserInfo($_SESSION["userID"]) as $info): ?>
                         <label for="name">Name</label><br>
                         <textarea name="name" id="name"><?php echo htmlspecialchars($info['username']); ?></textarea><br>
                         <label for="bio">Biography</label>
                         <textarea name="bio" id="bio"><?php echo htmlspecialchars($info['description']); ?></textarea>
                     <?php endforeach; ?>
 
-                    <?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <?php foreach(User::getUserInfo($_SESSION["userID"]) as $info): ?>
                         <label for="email">Email</label><br>
                         <textarea name="email" id="email"><?php echo htmlspecialchars($info['email']); ?></textarea>
                     <?php endforeach; ?>

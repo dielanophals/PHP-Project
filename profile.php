@@ -90,11 +90,11 @@
 	</header>
     <div class="profile__container">
     	<div class="profile__information">
-        	<?php foreach (Show::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
+        	<?php foreach (User::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
         		<div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
         	<?php endforeach; ?>
           	<div class="information">
-            	<?php foreach(Show::getUserInfo($_SESSION["userID"]) as $info): ?>
+            	<?php foreach(User::getUserInfo($_SESSION["userID"]) as $info): ?>
             		<h2 class="name"><?php echo $info['username'] ?></h2>
               		<p class="bio"><?php echo $info['description'] ?></p>
             	<?php endforeach; ?>
@@ -107,7 +107,7 @@
 	</div>
 	<main class="profilePosts">
     	<div class="container">
-	  		<?php foreach(Show::getUserPosts($_SESSION["userID"]) as $p): ?>
+	  		<?php foreach(User::getUserPosts($_SESSION["userID"]) as $p): ?>
 				<a href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
 						<img src="<?php echo $p['image']; ?>">

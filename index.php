@@ -69,7 +69,7 @@
         <?php endif; ?>
         <?php foreach($list as $key => $value): ?>
             <?php
-                $posts = Show::getFriendsPosts($value, $limit);
+                $posts = Friend::getFriendsPosts($value, $limit);
                 foreach($posts as $k => $v):
             ?>
                 <a href="?image=<?php echo $v["id"]; ?>">
