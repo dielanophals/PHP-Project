@@ -1,3 +1,4 @@
 /config
 /uploads
 .DS_Store
+classes/Show.class.php
