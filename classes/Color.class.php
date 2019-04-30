@@ -32,7 +32,7 @@
 				FROM `posts_color` WHERE posts_id = :id");
 				$statement->bindParam(":id", $id);
 				$statement->execute();
-				$result = $statement->fetchAll();
+				$result = $statement->fetch(PDO::FETCH_ASSOC);
 				return $result;
 			}
 			catch(Throwable $t){

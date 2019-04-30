@@ -115,14 +115,11 @@
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>
-						<!--Loop through all colors to display them from highest value to lowest.-->
-						<?php foreach($c as $key => $value): ?>
-                            <!--Don't get the values of the column id, posts_id and active. -->
-                            <?php if($key != "id" && $key != "posts_id" && $key != "active"): ?>
-                                <!--Only show found colors.-->
-                                <?php if($value != 0): ?>
-                                    <div class="color__item color__item--<?php echo $key; ?>"></div>
-                                <?php endif; ?>
+                        <!--Loop through all colors to display them from highest value to lowest.-->
+                        <?php foreach($c as $key => $value): ?>
+                            <!--Only show found colors.-->
+                            <?php if($value != 0): ?>
+                                <div class="color__item color__item--<?php echo $key; ?>"></div>
                             <?php endif; ?>
 						<?php endforeach; ?>
 					</div>
