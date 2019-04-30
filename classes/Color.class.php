@@ -6,7 +6,17 @@
 		*/
 		public static function getColors($id){
 			$findColors = Self::findColorsInDb($id);
-			return $findColors;
+			return $filteredColors;
+		}
+
+		/*
+		* 	Search all the colors of the image url and return the found colors in an array.
+		*	Return result.
+		*/
+		public static function findColors($url){
+			$colorDetection = new ColorDetection();
+			$c = $colorDetection->detectColors($url);
+			return $c;
 		}
 
 		/* 
@@ -28,18 +38,6 @@
 			catch(Throwable $t){
 				return false;
 			}
-		}
-
-		/*
-		*	Sort the colors in descending order.
-		*	Remove values of 0.
-		*	Return result.
-		*/
-		public static function filterColors($c){
-			arsort($c); //sort value in descending order
-			$arr = array_filter($c); //remove all colours which are not found i.e. 0
-			var_dump($arr);
-			return $arr;
 		}
 
 		/*
