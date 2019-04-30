@@ -101,7 +101,7 @@
     </main>
 	<!--If there is a search for color X, show posts with the same color. -->
     <?php if(!empty($_GET['color'])): ?>
-		<?php $posts = Color::searchPostsByColor('red'); ?>
+		<?php $posts = Color::searchPostsByColor($_GET['color']); ?>
 		<?php foreach($posts as $post): ?>
 			<?php $result = Post::getPostById($post["posts_id"]);?>
 			<?php foreach($result as $r):?>
