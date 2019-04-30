@@ -113,22 +113,32 @@
 			<?php endforeach; ?>
 		<?php endforeach; ?>
 	<?php endif; ?>
-    <?php
-    if(!empty($_GET['image'])){
-      $post = new Post();
-      $post->showImage($_GET['image']);
-
-      foreach($post->showImage($_GET['image']) as $p){
-        echo '<div class="popup">';
-        echo '<div class="post">';
-        echo '<img src="' . $p['image'] . '">';
-        echo '<p>' . $p['description'] . '</p>';
-        echo '</div>';
-        echo '<a href="search.php?search=' . $search . '" class="close">X</a>';
-        echo '</div>';
-      }
-    }
-     ?>
+	<!--Pop up sceen-->
+	<?php if(!empty($_GET['image'])): ?>
+		<?php $post = new Post(); $post->showImage($_GET['image']);?>
+		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+			<div class="popup">
+				<div class="post">
+					<img src="<?php echo $p['image']; ?>">
+					<!--Show the colors of the image. -->
+					<div class="color">
+						<?php $c = Color::getColors($p['id']); ?>
+                        <!--Loop through all colors to display them from highest value to lowest.-->
+                        <?php foreach($c as $key => $value): ?>
+                            <!--Only show found colors.-->
+                            <?php if($value != 0): ?>
+                                <a href="search.php?search=0&color=<?php echo $key?>">
+                                    <div class="color__item color__item--<?php echo $key; ?>"></div>
+                                </a>
+                            <?php endif; ?>
+						<?php endforeach; ?>
+					</div>
+					<p><?php echo $p['description']; ?></p>
+				</div>
+				<a href="search.php?search=<?php echo $search; ?>" class="close">X</a>';
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 <script src="js/like.js"></script>
