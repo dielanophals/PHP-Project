@@ -17,22 +17,4 @@
             return $posts;
         }
 
-        public static function getFriendsPosts($id, $limit){
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $limit");
-            $statement->execute();
-            $posts = $statement->fetchAll();
-            return $posts;
-        }
-
-        
-        static function getNextFriendsPosts($id, $lastId){
-            $lastId -= 1;
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20");
-            $statement->execute();
-            $posts = $statement->fetchAll();
-            return $posts;
-        }
-
     }
