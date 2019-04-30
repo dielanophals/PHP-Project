@@ -94,11 +94,16 @@ Class Post{
   }
 
   public function getSearchPosts($search){
-    $conn = Db::getInstance();
-    $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' ORDER BY id DESC");
-    $statement->execute();
-    $posts = $statement->fetchAll();
-    return $posts;
+    try{
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' ORDER BY id DESC");
+      $statement->execute();
+      $posts = $statement->fetchAll();
+      return $posts;
+    }
+    catch(Throwable $t){
+      return false;
+    }
   }
 
   public static function getLastInsertedId(){

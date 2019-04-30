@@ -139,7 +139,8 @@
         </div>
     </div>
 </main>
-	<?php if(!empty($_GET['image'])): ?>
+    <!--Pop up sceen-->
+    <?php if(!empty($_GET['image'])): ?>
 		<?php $post = new Post(); $post->showImage($_GET['image']);?>
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
@@ -147,15 +148,18 @@
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
-						<?php $c = Color::getColors($p['image']); ?>
+						<?php $c = Color::getColors($p['id']); ?>
 						<!--Loop through all colors to display them from highest value to lowest.-->
 						<?php foreach($c as $key => $value): ?>
+							<!--Only show found colors.-->
 							<?php if($value != 0): ?>
-								<div class="color__item color__item--<?php echo $key; ?>"></div>
+								<a href="search.php?color=<?php echo $key?>">
+									<div class="color__item color__item--<?php echo $key; ?>"></div>
+								</a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $p['description']; ?></p>
+					<p><?php echo $p['description']; ?></p>   
 				</div>
 				<a href="profile.php" class="close">X</a>';
 			</div>
