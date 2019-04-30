@@ -47,7 +47,7 @@
 		public static function searchPostsByColor($color){
 			try{
 				$conn = Db::getInstance();
-				$statement = $conn->prepare("SELECT posts_id FROM `posts_color` where not $color = 0");
+				$statement = $conn->prepare("SELECT posts_id FROM `posts_color` where not $color = 0 ORDER BY $color desc");
 				$statement->execute();
 				$result = $statement->fetchAll();
 				return $result;

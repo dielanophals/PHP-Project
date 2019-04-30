@@ -130,7 +130,7 @@
 				<a href="index.php" class="close">X</a>';
 			</div>
 		<?php endforeach; ?>
-	<?php endif; ?>
+	    <?php endif; ?>
     </main>
     <footer>
         <div class="btnLoadmore">
