@@ -102,7 +102,7 @@
                         -->
                     </div>
                 </a>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         <?php endforeach; ?>
 
         <!--Pop up sceen-->
