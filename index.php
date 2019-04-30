@@ -119,7 +119,9 @@
                         <?php foreach($c as $key => $value): ?>
                             <!--Only show found colors.-->
                             <?php if($value != 0): ?>
-                                <div class="color__item color__item--<?php echo $key; ?>"></div>
+                                <a href="search.php?search=0&color=<?php echo $key?>">
+                                    <div class="color__item color__item--<?php echo $key; ?>"></div>
+                                </a>
                             <?php endif; ?>
 						<?php endforeach; ?>
 					</div>
