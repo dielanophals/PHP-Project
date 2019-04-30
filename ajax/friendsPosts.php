@@ -11,7 +11,7 @@
         try{
             $list = Friend::getListOfFriendsIds($id);
             foreach($list as $key => $value){
-                $posts = Show::getNextFriendsPosts($value, $lastId);
+                $posts = Friend::getNextFriendsPosts($value, $lastId);
                 foreach($posts as $k => $v){
                     $allPosts[] = [$v['id'], $v['image']];
                 }
