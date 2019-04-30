@@ -6,7 +6,7 @@
 		*/
 		public static function getColors($id){
 			$findColors = Self::findColorsInDb($id);
-			return $filteredColors;
+			return $findColors;
 		}
 
 		/*
