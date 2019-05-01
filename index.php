@@ -150,7 +150,7 @@
                 </div>
               <?php endif; ?>
 				</div>
-				<a href="index.php" class="close">X</a>';
+				<a href="index.php" class="close">X</a>
 			</div>
 		<?php endforeach; ?>
 	    <?php endif; ?>
