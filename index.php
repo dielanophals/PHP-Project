@@ -68,16 +68,19 @@
             <p>No posts to display of your friends.</p>
         <?php endif; ?>
         <?php foreach($list as $key => $value): ?>
-            <?php
-                $posts = Friend::getFriendsPosts($value, $limit);
-                foreach($posts as $k => $v):
-            ?>
-                <a href="?image=<?php echo $v["id"]; ?>">
-                    <div id="<?php echo $v["id"]; ?>" class="post">
-                        <img class="post__img" src="<?php echo $v["image"]; ?>">
-                    </div>
-                </a>
-            <?php endforeach; ?>
+            <?php $posts = Friend::getFriendsPosts($value, $limit);?>
+	  			<?php if(empty($posts)): ?>
+	  				<p>Your friends haven't posted something.</p>
+				<?php endif; ?>
+                <?php if(!empty($posts)):?>
+                	<?php foreach($posts as $k => $v): ?>
+					<a href="?image=<?php echo $v["id"]; ?>">
+						<div id="<?php echo $v["id"]; ?>" class="post">
+							<img class="post__img" src="<?php echo $v["image"]; ?>">
+						</div>
+					</a>
+				<?php endforeach; ?>
+            <?php endif; ?>
         <?php endforeach; ?>
 
         <!--Pop up sceen-->
