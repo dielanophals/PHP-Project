@@ -133,7 +133,7 @@ nav form input{
 
 .popup img{
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 70vh;
 }
 
 .popup p{
@@ -224,6 +224,14 @@ p.post__name {
     width: 100%;
     color: white;
     font-weight: bold;
+}
+
+.popup_name{
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  padding-bottom: 20px;
+  display: block;
 }
 
 @media only screen and (min-width: 600px) {

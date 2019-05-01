@@ -89,6 +89,11 @@
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
+          <?php
+            $information = User::getUserInfo($p['user_id']);
+            $name = $information['firstname'] . ' ' . $information ['lastname'];
+          ?>
+          <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
