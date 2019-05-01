@@ -69,6 +69,7 @@
           	<div class="information">
             <h2 class="name"><?php echo $profile['username'] ?></h2>
             <p class="bio"><?php echo $profile['description'] ?></p>
+						<a href="#" class="addfriend" data-friend="<?php echo $id; ?>">Follow</a>
         	</div>
     	</div>
 		<div class="profile__posts">
@@ -177,5 +178,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/friends.js"></script>
 </body>
 </html>

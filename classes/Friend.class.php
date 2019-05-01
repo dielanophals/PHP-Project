@@ -27,8 +27,12 @@ Abstract class Friend{
         }
     }
 
-    public static function addFriend(){
+    public static function addFriend($userID, $friendId){
         //user adds new friend
+        $timestamp = date('Y-m-d H:i:s');
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("INSERT INTO friends (user1_id, user2_id, timestamp, active) VALUES ('$userID', '$friendId', '$timestamp', 1)");
+        $statement->execute();
     }
 
     public static function getFriendsPosts($id, $limit){
@@ -39,7 +43,7 @@ Abstract class Friend{
         return $posts;
     }
 
-    
+
     static function getNextFriendsPosts($id, $lastId){
         $lastId -= 1;
         $conn = Db::getInstance();
