@@ -58,7 +58,7 @@
       .hide {
         display: none;
       }
-    
+
       .searchPost {
         margin-bottom: 20px;
       }
@@ -82,7 +82,7 @@
         color: #333;
 			}
 
-			
+
     </style>
 </head>
 <body>
@@ -91,14 +91,11 @@
 	</header>
     <div class="profile__container">
     	<div class="profile__information">
-        	<?php foreach (User::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
-        		<div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
-        	<?php endforeach; ?>
+        	<?php $profile = User::getUserInfo($_SESSION['userID']); ?>
+        		<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-            	<?php foreach(User::getUserInfo($_SESSION["userID"]) as $info): ?>
-            		<h2 class="name"><?php echo $info['username'] ?></h2>
-              		<p class="bio"><?php echo $info['description'] ?></p>
-            	<?php endforeach; ?>
+            <h2 class="name"><?php echo $profile['username'] ?></h2>
+            <p class="bio"><?php echo $profile['description'] ?></p>
 				<a href="settings.php">Edit profile</a>
 				<a href="?upload=yes">Upload image</a>
         	</div>
@@ -117,7 +114,7 @@
 			<?php endforeach; ?>
 			<div class="likes">
 				<?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
-					
+
 				<?php if ($like['active'] == 1): ?>
 					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn fas fa-heart"></span>
 					<span data-id="<?php echo $p['id']; ?>" class="like like-btn hide far fa-heart"></span>
@@ -127,7 +124,7 @@
 					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
 					<span data-id="<?php echo $p['id']; ?>" class="like like-btn far fa-heart"></span>
 				<?php endif; ?>
-					
+
 				<?php $likeCount = Post::likeCount($p['id']); ?>
 
 				<?php if ( $likeCount == 1 ): ?>
@@ -178,7 +175,7 @@
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $p['description']; ?></p>   
+					<p><?php echo $p['description']; ?></p>
 				</div>
 				<a href="profile.php" class="close">X</a>';
 			</div>
@@ -205,7 +202,7 @@
         <a href="profile.php" class="close">X</a>
     </div>
 	<?php } ?>
-  
+
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>

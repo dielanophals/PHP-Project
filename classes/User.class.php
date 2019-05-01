@@ -94,7 +94,7 @@
             try{
                 $conn = Db::getInstance();
 
-                date_default_timezone_set("Europe/Brussels"); 
+                date_default_timezone_set("Europe/Brussels");
                 $timestamp = date('Y-m-d H:i:s');
                 $statement = $conn->prepare("INSERT INTO users (firstname, lastname, username, email, password, timestamp) VALUES (:firstname, :lastname, :username, :email, :password, :timestamp)");
                 $statement->bindParam(":firstname", $this->firstname);
@@ -193,7 +193,7 @@
                 $statement->bindParam(":email", $this->email);
                 $statement->execute();
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
-                  
+
                 $id = $this->userID = $user['id'];
                 return $id;
             }
@@ -206,8 +206,8 @@
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT * FROM users WHERE id = '$userID'");
             $statement->execute();
-            $information = $statement->fetchAll();
-            return $information;
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            return $user;
         }
 
         public static function getUserPosts($userID){
