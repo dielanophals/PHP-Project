@@ -74,10 +74,10 @@
                   $information = User::getUserInfo($v['user_id']);
                   $name = $information['firstname'] . ' ' . $information ['lastname'];
             ?>
-                <a class="post_full" href="?image=<?php echo $v["id"]; ?>">
+                <a class="post__full" href="?image=<?php echo $v["id"]; ?>">
                     <div id="<?php echo $v["id"]; ?>" class="post">
                         <img class="post__img" src="<?php echo $v["image"]; ?>">
-                        <p><?php echo $name; ?></p>
+                        <p class="post__name"><?php echo $name; ?></p>
                     </div>
                 </a>
             <?php endforeach; ?>

@@ -211,6 +211,21 @@ nav form input{
     background-color: #CCAF88;
 }
 
+a.post__full {
+    position: relative;
+    overflow: hidden;
+}
+
+p.post__name {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+}
+
 @media only screen and (min-width: 600px) {
     nav a, nav form{
         flex-flow: row wrap;
