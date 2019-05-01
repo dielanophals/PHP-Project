@@ -96,7 +96,7 @@ Class Post{
   public function getSearchPosts($search){
     try{
       $conn = Db::getInstance();
-      $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' ORDER BY id DESC");
+      $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' AND active = '1' ORDER BY id DESC");
       $statement->execute();
       $posts = $statement->fetchAll();
       return $posts;
@@ -148,5 +148,25 @@ Class Post{
     $result = $statement->fetchAll();
     
     return count($result);
+  }
+
+  public function delete($id, $filename) {
+    try {
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("UPDATE posts SET active = '0' WHERE user_id = '$id' AND image = '$filename'");
+      $result = $statement->execute();
+    } catch(Throwable $t){
+      return false;
+    }
+  }
+
+  public function edit($id, $desc) {
+    try {
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("UPDATE posts SET description = '$desc' WHERE id = '$id'");
+      $result = $statement->execute();
+    } catch(Throwable $t){
+      return false;
+    }
   }
 }

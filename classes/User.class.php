@@ -212,7 +212,7 @@
 
         public static function getUserPosts($userID){
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$userID'");
+            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$userID' AND active = '1'");
             $statement->execute();
             $posts = $statement->fetchAll();
             return $posts;

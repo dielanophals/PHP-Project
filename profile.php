@@ -35,8 +35,8 @@
         			}
         		}
       		}
+			}
 		}
-  	}
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -80,8 +80,9 @@
       span.likes-count {
         text-decoration: none;
         color: #333;
-      }
-    
+			}
+
+			
     </style>
 </head>
 <body>
@@ -106,17 +107,17 @@
 		</div>
 	</div>
 	<main class="profilePosts">
-    	<div class="container">
-	  		<?php foreach(User::getUserPosts($_SESSION["userID"]) as $p): ?>
+		<div class="container">
+			<?php foreach(User::getUserPosts($_SESSION["userID"]) as $p): ?>
 				<a href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
 						<img src="<?php echo $p['image']; ?>">
 					</div>
 				</a>
 			<?php endforeach; ?>
-        	<div class="likes">
-            	<?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
-            
+			<div class="likes">
+				<?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
+					
 				<?php if ($like['active'] == 1): ?>
 					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn fas fa-heart"></span>
 					<span data-id="<?php echo $p['id']; ?>" class="like like-btn hide far fa-heart"></span>
@@ -126,8 +127,8 @@
 					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
 					<span data-id="<?php echo $p['id']; ?>" class="like like-btn far fa-heart"></span>
 				<?php endif; ?>
-            
-            	<?php $likeCount = Post::likeCount($p['id']); ?>
+					
+				<?php $likeCount = Post::likeCount($p['id']); ?>
 
 				<?php if ( $likeCount == 1 ): ?>
 					<span class="likes-count"><?php echo $likeCount; ?> like</span>
@@ -136,9 +137,27 @@
 				<?php if ( $likeCount == 0 || $likeCount > 1) : ?>
 					<span class="likes-count"><?php echo $likeCount; ?> likes</span>
 				<?php endif; ?>
-        </div>
+			</div>
+			<?php if ($_SESSION['userID'] == $p['user_id']): ?>
+				<div class="edit">
+					<a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
+					<div class="edit__options">
+						<a href="#" class="option--delete">Delete</a>
+						<form action="postDelete.php" method="POST" class="form--delete">
+							<input type="hidden" value="<?php echo $p['image']; ?>" name="delete_file"/>
+							<input type="submit" name="delete" value="Delete">
+						</form>
+						<a href="#" class="option--edit">Edit</a>
+						<form action="postEdit.php" method="POST" class="form--edit">
+							<input type="hidden" value="<?php echo $p['id']; ?>" name="file_id">
+							<textarea name="descriptionEdit"><?php echo $p['description']; ?></textarea>
+							<input type="submit" name="update" value="Update">
+						</form>
+					</div>
+				</div>
+			<?php endif; ?>
     </div>
-</main>
+	</main>
     <!--Pop up sceen-->
     <?php if(!empty($_GET['image'])): ?>
 		<?php $post = new Post(); $post->showImage($_GET['image']);?>
@@ -189,5 +208,6 @@
   
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
+	<script src="js/edit.js"></script>
 </body>
 </html>

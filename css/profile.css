@@ -133,3 +133,25 @@
   width:100%;
   height:85px;
 }
+
+.edit__options {
+  visibility: hidden;
+}
+
+.edit__options,
+.fa-ellipsis-h,
+.option--delete,
+.option--edit {
+  color: black;
+  font-size: 1em;
+  text-decoration: none;
+}
+
+.edit__options form {
+  margin: 5px 0 10px;
+}
+
+.form--delete,
+.form--edit {
+  display: none;
+}

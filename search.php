@@ -50,7 +50,28 @@
         text-decoration: none;
         color: #333;
       }
-    
+
+      .edit__options {
+        visibility: hidden;
+      }
+
+      .edit__options,
+      .fa-ellipsis-h,
+      .option--delete,
+      .option--edit {
+        color: black;
+        font-size: 1em;
+        text-decoration: none;
+      }
+
+      .edit__options form {
+        margin: 5px 0 10px;
+      }
+
+      .form--delete,
+      .form--edit {
+        display: none;
+      }
     </style>
 </head>
 <body>
@@ -95,6 +116,25 @@
                 <?php endif; ?>
 
               </div>
+
+              <?php if ($_SESSION['userID'] == $s['user_id']): ?>
+                <div class="edit">
+                  <a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
+                  <div class="edit__options">
+                    <a href="#" class="option--delete">Delete</a>
+                    <form action="postDelete.php" method="POST" class="form--delete">
+                      <input type="hidden" value="<?php echo $s['image']; ?>" name="delete_file"/>
+                      <input type="submit" name="delete" value="Delete">
+                    </form>
+                    <a href="#" class="option--edit">Edit</a>
+                    <form action="postEdit.php" method="POST" class="form--edit">
+                      <input type="hidden" value="<?php echo $s['id']; ?>" name="file_id">
+                      <textarea name="descriptionEdit"><?php echo $s['description']; ?></textarea>
+                      <input type="submit" name="update" value="Update">
+                    </form>
+                  </div>
+                </div>
+              <?php endif; ?>
 
             <?php
           endforeach;
@@ -145,5 +185,6 @@
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 <script src="js/like.js"></script>
+<script src="js/edit.js"></script>
 </body>
 </html>

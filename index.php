@@ -123,6 +123,24 @@
                             <span class="likes-count"><?php echo $likeCount; ?> likes</span>
                             <?php endif; ?> 
                     </div>
+                    <?php if ($_SESSION['userID'] == $v['user_id']): ?>
+                <div class="edit">
+                  <a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
+                  <div class="edit__options">
+                    <a href="#" class="option--delete">Delete</a>
+                    <form action="postDelete.php" method="POST" class="form--delete">
+                      <input type="hidden" value="<?php echo $v['image']; ?>" name="delete_file"/>
+                      <input type="submit" name="delete" value="Delete">
+                    </form>
+                    <a href="#" class="option--edit">Edit</a>
+                    <form action="postEdit.php" method="POST" class="form--edit">
+                      <input type="hidden" value="<?php echo $v['id']; ?>" name="file_id">
+                      <textarea name="descriptionEdit"><?php echo $v['description']; ?></textarea>
+                      <input type="submit" name="update" value="Update">
+                    </form>
+                  </div>
+                </div>
+              <?php endif; ?>
 				</div>
 				<a href="index.php" class="close">X</a>';
 			</div>
