@@ -1,79 +1,78 @@
 <?php
 
-    require_once("bootstrap.php");
+    require_once 'bootstrap.php';
     $s = Session::check();
 
-    if($s === false){
-        header("Location: login.php");
+    if ($s === false) {
+        header('Location: login.php');
     }
 
-    if ( !empty($_POST) ) {
-        if ( !empty($_POST['currentPassword']) ) {
+    if (!empty($_POST)) {
+        if (!empty($_POST['currentPassword'])) {
             $check = new User();
             $check->setPassword($_POST['currentPassword']);
 
-            if ( $check->passwordCheck($_SESSION['userID']) == true ) {
+            if ($check->passwordCheck($_SESSION['userID']) == true) {
                 $update = new Post();
 
-                if ( !empty($_POST['email']) ) {
+                if (!empty($_POST['email'])) {
                     $check->setEmail($_POST['email']);
                 } else {
-                    $feedback = "email cannot be empty.";
+                    $feedback = 'email cannot be empty.';
                 }
 
-                if ( !empty($_POST['name']) ) {
+                if (!empty($_POST['name'])) {
                     $check->setUsername($_POST['name']);
                 } else {
-                    $feedback = "username cannot be empty.";
+                    $feedback = 'username cannot be empty.';
                 }
 
-                if ( !empty($_POST['bio']) ) {
+                if (!empty($_POST['bio'])) {
                     $check->setDescription($_POST['bio']);
                 } else {
-                    $feedback = "description cannot be empty.";
+                    $feedback = 'description cannot be empty.';
                 }
 
                 $check->updateInfo($_SESSION['userID']);
 
-                if ( !empty($_POST['newPassword']) ) {
-                    if ( !empty($_POST['confirmPassword']) ) {
-                        if ( $_POST['newPassword'] == $_POST['confirmPassword'] ) {
+                if (!empty($_POST['newPassword'])) {
+                    if (!empty($_POST['confirmPassword'])) {
+                        if ($_POST['newPassword'] == $_POST['confirmPassword']) {
                             $check->setPassword($_POST['newPassword']);
                             $check->updatePassword($_SESSION['userID']);
                         } else {
-                            $feedback = "Your new password is not confirmed correctly.";
+                            $feedback = 'Your new password is not confirmed correctly.';
                         }
                     } else {
-                        $feedback = "You need to confirm your password.";
+                        $feedback = 'You need to confirm your password.';
                     }
                 }
 
-                if ( !empty($_FILES['profileImage']) ) {
-                    $imagePost = $_FILES["profileImage"];
-                    
+                if (!empty($_FILES['profileImage'])) {
+                    $imagePost = $_FILES['profileImage'];
+
                     $update = new Post();
-                    if ( $update->checkType($imagePost) === false ) {
-                        $feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    if ($update->checkType($imagePost) === false) {
+                        $feedback = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.';
                     } else {
-                        if ( $update->fileSize($imagePost) === false ) {
-                            $feedback = "Sorry, your file is too big.";
+                        if ($update->fileSize($imagePost) === false) {
+                            $feedback = 'Sorry, your file is too big.';
                         } else {
-                            $update->createDirectory("profile");
-                            if ( $update->fileExists() === false ) {
-                                $feedback = "Sorry, this file already exists. Please try again.";
+                            $update->createDirectory('profile');
+                            if ($update->fileExists() === false) {
+                                $feedback = 'Sorry, this file already exists. Please try again.';
                             } else {
-                                $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION["userID"]);
+                                $update->insertProfilePictureIntoDB($update->uploadProfileImage(), $_SESSION['userID']);
                             }
                         }
                     }
                 }
-                $feedback = "Account updated.";
+                $feedback = 'Account updated.';
             } else {
-                $feedback = "Password is incorrect.";
+                $feedback = 'Password is incorrect.';
             }
-
         } else {
-            $feedback = "Password cannot be empty.";
+            $feedback = 'Password cannot be empty.';
         }
     }
 
@@ -91,8 +90,8 @@
     <title>InstaPet - Profile</title>
 </head>
 <body>
-    <?php include_once("nav.inc.php"); ?>
-    <?php if ( isset($feedback) ): ?>
+    <?php include_once 'nav.inc.php'; ?>
+    <?php if (isset($feedback)): ?>
         <div class="feedback">
             <p><?php echo $feedback; ?></p>
         </div>
@@ -100,18 +99,18 @@
     <div class="container">
         <form action="#" method="post" enctype="multipart/form-data">
             <div class="profile__information">
-                <?php foreach (User::getUserInfo($_SESSION['userID']) as $profilePicture): ?>
+                <?php foreach (User::getUserInfoSettings($_SESSION['userID']) as $profilePicture): ?>
                     <div class="profile" style="background-image: url('<?php echo $profilePicture['picture']; ?>');"></div>
                 <?php endforeach; ?>
                 <div class="information">
-                    <?php foreach(User::getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <?php foreach (User::getUserInfoSettings($_SESSION['userID']) as $info): ?>
                         <label for="name">Name</label><br>
                         <textarea name="name" id="name"><?php echo htmlspecialchars($info['username']); ?></textarea><br>
                         <label for="bio">Biography</label>
                         <textarea name="bio" id="bio"><?php echo htmlspecialchars($info['description']); ?></textarea>
                     <?php endforeach; ?>
 
-                    <?php foreach(User::getUserInfo($_SESSION["userID"]) as $info): ?>
+                    <?php foreach (User::getUserInfoSettings($_SESSION['userID']) as $info): ?>
                         <label for="email">Email</label><br>
                         <textarea name="email" id="email"><?php echo htmlspecialchars($info['email']); ?></textarea>
                     <?php endforeach; ?>
