@@ -67,8 +67,8 @@
         	<?php $profile = User::getUserInfo($id); ?>
         		<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-            <h2 class="name"><?php echo $profile['username'] ?></h2>
-            <p class="bio"><?php echo $profile['description'] ?></p>
+            <h2 class="name"><?php echo $profile['username']; ?></h2>
+            <p class="bio"><?php echo $profile['description']; ?></p>
 						<?php
 							$friend = Friend::checkFriend($_SESSION['userID'], $id);
 							if($friend == 0){
@@ -145,6 +145,7 @@
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
+					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
