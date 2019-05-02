@@ -33,7 +33,7 @@
       .hide {
         display: none;
       }
-    
+
       .searchPost {
         margin-bottom: 20px;
       }
@@ -90,17 +90,20 @@
         if(!empty($search)){
           $searchPosts = new Post();
           foreach($searchPosts->getSearchPosts($search) as $s):
+            $information = User::getUserInfo($s['user_id']);
+            $name = $information['firstname'] . ' ' . $information ['lastname'];
             ?>
 
-				<a href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
+				<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
                     <div class="searchPost">
                         <img class="post__img" src="<?php echo $s["image"]; ?>">
+                        <p class="post__name"><?php echo $name; ?></p>
                     </div>
                 </a>
 
             <div class="likes">
                 <?php $like = Post::like($_SESSION['userID'], $s['id']); ?>
-                
+
                 <?php if ($like['active'] == 1): ?>
                   <span data-id="<?php echo $s['id']; ?>" class="unlike like-btn fas fa-heart"></span>
                   <span data-id="<?php echo $s['id']; ?>" class="like like-btn hide far fa-heart"></span>
@@ -110,7 +113,7 @@
                   <span data-id="<?php echo $s['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
                   <span data-id="<?php echo $s['id']; ?>" class="like like-btn far fa-heart"></span>
                 <?php endif; ?>
-                
+
                 <?php $likeCount = Post::likeCount($s['id']); ?>
 
                 <?php if ( $likeCount == 1 ): ?>
@@ -168,6 +171,11 @@
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
+          <?php
+            $information = User::getUserInfo($p['user_id']);
+            $name = $information['firstname'] . ' ' . $information ['lastname'];
+          ?>
+          <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
