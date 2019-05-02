@@ -107,10 +107,10 @@
 		<div class="container">
 			<?php foreach (User::getUserPosts($_SESSION['userID']) as $p): ?>
 				<?php $time = User::timeAgo($p['timestamp']); ?>
-				<p class="timeAgo"><?php echo $time; ?></p>
-				<a href="?image=<?php echo $p['id']; ?>">
+				<a class="post__full" href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
 						<img src="<?php echo $p['image']; ?>">
+            <p class="timeAgo"><?php echo $time; ?></p>
 					</div>
 				</a>
 			<?php endforeach; ?>
