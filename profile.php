@@ -46,15 +46,12 @@
       $comment->setText($_POST['comment']);
       var_dump($comment->Save());
         
-        //prog.enhancement
-        //graceful.degradation
-        
     } catch (\Throwable $th) {
         //throw $th;
     }
   }
 
-  //get all previous activity
+  //get all previous comments
     $comments = Comment::getAll();  
 
 ?><!DOCTYPE html>
@@ -244,16 +241,12 @@
 
   </div>
     </div>
-	<?php } ?>
+	<?php  ?>
 
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
+	<script src="js/comment.js"></script>
 </body>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-    <script src="js/comment.js"></script>
+
 </html>
