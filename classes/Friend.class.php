@@ -1,6 +1,6 @@
 <?php
 Abstract class Friend{
-    public static function getListOfFriendsIds($p_iUserid){
+    static function getListOfFriendsIds($p_iUserid){
         try{
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT user1_id, user2_id FROM `friends` INNER JOIN users ON friends.user1_id = users.id WHERE friends.user1_id = :user1_id OR friends.user2_id = :user2_id");
@@ -63,7 +63,7 @@ Abstract class Friend{
     static function getNextFriendsPosts($id, $lastId){
         $lastId -= 1;
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$user_id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20");
+        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20");
         $statement->execute();
         $posts = $statement->fetchAll();
         return $posts;
