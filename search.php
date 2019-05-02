@@ -89,13 +89,16 @@
         <?php
         if(!empty($search)){
           $searchPosts = new Post();
-          foreach($searchPosts->getSearchPosts($search) as $s): ?>
+          foreach($searchPosts->getSearchPosts($search) as $s):
+            $information = User::getUserInfo($s['user_id']);
+            $name = $information['username'];
+            ?>
             <?php $time = User::timeAgo($s['timestamp']); ?>
-				    <p class="timeAgo"><?php echo $time; ?></p>
-				<a href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
+				<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
                     <div class="searchPost">
                         <img class="post__img" src="<?php echo $s["image"]; ?>">
                         <p class="post__name"><?php echo $name; ?></p>
+                        <p class="timeAgo"><?php echo $time; ?></p>
                     </div>
                 </a>
 
@@ -171,7 +174,7 @@
 				<div class="post">
           <?php
             $information = User::getUserInfo($p['user_id']);
-            $name = $information['firstname'] . ' ' . $information ['lastname'];
+            $name = $information['username'];
           ?>
           <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
 					<img src="<?php echo $p['image']; ?>">
