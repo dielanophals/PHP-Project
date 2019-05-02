@@ -12,16 +12,14 @@
             $list = Friend::getListOfFriendsIds($id);
             foreach($list as $key => $value){
                 $posts = Friend::getNextFriendsPosts($value, $lastId);
-
-                /*foreach($posts as $k => $v){
+                foreach($posts as $k => $v){
                     $allPosts[] = [$v['id'], $v['username'], $v['image']];
-                }*/
-
+                }
             }
 
             $result = [
                 "status" => "success",
-                "message" => $posts
+                "message" => $allPosts
             ];
         }
         catch(Throwable $t){
