@@ -16,7 +16,7 @@
 	<header>
         <?php require_once("nav.inc.php"); ?>
     </header>
-	<div id='map' style='width: 400px; height: 300px;'></div>
+	<div id='map' style='width: 100vw; height: 100vh;'></div>
 	<script src="js/map.js"></script>
 </body>
 </html>
