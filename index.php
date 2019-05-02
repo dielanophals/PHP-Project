@@ -74,6 +74,8 @@
                   $information = User::getUserInfo($v['user_id']);
                   $name = $information['firstname'] . ' ' . $information ['lastname'];
             ?>
+            <?php $time = User::timeAgo($v['timestamp']); ?>
+				    <p class="timeAgo"><?php echo $time; ?></p>
                 <a class="post__full" href="?image=<?php echo $v["id"]; ?>">
                     <div id="<?php echo $v["id"]; ?>" class="post">
                         <img class="post__img" src="<?php echo $v["image"]; ?>">
