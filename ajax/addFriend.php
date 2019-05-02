@@ -13,8 +13,4 @@
   catch(Throwable $t){
       return false;
   }
-
-
-
- echo "jup";
   }
