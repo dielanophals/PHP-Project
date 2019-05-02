@@ -28,13 +28,13 @@ if(!empty($_POST)) {
                 $user->setPassword($password);
 
                     if ( $user->register() ) {
-                        $x = $_SESSION['userID'] = $user->getUserID();
+                        Session::create();
                         header("Location: index.php");
                     } else {
-                        $errLogin = "Login failed.";
+                        $errLogin = "Sign up failed.";
                     }
                 } else {
-                $feedbackS = "You already have an account.";
+                $feedback = "You already have an account.";
                 }
             } else {
                 $feedback = "Password is incorrect.";
@@ -45,12 +45,7 @@ if(!empty($_POST)) {
     } else {
         $feedback = "Personal details cannot be empty.";
     }
-
 }
-
-
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,8 +76,6 @@ if(!empty($_POST)) {
                 <p><?php echo $errLogin; ?></p>
             </div>
         <?php endif; ?>
-
-
                 <label for="first_name">Firstname</label>
                 <input type="text" id="firstname" name="firstname"><br>
             
@@ -102,11 +95,6 @@ if(!empty($_POST)) {
                 <input type="password" id="password_confirmation" name="password_confirmation"><br>
           
                 <input type="submit" value="Sign me up!" class="btn btn--primary">  
-          
     </form>
-
-
-
-
 </body>
 </html>

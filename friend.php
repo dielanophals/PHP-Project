@@ -6,57 +6,11 @@
     	header("Location: login.php");
 	}
 
-	if(!empty($_POST)) {
-    	$imagePost = $_FILES["fileToUpload"];
-    	$description = htmlspecialchars($_POST["description"]);
-    	if(empty($description)){
-      		$feedback = "Please add a description.";
-    	}else{
-    		$post = new Post();
-    		if($post->checkType($imagePost) === false){
-        		$feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    		}else{
-        		if($post->fileSize($imagePost) === false){
-        			$feedback = "Sorry, your file is too big.";
-        		}else{
-        			$post->createDirectory("posts");
-        			if($post->fileExists() === false){
-            			$feedback = "Sorry, this file already exists. Please try again.";
-        			}else{
-						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
-						$post = Post::getLastInsertedId();
-						foreach($post as $p){
-							$id = $p["id"];
-							$arrColor = Color::findColors($p["image"]);
-							Color::insertIntoDB($id, $arrColor);
-						}
-						$feedback = "File has been uploaded.";
-            			header("Location: profile.php");
-        			}
-        		}
-      		}
-			}
-		}
-
-  //check if update is send
-  if(!empty($_POST))
-  {
-    try {
-      $comment = new Comment();
-      $comment->setText($_POST['comment']);
-      var_dump($comment->Save());
-        
-        //prog.enhancement
-        //graceful.degradation
-        
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
-  }
-
-  //get all previous activity
-    $comments = Comment::getAll();  
-
+	if(!empty($_GET['id'])){
+		$id = $_GET['id'];
+	}else{
+		header("Location: index.php");
+	}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +20,6 @@
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
-    <script type="text/javascript"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>InstaPet - Profile</title>
     <style>
@@ -111,13 +64,24 @@
 	</header>
     <div class="profile__container">
     	<div class="profile__information">
-        	<?php $profile = User::getUserInfo($_SESSION['userID']); ?>
+        	<?php $profile = User::getUserInfo($id); ?>
         		<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-            <h2 class="name"><?php echo $profile['username'] ?></h2>
-            <p class="bio"><?php echo $profile['description'] ?></p>
-				<a href="settings.php">Edit profile</a>
-				<a href="?upload=yes">Upload image</a>
+            <h2 class="name"><?php echo $profile['username']; ?></h2>
+            <p class="bio"><?php echo $profile['description']; ?></p>
+						<?php
+							$friend = Friend::checkFriend($_SESSION['userID'], $id);
+							if($friend == 0){
+								?>
+								<a href="#" class="addfriend" data-friend="<?php echo $id; ?>">Follow</a>
+								<?php
+							}else{
+								?>
+								<a href="#" class="removefriend" data-friend="<?php echo $id; ?>">Unfollow</a>
+
+								<?php
+							}
+						?>
         	</div>
     	</div>
 		<div class="profile__posts">
@@ -125,15 +89,15 @@
 	</div>
 	<main class="profilePosts">
 		<div class="container">
-			<?php foreach(User::getUserPosts($_SESSION["userID"]) as $p): ?>
-				<a href="?image=<?php echo $p['id']; ?>">
+			<?php foreach(User::getUserPosts($id) as $p): ?>
+				<a href="?id=<?php echo $id ?>&image=<?php echo $p['id']; ?>">
 					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
 						<img src="<?php echo $p['image']; ?>">
 					</div>
 				</a>
 			<?php endforeach; ?>
 			<div class="likes">
-				<?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
+				<?php $like = Post::like($id, $p['id']); ?>
 
 				<?php if ($like['active'] == 1): ?>
 					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn fas fa-heart"></span>
@@ -181,6 +145,7 @@
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
+					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
@@ -197,7 +162,7 @@
 					</div>
 					<p><?php echo $p['description']; ?></p>
 				</div>
-				<a href="profile.php" class="close">X</a>';
+				<a href="?id=<?php echo $id; ?>" class="close">X</a>
 			</div>
 		<?php endforeach; ?>
 	<?php endif; ?>
@@ -220,40 +185,13 @@
           	?>
         </div>
         <a href="profile.php" class="close">X</a>
-      </div>
-  <?php
-    }
-  ?>
-
-  <h2>Comments</h2>
-  <div id="comments">
-
-    <!--COMMENT INPUT -->
-    <input type="text" placeholder="What's on your mind?" id="comment" name="comment" />
-		<input id="btnSubmit" type="submit" value="Add comment" />
-		
-    <!--MAKE A LIST OF COMMENTS-->
-		<ul id="listupdates">
-		<?php 
-			foreach($comments as $c) {
-					echo "<li>". $c->getText() ."</li>";
-			}
-
-		?>
-		</ul>
-
-  </div>
     </div>
 	<?php } ?>
 
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/friends.js"></script>
 </body>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
-    <script src="js/comment.js"></script>
 </html>

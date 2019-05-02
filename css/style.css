@@ -57,16 +57,19 @@ nav form input{
   display:flex;
 }
 
-main.grid{
+.grid{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    grid-auto-rows: minmax(20vw, 25vw);
     grid-gap: 1em;
     grid-auto-flow: row;
+    padding: 1em;
 }
 
-div.post img{
-    width: inherit;
-    height: inherit;
+.post__img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .loadmore {
@@ -107,6 +110,7 @@ div.post img{
     height: 100vh;
     width:100%;
     top:0;
+    left:0;
     background:rgba(0,0,0,0.6);
 }
 
@@ -130,13 +134,104 @@ div.post img{
 
 .popup img{
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 70vh;
 }
 
 .popup p{
   text-align: center;
   color:white;
   width:100%;
+}
+
+.color{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.color__item{
+    border-radius: 100%;
+    padding: 0.5em;
+    font-weight: bold;
+    font-size: 1.5em;
+    flex: 1 1 minmax(0.5em, auto);
+    height: auto;
+}
+
+.color__item:before{
+    content: ' ';
+    padding-top: 100%;
+}
+
+.color__item--red{
+    background-color: tomato;
+}
+
+.color__item--orange{
+    background-color: #FDCD77;
+}
+
+.color__item--yellow{
+    background-color: #FFF68C;
+}
+
+.color__item--green{
+    background-color: #B6D881;
+}
+
+.color__item--turquoise{
+    background-color: #6BCADA;
+}
+
+.color__item--blue{
+    background-color: #71ABD9;
+}
+
+.color__item--purple{
+    background-color: #9977B0;
+}
+
+.color__item--pink{
+    background-color: #F497A7;
+}
+
+.color__item--white{
+    background-color: #FFF;
+    border: 1px solid #000;
+}
+
+.color__item--gray{
+    background-color: #B2B2B2;
+}
+
+.color__item--black{
+    background-color: #424242;
+}
+
+.color__item--brown{
+    background-color: #CCAF88;
+}
+
+a.post__full {
+    position: relative;
+    overflow: hidden;
+}
+
+p.post__name {
+    position: absolute;
+    bottom: 25px;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+}
+
+.popup_name{
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  padding-bottom: 20px;
+  display: block;
 }
 
 @media only screen and (min-width: 600px) {
@@ -146,4 +241,4 @@ div.post img{
         text-transform: lowercase;
         text-align: center;
     }
-  }
+}

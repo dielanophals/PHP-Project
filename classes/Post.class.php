@@ -58,15 +58,14 @@ Class Post{
     return $target_file;
   }
 
-  public function insertIntoDB($filePath, $des, $userID, $tag){
+  public function insertIntoDB($filePath, $des, $userID){
     try{
         $timestamp = date('Y-m-d H:i:s');
         $conn = Db::getInstance();
-        $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, tag, timestamp, active) VALUES ('$userID', :path, :des, $tag, '$timestamp', 1)");
+        $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, active) VALUES ('$userID', :path, :des, '$timestamp', 1)");
         $statement->bindParam(":path", $filePath);
         $statement->bindParam(":des", $des);
         $statement->execute();
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
     }
     catch(Throwable $t){
         return false;
@@ -95,11 +94,42 @@ Class Post{
   }
 
   public function getSearchPosts($search){
-    $conn = Db::getInstance();
-    $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' ORDER BY id DESC");
-    $statement->execute();
-    $posts = $statement->fetchAll();
-    return $posts;
+    try{
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' AND active = '1' ORDER BY id DESC");
+      $statement->execute();
+      $posts = $statement->fetchAll();
+      return $posts;
+    }
+    catch(Throwable $t){
+      return false;
+    }
+  }
+
+  public static function getLastInsertedId(){
+    try{
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT 0, 1");
+      $statement->execute();
+      $post = $statement->fetchAll();
+      return $post;
+    }
+    catch(Throwable $t){
+      return false;
+    }
+  }
+
+  public static function getPostById($id){
+    try{
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM `posts` WHERE `id` = $id");
+      $statement->execute();
+      $result = $statement->fetchAll();
+      return $result;
+    }
+    catch(Trowable $t){
+      return false;
+    }
   }
 
   public static function like($userID, $postID) {
@@ -118,5 +148,25 @@ Class Post{
     $result = $statement->fetchAll();
     
     return count($result);
+  }
+
+  public function delete($id, $filename) {
+    try {
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("UPDATE posts SET active = '0' WHERE user_id = '$id' AND image = '$filename'");
+      $result = $statement->execute();
+    } catch(Throwable $t){
+      return false;
+    }
+  }
+
+  public function edit($id, $desc) {
+    try {
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("UPDATE posts SET description = '$desc' WHERE id = '$id'");
+      $result = $statement->execute();
+    } catch(Throwable $t){
+      return false;
+    }
   }
 }
