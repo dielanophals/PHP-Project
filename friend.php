@@ -135,7 +135,7 @@
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
-					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
+					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['username']; ?></a>
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
