@@ -43,7 +43,7 @@ Abstract class Friend{
         $statement->execute();
     }
 
-    public function checkFriend($userID, $friendId){
+    public static function checkFriend($userID, $friendId){
       $conn = Db::getInstance();
       $statement = $conn->prepare("SELECT * FROM friends WHERE user1_id = '$userID' && user2_id='$friendId'");
       $statement->execute();
