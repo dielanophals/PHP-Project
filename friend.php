@@ -67,21 +67,11 @@
         	<?php $profile = User::getUserInfo($id); ?>
         		<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-            <h2 class="name"><?php echo $profile['username'] ?></h2>
-            <p class="bio"><?php echo $profile['description'] ?></p>
-						<?php
-							$friend = Friend::checkFriend($_SESSION['userID'], $id);
-							if($friend == 0){
-								?>
-								<a href="#" class="addfriend" data-friend="<?php echo $id; ?>">Follow</a>
-								<?php
-							}else{
-								?>
-								<a href="#" class="removefriend" data-friend="<?php echo $id; ?>">Unfollow</a>
-
-								<?php
-							}
-						?>
+            <h2 class="name"><?php echo $profile['username']; ?></h2>
+            <p class="bio"><?php echo $profile['description']; ?></p>
+						<?php $friend = Friend::checkFriend($_SESSION['userID'], $id); ?>
+								<a href="#" class="btn_friend addfriend <?php if($friend == 1){ echo "hide"; } ?>" data-friend="<?php echo $id; ?>">Follow</a>
+								<a href="#" class="btn_friend removefriend <?php if($friend == 0){ echo "hide"; } ?>" data-friend="<?php echo $id; ?>">Unfollow</a>
         	</div>
     	</div>
 		<div class="profile__posts">
@@ -145,6 +135,7 @@
 		<?php foreach($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
+					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
 					<img src="<?php echo $p['image']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
