@@ -13,6 +13,9 @@
 	<title>Instapet - imagemap</title>
 </head>
 <body>
+	<header>
+        <?php require_once("nav.inc.php"); ?>
+    </header>
 	<div id='map' style='width: 400px; height: 300px;'></div>
 	<script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoicjA3MDI0NjUiLCJhIjoiY2p2NnNodnYwMDNydzRkbHZ0bnM0aTQ3aCJ9.aoZTpRItL6OIKxqjC38EWg';
