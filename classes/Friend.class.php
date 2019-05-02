@@ -35,6 +35,22 @@ Abstract class Friend{
         $statement->execute();
     }
 
+    public static function removeFriend($userID, $friendId){
+        //user adds new friend
+        $timestamp = date('Y-m-d H:i:s');
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE FROM friends WHERE user1_id = '$userID' AND user2_id = '$friendId'");
+        $statement->execute();
+    }
+
+    public function checkFriend($userID, $friendId){
+      $conn = Db::getInstance();
+      $statement = $conn->prepare("SELECT * FROM friends WHERE user1_id = '$userID' && user2_id='$friendId'");
+      $statement->execute();
+      $statement->fetch(PDO::FETCH_ASSOC);
+      return $statement->rowCount();
+    }
+
     public static function getFriendsPosts($id, $limit){
         $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $limit");
