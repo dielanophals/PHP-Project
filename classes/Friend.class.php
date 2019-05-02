@@ -60,10 +60,9 @@ Abstract class Friend{
     }
 
 
-    static function getNextFriendsPosts($id, $lastId){
-        $lastId -= 1;
+    public static function getNextFriendsPosts($id, $lastId){
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20");
+        $statement = $conn->prepare("SELECT posts.*, users.username FROM posts, users WHERE user_id = '$id' AND users.id = '$id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20 ");
         $statement->execute();
         $posts = $statement->fetchAll();
         return $posts;

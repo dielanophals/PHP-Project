@@ -1,42 +1,42 @@
 <?php
-	require_once("bootstrap.php");
+    require_once 'bootstrap.php';
 
-	$s = Session::check();
-	if($s === false){
-    	header("Location: login.php");
-	}
+    $s = Session::check();
+    if ($s === false) {
+        header('Location: login.php');
+    }
 
-	if(!empty($_POST)) {
-    	$imagePost = $_FILES["fileToUpload"];
-    	$description = htmlspecialchars($_POST["description"]);
-    	if(empty($description)){
-      		$feedback = "Please add a description.";
-    	}else{
-    		$post = new Post();
-    		if($post->checkType($imagePost) === false){
-        		$feedback = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    		}else{
-        		if($post->fileSize($imagePost) === false){
-        			$feedback = "Sorry, your file is too big.";
-        		}else{
-        			$post->createDirectory("posts");
-        			if($post->fileExists() === false){
-            			$feedback = "Sorry, this file already exists. Please try again.";
-        			}else{
-						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION["userID"]);
-						$post = Post::getLastInsertedId();
-						foreach($post as $p){
-							$id = $p["id"];
-							$arrColor = Color::findColors($p["image"]);
-							Color::insertIntoDB($id, $arrColor);
-						}
-						$feedback = "File has been uploaded.";
-            			header("Location: profile.php");
-        			}
-        		}
-      		}
-			}
-		}
+    if (!empty($_POST)) {
+        $imagePost = $_FILES['fileToUpload'];
+        $description = htmlspecialchars($_POST['description']);
+        if (empty($description)) {
+            $feedback = 'Please add a description.';
+        } else {
+            $post = new Post();
+            if ($post->checkType($imagePost) === false) {
+                $feedback = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.';
+            } else {
+                if ($post->fileSize($imagePost) === false) {
+                    $feedback = 'Sorry, your file is too big.';
+                } else {
+                    $post->createDirectory('posts');
+                    if ($post->fileExists() === false) {
+                        $feedback = 'Sorry, this file already exists. Please try again.';
+                    } else {
+                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID']);
+                        $post = Post::getLastInsertedId();
+                        foreach ($post as $p) {
+                            $id = $p['id'];
+                            $arrColor = Color::findColors($p['image']);
+                            Color::insertIntoDB($id, $arrColor);
+                        }
+                        $feedback = 'File has been uploaded.';
+                        header('Location: profile.php');
+                    }
+                }
+            }
+        }
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -87,15 +87,15 @@
 </head>
 <body>
 	<header>
-    	<?php require_once("nav.inc.php"); ?>
+    	<?php require_once 'nav.inc.php'; ?>
 	</header>
     <div class="profile__container">
     	<div class="profile__information">
         	<?php $profile = User::getUserInfo($_SESSION['userID']); ?>
         		<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-            <h2 class="name"><?php echo $profile['username'] ?></h2>
-            <p class="bio"><?php echo $profile['description'] ?></p>
+            <h2 class="name"><?php echo $profile['username']; ?></h2>
+            <p class="bio"><?php echo $profile['description']; ?></p>
 				<a href="settings.php">Edit profile</a>
 				<a href="?upload=yes">Upload image</a>
         	</div>
@@ -105,7 +105,9 @@
 	</div>
 	<main class="profilePosts">
 		<div class="container">
-			<?php foreach(User::getUserPosts($_SESSION["userID"]) as $p): ?>
+			<?php foreach (User::getUserPosts($_SESSION['userID']) as $p): ?>
+				<?php $time = User::timeAgo($p['timestamp']); ?>
+				<p class="timeAgo"><?php echo $time; ?></p>
 				<a href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
 						<img src="<?php echo $p['image']; ?>">
@@ -127,11 +129,11 @@
 
 				<?php $likeCount = Post::likeCount($p['id']); ?>
 
-				<?php if ( $likeCount == 1 ): ?>
+				<?php if ($likeCount == 1): ?>
 					<span class="likes-count"><?php echo $likeCount; ?> like</span>
 				<?php endif; ?>
 
-				<?php if ( $likeCount == 0 || $likeCount > 1) : ?>
+				<?php if ($likeCount == 0 || $likeCount > 1) : ?>
 					<span class="likes-count"><?php echo $likeCount; ?> likes</span>
 				<?php endif; ?>
 			</div>
@@ -156,9 +158,9 @@
     </div>
 	</main>
     <!--Pop up sceen-->
-    <?php if(!empty($_GET['image'])): ?>
-		<?php $post = new Post(); $post->showImage($_GET['image']);?>
-		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+    <?php if (!empty($_GET['image'])): ?>
+		<?php $post = new Post(); $post->showImage($_GET['image']); ?>
+		<?php foreach ($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
 					<img src="<?php echo $p['image']; ?>">
@@ -166,10 +168,10 @@
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>
 						<!--Loop through all colors to display them from highest value to lowest.-->
-						<?php foreach($c as $key => $value): ?>
+						<?php foreach ($c as $key => $value): ?>
 							<!--Only show found colors.-->
-							<?php if($value != 0): ?>
-								<a href="search.php?color=<?php echo $key?>">
+							<?php if ($value != 0): ?>
+								<a href="search.php?color=<?php echo $key; ?>">
 									<div class="color__item color__item--<?php echo $key; ?>"></div>
 								</a>
 							<?php endif; ?>
@@ -182,8 +184,8 @@
 		<?php endforeach; ?>
 	<?php endif; ?>
 <?php
-    if(!empty($_GET['upload'])){
-?>
+    if (!empty($_GET['upload'])) {
+        ?>
 	<div class="popup">
         <div class="imageUpload">
         	<form action="#" method="post" enctype="multipart/form-data">
@@ -194,14 +196,14 @@
 				<input type="submit" value="Upload Image" name="submit">
           	</form>
         	<?php
-				if(isset($feedback)){
-				echo $feedback;
-				}
-          	?>
+                if (isset($feedback)) {
+                    echo $feedback;
+                } ?>
         </div>
         <a href="profile.php" class="close">X</a>
     </div>
-	<?php } ?>
+	<?php
+    } ?>
 
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>

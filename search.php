@@ -89,12 +89,10 @@
         <?php
         if(!empty($search)){
           $searchPosts = new Post();
-          foreach($searchPosts->getSearchPosts($search) as $s):
-            $information = User::getUserInfo($s['user_id']);
-            $name = $information['firstname'] . ' ' . $information ['lastname'];
-            ?>
-
-				<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
+          foreach($searchPosts->getSearchPosts($search) as $s): ?>
+            <?php $time = User::timeAgo($s['timestamp']); ?>
+				    <p class="timeAgo"><?php echo $time; ?></p>
+				<a href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
                     <div class="searchPost">
                         <img class="post__img" src="<?php echo $s["image"]; ?>">
                         <p class="post__name"><?php echo $name; ?></p>
