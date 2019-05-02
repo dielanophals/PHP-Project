@@ -226,6 +226,14 @@ p.post__name {
     font-weight: bold;
 }
 
+p.timeAgo {
+    position: absolute;
+    top: 10px;
+    text-align: center;
+    width: 100%;
+    color: white;
+}
+
 .popup_name{
   color: white;
   font-weight: bold;
