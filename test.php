@@ -84,74 +84,20 @@
     <header>
         <?php require_once("nav.inc.php"); ?>
     </header>
-    <main class="search">
-      <div class="container searched">
-        <?php
-        if(!empty($search)){
-          $searchPosts = new Post();
-          foreach($searchPosts->getSearchPosts($search) as $s):
-            $information = User::getUserInfo($s['user_id']);
-            $name = $information['username'];
-            ?>
-            <?php $time = User::timeAgo($s['timestamp']); ?>
-				<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
-                    <div class="searchPost">
-                        <img class="post__img" src="<?php echo $s["image"]; ?>">
-                        <p class="post__name"><?php echo $name; ?></p>
-                        <p class="timeAgo"><?php echo $time; ?></p>
-                    </div>
-                </a>
 
-            <div class="likes">
-                <?php $like = Post::like($_SESSION['userID'], $s['id']); ?>
+    <?php
+$api_key = "e2d2e2e24294fe4b91a4ed0d521d2539";
+$freegeoipjson = file_get_contents("http://api.ipstack.com/193.191.150.3?access_key=e2d2e2e24294fe4b91a4ed0d521d2539");
 
-                <?php if ($like['active'] == 1): ?>
-                  <span data-id="<?php echo $s['id']; ?>" class="unlike like-btn fas fa-heart"></span>
-                  <span data-id="<?php echo $s['id']; ?>" class="like like-btn hide far fa-heart"></span>
-                <?php endif; ?>
+$jsondata = json_decode($freegeoipjson);
 
-                <?php if ($like['active'] == 0): ?>
-                  <span data-id="<?php echo $s['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
-                  <span data-id="<?php echo $s['id']; ?>" class="like like-btn far fa-heart"></span>
-                <?php endif; ?>
+$countryfromip = $jsondata->country_name;
+$cityfromip = $jsondata->city;
 
-                <?php $likeCount = Post::likeCount($s['id']); ?>
-
-                <?php if ( $likeCount == 1 ): ?>
-                  <span class="likes-count"><?php echo $likeCount; ?> like</span>
-                <?php endif; ?>
-
-                <?php if ( $likeCount == 0 || $likeCount > 1) : ?>
-                  <span class="likes-count"><?php echo $likeCount; ?> likes</span>
-                <?php endif; ?>
-
-              </div>
-
-              <?php if ($_SESSION['userID'] == $s['user_id']): ?>
-                <div class="edit">
-                  <a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
-                  <div class="edit__options">
-                    <a href="#" class="option--delete">Delete</a>
-                    <form action="postDelete.php" method="POST" class="form--delete">
-                      <input type="hidden" value="<?php echo $s['image']; ?>" name="delete_file"/>
-                      <input type="submit" name="delete" value="Delete">
-                    </form>
-                    <a href="#" class="option--edit">Edit</a>
-                    <form action="postEdit.php" method="POST" class="form--edit">
-                      <input type="hidden" value="<?php echo $s['id']; ?>" name="file_id">
-                      <textarea name="descriptionEdit"><?php echo $s['description']; ?></textarea>
-                      <input type="submit" name="update" value="Update">
-                    </form>
-                  </div>
-                </div>
-              <?php endif; ?>
-
-            <?php
-          endforeach;
-        }
-        ?>
-      </div>
-    </main>
+echo "City: ". $cityfromip ."";
+echo "<br/>";
+echo "Country: ". $countryfromip ."";
+?>
 	<!--If there is a search for color X, show posts with the same color. -->
     <?php if(!empty($_GET['color'])): ?>
 		<?php $posts = Color::searchPostsByColor($_GET['color']); ?>
@@ -174,7 +120,7 @@
 				<div class="post">
           <?php
             $information = User::getUserInfo($p['user_id']);
-            $name = $information['username'];
+            $name = $information['firstname'] . ' ' . $information ['lastname'];
           ?>
           <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
 					<img src="<?php echo $p['image']; ?>">

@@ -8,7 +8,8 @@
 
     if (!empty($_POST)) {
         $imagePost = $_FILES['fileToUpload'];
-        $description = htmlspecialchars($_POST['description']);
+		$description = htmlspecialchars($_POST['description']);
+		$filter = $_POST['filter'];
         if (empty($description)) {
             $feedback = 'Please add a description.';
         } else {
@@ -23,7 +24,7 @@
                     if ($post->fileExists() === false) {
                         $feedback = 'Sorry, this file already exists. Please try again.';
                     } else {
-                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID']);
+                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
                         $post = Post::getLastInsertedId();
                         foreach ($post as $p) {
                             $id = $p['id'];
@@ -62,7 +63,15 @@
 
       .searchPost {
         margin-bottom: 20px;
-      }
+	  }
+	  
+	  .previewImg {
+		margin-top: 20px;
+		width: 200px;
+		height: auto;
+		background: white;
+		padding: 20px;  
+	  }
 
       .likes {
         display: flex;
@@ -108,10 +117,10 @@
 		<div class="container">
 			<?php foreach (User::getUserPosts($_SESSION['userID']) as $p): ?>
 				<?php $time = User::timeAgo($p['timestamp']); ?>
-				<p class="timeAgo"><?php echo $time; ?></p>
-				<a href="?image=<?php echo $p['id']; ?>">
-					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
-						<img src="<?php echo $p['image']; ?>">
+				<a class="post__full" href="?image=<?php echo $p['id']; ?>">
+					<div class="userPosts">
+						<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
+            			<p class="timeAgo"><?php echo $time; ?></p>
 					</div>
 				</a>
 			<?php endforeach; ?>
