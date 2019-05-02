@@ -5,10 +5,10 @@ $(document).ready(() => {
     $('.edit_button').on('click', (e) => {
         e.preventDefault();
         if (state == false) {
-            $('.edit__options').css('visibility', 'visible');
+            $(".edit__options").css('visibility', 'visible');
             state = true;
         } else {
-            $('.edit__options').css('visibility', 'hidden');
+            $(".edit__options").css('visibility', 'hidden');
             state = false;
         }
     });

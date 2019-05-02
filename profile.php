@@ -189,7 +189,7 @@
         ?>
 	<div class="popup">
         <div class="imageUpload">
-        	<form action="#" method="post" enctype="multipart/form-data">
+        	<form action="#" method="post" enctype="multipart/form-data" id="uploadForm">
             	<label for="fileToUpload">Select image to upload:</label>
 				<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 				<label for="description">Description:</label>
@@ -197,6 +197,7 @@
 				<input type="submit" value="Upload Image" name="submit">
 				<label for="filter">Filter</label>
 				<select name="filter" id="filter">
+					<option value="" selected>Select filter...</option>
 					<option value="1977">1977</option>
 					<option value="aden">aden</option>
 					<option value="brannan">brannan</option>
@@ -224,6 +225,7 @@
 					<option value="willow">willow</option>
 					<option value="xpro2">xpro2</option>
 				</select>
+				<div id="filter1977" style="width: 450px; height: 450px; background:red;display:none"><div>
           	</form>
         	<?php
                 if (isset($feedback)) {
@@ -238,5 +240,6 @@
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
+	<script src="js/preview.js"></script>
 </body>
 </html>
