@@ -8,6 +8,12 @@
 	if(!empty($_GET['search'])){
 		$search = $_GET['search'];
 	}
+
+	//Properly redirect to previous page.
+	$previous = "javascript:history.go(-1)";
+	if(isset($_SERVER['HTTP_REFERER'])) {
+    	$previous = $_SERVER['HTTP_REFERER'];
+	}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,7 +184,7 @@
 					</div>
 					<p><?php echo $p['description']; ?></p>
 				</div>
-				<a href="search.php?search=<?php echo $search; ?>" class="close">X</a>';
+				<a href="<?php echo $previous; ?>" class="close">X</a>';
 			</div>
 		<?php endforeach; ?>
 	<?php endif; ?>
