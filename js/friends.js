@@ -10,9 +10,8 @@ $(document).ready(function(){
                 'friend': friend,
             },
             success: function (data) {
-                $('.addfriend').html("Unfollow");
-                $('.addfriend').addClass("removefriend");
-                $('.addfriend').removeClass("addfriend");
+                $('.addfriend').toggleClass("hide");
+                $('.removefriend').toggleClass("hide");
             }
         });
         e.preventDefault();
@@ -30,9 +29,8 @@ $(document).ready(function(){
                 'friend': friend,
             },
             success: function (data) {
-                $('.removefriend').html("Follow");
-                $('.removefriend').addClass("addfriend");
-                $('.removefriend').removeClass("removefriend");
+                $('.removefriend').toggleClass("hide");
+                $('.addfriend').toggleClass("hide");
             }
         });
         e.preventDefault();

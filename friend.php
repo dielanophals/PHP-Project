@@ -69,19 +69,9 @@
           	<div class="information">
             <h2 class="name"><?php echo $profile['username']; ?></h2>
             <p class="bio"><?php echo $profile['description']; ?></p>
-						<?php
-							$friend = Friend::checkFriend($_SESSION['userID'], $id);
-							if($friend == 0){
-								?>
-								<a href="#" class="addfriend" data-friend="<?php echo $id; ?>">Follow</a>
-								<?php
-							}else{
-								?>
-								<a href="#" class="removefriend" data-friend="<?php echo $id; ?>">Unfollow</a>
-
-								<?php
-							}
-						?>
+						<?php $friend = Friend::checkFriend($_SESSION['userID'], $id); ?>
+								<a href="#" class="btn_friend addfriend <?php if($friend == 1){ echo "hide"; } ?>" data-friend="<?php echo $id; ?>">Follow</a>
+								<a href="#" class="btn_friend removefriend <?php if($friend == 0){ echo "hide"; } ?>" data-friend="<?php echo $id; ?>">Unfollow</a>
         	</div>
     	</div>
 		<div class="profile__posts">
