@@ -48,6 +48,7 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/vendor/cssgram.min.css">
     <title>InstaPet - Profile</title>
     <style>
 
@@ -194,6 +195,35 @@
 				<label for="description">Description:</label>
 				<input type="text" name="description" id="description" required><br><br>
 				<input type="submit" value="Upload Image" name="submit">
+				<label for="filter">Filter</label>
+				<select name="filter" id="filter">
+					<option value="1977">1977</option>
+					<option value="aden">aden</option>
+					<option value="brannan">brannan</option>
+					<option value="brooklyn">brooklyn</option>
+					<option value="clarendon">clarendon</option>
+					<option value="earlybird">earlybird</option>
+					<option value="gingham">gingham</option>
+					<option value="hudson">hudson</option>
+					<option value="inkwell">inkwell</option>
+					<option value="kelvin">kelvin</option>
+					<option value="lark">lark</option>
+					<option value="lofi">lofi</option>
+					<option value="maven">maven</option>
+					<option value="mayfair">mayfair</option>
+					<option value="moon">moon</option>
+					<option value="nashville">nashville</option>
+					<option value="perpetua">perpetua</option>
+					<option value="reyes">reyes</option>
+					<option value="rise">rise</option>
+					<option value="slumber">slumber</option>
+					<option value="stinson">stinson</option>
+					<option value="toaster">toaster</option>
+					<option value="valencia">valencia</option>
+					<option value="walden">walden</option>
+					<option value="willow">willow</option>
+					<option value="xpro2">xpro2</option>
+				</select>
           	</form>
         	<?php
                 if (isset($feedback)) {
