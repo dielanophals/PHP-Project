@@ -32,6 +32,25 @@
     }
   }
 
+  //check if update is send
+  if(!empty($_POST))
+  {
+    try {
+      $comment = new Comment();
+      $comment->setText($_POST['comment']);
+      var_dump($comment->Save());
+        
+        //prog.enhancement
+        //graceful.degradation
+        
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+  }
+
+  //get all previous activity
+    $comments = Comment::getAll();  
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +60,7 @@
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
+    <script type="text/javascript"></script>
     <title>InstaPet - Profile</title>
 </head>
 <body>
@@ -92,6 +112,7 @@
         echo '<a href="profile.php" class="close">X</a>';
         echo '</div>';
       }
+
     }
 
     if(!empty($_GET['upload'])){
@@ -117,5 +138,30 @@
   <?php
     }
   ?>
+
+  <h2>Comments</h2>
+  <div id="comments">
+
+    <!--COMMENT INPUT -->
+    <input type="text" placeholder="What's on your mind?" id="comment" name="comment" />
+		<input id="btnSubmit" type="submit" value="Add comment" />
+		
+    <!--MAKE A LIST OF COMMENTS-->
+		<ul id="listupdates">
+		<?php 
+			foreach($comments as $c) {
+					echo "<li>". $c->getText() ."</li>";
+			}
+
+		?>
+		</ul>
+
+  </div>
 </body>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+    <script src="js/comment.js"></script>
 </html>
