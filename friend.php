@@ -21,7 +21,8 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <title>InstaPet - Profile</title>
+    <link rel="stylesheet" href="css/vendor/cssgram.min.css">
+		<title>InstaPet - Profile</title>
     <style>
 
       a.post-image {
@@ -81,8 +82,8 @@
 		<div class="container">
 			<?php foreach(User::getUserPosts($id) as $p): ?>
 				<a href="?id=<?php echo $id ?>&image=<?php echo $p['id']; ?>">
-					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
-						<img src="<?php echo $p['image']; ?>">
+					<div class="userPosts">
+						<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					</div>
 				</a>
 			<?php endforeach; ?>
@@ -136,7 +137,7 @@
 			<div class="popup">
 				<div class="post">
 					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
-					<img src="<?php echo $p['image']; ?>">
+					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>

@@ -23,6 +23,7 @@
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/vendor/cssgram.min.css">
     <title>InstaPet - Search</title>
     <style>
 
@@ -96,7 +97,7 @@
             <?php $time = User::timeAgo($s['timestamp']); ?>
 				<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
                     <div class="searchPost">
-                        <img class="post__img" src="<?php echo $s["image"]; ?>">
+                        <img class="post__img <?php echo $s['filter']; ?>" src="<?php echo $s["image"]; ?>">
                         <p class="post__name"><?php echo $name; ?></p>
                         <p class="timeAgo"><?php echo $time; ?></p>
                     </div>
@@ -160,7 +161,7 @@
 			<?php foreach($result as $r):?>
 				<a href="?image=<?php echo $r["id"]; ?>">
                     <div id="<?php echo $r["id"]; ?>" class="post">
-                		<img class="post__img" src="<?php echo $r["image"]; ?>">
+                		<img class="post__img <?php echo $r['filter']; ?>" src="<?php echo $r["image"]; ?>">
 					</div>
                 </a>
 			<?php endforeach; ?>
@@ -177,7 +178,7 @@
             $name = $information['username'];
           ?>
           <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
-					<img src="<?php echo $p['image']; ?>">
+					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>

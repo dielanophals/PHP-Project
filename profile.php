@@ -173,7 +173,7 @@
 		<?php foreach ($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
-					<img src="<?php echo $p['image']; ?>">
+					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>
