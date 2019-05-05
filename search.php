@@ -87,7 +87,7 @@
         <?php require_once("nav.inc.php"); ?>
     </header>
     <main>
-        <button type="submit" class="btn__change__view " value="View on map">View on map</button>
+        <button type="submit" class="btn__change__view" value="View on map">View on map</button>
     </main>
     <section class="search">
         <div class="container searched">
