@@ -22,6 +22,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
+    <script src='https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>InstaPet - Search</title>
     <style>
@@ -84,7 +86,10 @@
     <header>
         <?php require_once("nav.inc.php"); ?>
     </header>
-    <main class="search">
+    <main>
+        <button type="submit" class="btn__change__view " value="View on map">View on map</button>
+    </main>
+    <section class="search">
         <div class="container searched">
             <?php
             if(!empty($search)){
@@ -151,7 +156,11 @@
             }
             ?>
         </div>
-    </main>
+    </section>
+    <!--Image map-->
+    <section class="search__map">
+        <div id='map' style="width: 100vw; height: 80vh;"></div>
+    </section>
 	<!--If there is a search for color X, show posts with the same color. -->
     <?php if(!empty($_GET['color'])): ?>
 		<?php $posts = Color::searchPostsByColor($_GET['color']); ?>
@@ -198,8 +207,9 @@
 		<?php endforeach; ?>
 	<?php endif; ?>
 
-<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-<script src="js/like.js"></script>
-<script src="js/edit.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+    <script src="js/like.js"></script>
+    <script src="js/edit.js"></script>
+    <script src="js/map.js"></script>
 </body>
 </html>
