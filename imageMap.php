@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+    require_once("bootstrap.php");
+    $s = Session::check();
+    if($s === false){
+        header("Location: login.php");
+	}
+	
+	//get all posts
+	//loop through all pictures
+	//display image based on longitude and langitude
+?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
