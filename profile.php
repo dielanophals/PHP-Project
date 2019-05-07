@@ -123,7 +123,6 @@
             			<p class="timeAgo"><?php echo $time; ?></p>
 					</div>
 				</a>
-			<?php endforeach; ?>
 			<div class="likes">
 				<?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
 
@@ -165,6 +164,7 @@
 					</div>
 				</div>
 			<?php endif; ?>
+		<?php endforeach; ?>
     </div>
 	</main>
     <!--Pop up sceen-->
