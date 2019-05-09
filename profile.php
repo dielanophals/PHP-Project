@@ -116,10 +116,11 @@
 	<main class="profilePosts">
 		<div class="container">
 			<?php foreach (User::getUserPosts($_SESSION['userID']) as $p): ?>
-				<?php $time = User::timeAgo($p['timestamp']); ?>
+				<div class="container_post">
+					<?php $time = User::timeAgo($p['timestamp']); ?>
 				<a class="post__full" href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts">
-						<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
+						<div class="post__img" class="<?php echo $p['filter']; ?>" style="background-image: url('<?php echo $p['image']; ?>')"></div>
             			<p class="timeAgo"><?php echo $time; ?></p>
 					</div>
 				</a>
@@ -158,13 +159,14 @@
 						<a href="#" class="option--edit">Edit</a>
 						<form action="postEdit.php" method="POST" class="form--edit">
 							<input type="hidden" value="<?php echo $p['id']; ?>" name="file_id">
-							<textarea name="descriptionEdit"><?php echo $p['description']; ?></textarea>
+							<textarea name="descriptionEdit"><?php echo $p['description']; ?></textarea><br>
 							<input type="submit" name="update" value="Update">
 						</form>
 					</div>
 				</div>
 			<?php endif; ?>
-		<?php endforeach; ?>
+				</div>
+			<?php endforeach; ?>
     </div>
 	</main>
     <!--Pop up sceen-->
