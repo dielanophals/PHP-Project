@@ -28,7 +28,8 @@ if(!empty($_POST)) {
                 $user->setPassword($password);
 
                     if ( $user->register() ) {
-                        Session::create();
+                        $id = $user->getUserID();
+                        Session::create($id);
                         header("Location: index.php");
                     } else {
                         $errLogin = "Sign up failed.";
