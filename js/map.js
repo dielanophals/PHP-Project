@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    //Variables
     var markers = Array();
     //Change it with ajax, due to refresh it blocks each other
 
@@ -7,7 +6,7 @@ $( document ).ready(function() {
 	mapboxgl.accessToken = 'pk.eyJ1IjoicjA3MDI0NjUiLCJhIjoiY2p2NnNodnYwMDNydzRkbHZ0bnM0aTQ3aCJ9.aoZTpRItL6OIKxqjC38EWg';
 	var map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/mapbox/streets-v11',
 		center: [51.0, 4.4]
 	});
 	
