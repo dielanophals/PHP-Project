@@ -2,13 +2,11 @@
 	require('../bootstrap.php');
 
 	if(!empty($_GET)){
-		//Check of er op iets gezocht moet worden
-			//=> waarschijnlijk posts klasse gebruiken om alle posts te krijgen
-			//=> waarschijnlijk eerder zoekfunctie gebruiken om door de resultaten te loppen
-		//Zo niet toon alles
-
+    //geen search => toon alles
+    //wel search => toon correcte search
 		try{
 			//looking for certain result depending on search
+            $posts = Posts::getSearchPosts($search);
 
             $result = [
                 "status" => "success",

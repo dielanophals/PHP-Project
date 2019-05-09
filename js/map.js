@@ -1,14 +1,7 @@
 $( document ).ready(function() {
-	//Change it with ajax, due to refresh it blocks each other
+    //Change it with ajax, due to refresh it blocks each other
 	$(".btn__change__view").click((e) => {
-		if($(".btn__change__view").val() === "View on map"){
-			$(".search").toggle();
-			$(".search__map").toggle();
-		}
-		else if($(".btn__change__view").val() === "View default search"){
-			$(".search").toggle();
-			$(".search__map").toggle();
-		}
+        //show map?
 	});
 
 	//Mapbox - map visualisatie
@@ -19,9 +12,9 @@ $( document ).ready(function() {
 		center: [51.0, 4.4]
 	});
 	
-	//Ajax call om of alle posts te laten zien o.b.v. search, laat leeg en het toont alle posts
-	//Show it on the map without refresh
-	/*
+    /*
+    Ajax call om of alle posts te laten zien o.b.v. search, laat leeg en het toont alle posts
+
 	$.ajax({
 		method: "GET",
 		url: "ajax/imageMap.php",
@@ -29,27 +22,19 @@ $( document ).ready(function() {
 	})
 	.done(function(res) {
 		if(res.status = "success"){
-			//Maak o.b.v. de locatie een marker + popup
-			//Loop door alle posts
+			//When ajax is succesful select all images on the map using a marker and popup and extra popup
 		}
-	});*/
+	});
 
-	//e.preventDefault();
+	e.preventDefault();*/
 
 	var popup = new mapboxgl.Popup({closeOnClick: false})
-	/*
-		<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
-            <div class="searchPost">
-        	    <img class="post__img" src="<?php echo $s["image"]; ?>">
-                <p class="post__name"><?php echo $name; ?></p>
-				<p class="timeAgo"><?php echo $time; ?></p>
-		    </div>
-        </a>
-	*/
-
-	//Popup fix
 		.setHTML(
-			'<a class="post__full" href="?image="2">' +
+            //Change href due to missing db information
+            //Change source of image
+            //Change description (p)
+            //Change timeago (p)
+			'<a class="post__full" href="search.php?search=dog&map=true&image=2>' +
 				'<div class="searchPost">' +
 					'<img class="post__img" src="https://placeimg.com/200/200/any">' +
 					'<p class="post__name">Test</p>' +
@@ -63,8 +48,17 @@ $( document ).ready(function() {
 	  .setPopup(popup)
 	  .addTo(map); 
 
+    //Delete code below due to being implemented in foreach loop
 	var popup1 = new mapboxgl.Popup({closeOnClick: false})
-		.setText('We have no idea.');
+	.setHTML(
+		'<a class="post__full" href="?image="2">' +
+			'<div class="searchPost">' +
+				'<img class="post__img" src="https://placeimg.com/200/200/any">' +
+				'<p class="post__name">Test</p>' +
+				'<p class="timeAgo"></p>' +
+			'</div>' +
+		'</a>'
+	)
   
 	new mapboxgl.Marker()
 		.setLngLat([30.5, 50.5])

@@ -15,15 +15,24 @@
     	$previous = $_SERVER['HTTP_REFERER'];
     }
 
+    //Get the user choses a map or the default search
     if(!empty($_GET["map"])){
         $isMapActivated = $_GET["map"];
         if($isMapActivated === "false"){
             $valBtnMap = "View on map";
             $isMapActivated = "true";
+
+            //Display the current choice of the user
+            $isDefaultSearch = "flex";
+            $isMapSearch = "none";
         }
         else if($isMapActivated === "true"){
             $valBtnMap = "View default search";
             $isMapActivated = "false";
+
+            //Display the current choice of the user
+            $isDefaultSearch = "none";
+            $isMapSearch = "block";
         }
     }
     //Default
@@ -104,12 +113,12 @@
         <?php require_once("nav.inc.php"); ?>
     </header>
     <main>
-        <form method="get">
+        <form method="GET">
             <input type="hidden" name="map" value="<?php echo $isMapActivated; ?>">
             <input type="submit" class="btn__change__view" value="<?php echo $valBtnMap; ?>">
         </form>
     </main>
-    <section class="search">
+    <section class="search" style="display:<?php echo $isDefaultSearch; ?>;">
         <div class="container searched">
             <?php
             if(!empty($search)){
@@ -178,7 +187,7 @@
         </div>
     </section>
     <!--Image map-->
-    <section class="search__map">
+    <section class="search__map" style="display:<?php echo $isMapSearch; ?>;">
         <div id='map' style="width: 100vw; height: 80vh;"></div>
     </section>
 	<!--If there is a search for color X, show posts with the same color. -->
