@@ -6,6 +6,8 @@ body{
     font-family: 'Quicksand', sans-serif;
 }
 
+/*Navigation*/
+
 nav{
     display: flex;
     background: #000;
@@ -23,6 +25,8 @@ nav a, nav form{
     text-align: center;
     width: 600px;
 }
+
+/*Sign up and sign in form*/
 
 form.login, form.register{
     margin: 100px;
@@ -112,7 +116,6 @@ nav form input{
   height:350px;
 }
 
-
 .popup {
     position: fixed;
     height: 100vh;
@@ -150,6 +153,8 @@ nav form input{
   color:white;
   width:100%;
 }
+
+/*Color filter*/
 
 .color{
     display: flex;
