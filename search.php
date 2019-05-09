@@ -13,7 +13,24 @@
 	$previous = "javascript:history.go(-1)";
 	if(isset($_SERVER['HTTP_REFERER'])) {
     	$previous = $_SERVER['HTTP_REFERER'];
-	}
+    }
+
+    if(!empty($_GET["map"])){
+        $isMapActivated = $_GET["map"];
+        if($isMapActivated === "false"){
+            $valBtnMap = "View on map";
+            $isMapActivated = "true";
+        }
+        else if($isMapActivated === "true"){
+            $valBtnMap = "View default search";
+            $isMapActivated = "false";
+        }
+    }
+    //Default
+    else{
+        $isMapActivated = "false";
+        $valBtnMap = "View on map";
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +104,10 @@
         <?php require_once("nav.inc.php"); ?>
     </header>
     <main>
-        <button type="submit" class="btn__change__view" value="View on map">View on map</button>
+        <form method="get">
+            <input type="hidden" name="map" value="<?php echo $isMapActivated; ?>">
+            <input type="submit" class="btn__change__view" value="<?php echo $valBtnMap; ?>">
+        </form>
     </main>
     <section class="search">
         <div class="container searched">

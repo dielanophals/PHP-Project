@@ -1,17 +1,13 @@
 $( document ).ready(function() {
-	$(".search__map").toggle();
+	//Change it with ajax, due to refresh it blocks each other
 	$(".btn__change__view").click((e) => {
 		if($(".btn__change__view").val() === "View on map"){
 			$(".search").toggle();
 			$(".search__map").toggle();
-			$(".btn__change__view").val("View default search");
-			$(".btn__change__view").text("View default search");
 		}
-		else{
+		else if($(".btn__change__view").val() === "View default search"){
 			$(".search").toggle();
 			$(".search__map").toggle();
-			$(".btn__change__view").val("View on map");
-			$(".btn__change__view").text("View on map");
 		}
 	});
 
@@ -24,6 +20,7 @@ $( document ).ready(function() {
 	});
 	
 	//Ajax call om of alle posts te laten zien o.b.v. search, laat leeg en het toont alle posts
+	//Show it on the map without refresh
 	/*
 	$.ajax({
 		method: "GET",

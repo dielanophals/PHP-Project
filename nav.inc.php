@@ -4,6 +4,7 @@
     <a href="profile.php">Profile</a>
 
     <form action="search.php" method="get">
+      <input type="hidden" name="map" value="false">
       <input type="text" name="search" placeholder="Search">
       <input type="submit" name="submit" value="O">
     </form>
