@@ -195,7 +195,9 @@ class Post
             $statement = $conn->prepare("SELECT user_id FROM `likes_post` WHERE post_id = $postId AND active = '1'");
             $likes = $statement->execute();
         }
-        //add catch
+        catch(Throwable $t){
+            return false;
+        }
     }
 
     public function getUsersOfLikesOfPost($userId){
@@ -216,7 +218,7 @@ class Post
                 }*/
             //}
         }
-        catch{
+        catch(Throwable $t){
             return false;
         }
     }
