@@ -22,10 +22,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel = "stylesheet" type = "text/css" href = "css/reset.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "css/search.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/vendor/cssgram.min.css">
     <title>InstaPet - Search</title>
     <style>
+
+      body {
+        background: #ddd;
+      }
+
+      .container {
+        flex-flow: column wrap;
+      }
 
       a.post-image {
         text-decoration: none;
@@ -94,10 +103,11 @@
             $information = User::getUserInfo($s['user_id']);
             $name = $information['username'];
             ?>
+            <div class="container_post">
             <?php $time = User::timeAgo($s['timestamp']); ?>
 				<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
                     <div class="searchPost">
-                        <img class="post__img <?php echo $s['filter']; ?>" src="<?php echo $s["image"]; ?>">
+                        <div class="post__img" class="<?php echo $s['filter']; ?>  post__img" style="background-image: url('<?php echo $s['image']; ?>')"></div>
                         <p class="post__name"><?php echo $name; ?></p>
                         <p class="timeAgo"><?php echo $time; ?></p>
                     </div>
@@ -140,17 +150,15 @@
                     <a href="#" class="option--edit">Edit</a>
                     <form action="postEdit.php" method="POST" class="form--edit">
                       <input type="hidden" value="<?php echo $s['id']; ?>" name="file_id">
-                      <textarea name="descriptionEdit"><?php echo $s['description']; ?></textarea>
+                      <textarea name="descriptionEdit"><?php echo $s['description']; ?></textarea><br>
                       <input type="submit" name="update" value="Update">
                     </form>
                   </div>
                 </div>
               <?php endif; ?>
 
-            <?php
-          endforeach;
-        }
-        ?>
+            </div>
+          <?php endforeach; } ?>
       </div>
     </main>
 	<!--If there is a search for color X, show posts with the same color. -->
@@ -178,7 +186,7 @@
             $name = $information['username'];
           ?>
           <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
-					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
+					<div class="popup_img" class="<?php echo $p['filter']; ?>" style="background-image: url('<?php echo $p['image']; ?>')"></div>
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>

@@ -27,6 +27,10 @@
     <title>InstaPet - Feed</title>
     <style>
 
+      body {
+        background: #ddd;
+      }
+
       a.post-image {
         text-decoration: none;
       }
@@ -78,7 +82,7 @@
             <?php $time = User::timeAgo($v['timestamp']); ?>
                 <a class="post__full" href="?image=<?php echo $v["id"]; ?>">
                     <div id="<?php echo $v["id"]; ?>" class="post">
-                        <img class="post__img <?php echo $r['filter']; ?>" src="<?php echo $v["image"]; ?>">
+                        <div class="post__img" class="<?php echo $r['filter']; ?>  post__img" style="background-image: url('<?php echo $v['image']; ?>')"></div>
                         <p class="post__name"><?php echo $name; ?></p>
                         <p class="timeAgo"><?php echo $time; ?></p>
                     </div>
@@ -97,18 +101,18 @@
             $name = $information['username'];
           ?>
           <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
-					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
+					<div class="popup_img" class="<?php echo $p['filter']; ?>" style="background-image: url('<?php echo $p['image']; ?>')"></div>
 					<!--Show the colors of the image. -->
 					<div class="color">
-						<?php $c = Color::getColors($p['id']); ?>
-                        <!--Loop through all colors to display them from highest value to lowest.-->
-                        <?php foreach($c as $key => $value): ?>
-                            <!--Only show found colors.-->
-                            <?php if($value != 0): ?>
-                                <a href="search.php?color=<?php echo $key?>">
-                                    <div class="color__item color__item--<?php echo $key; ?>"></div>
-                                </a>
-                            <?php endif; ?>
+				  	<?php $c = Color::getColors($p['id']); ?>
+              <!--Loop through all colors to display them from highest value to lowest.-->
+              <?php foreach($c as $key => $value): ?>
+                <!--Only show found colors.-->
+                <?php if($value != 0): ?>
+                  <a href="search.php?color=<?php echo $key?>">
+                    <div class="color__item color__item--<?php echo $key; ?>"></div>
+                  </a>
+                <?php endif; ?>
 						<?php endforeach; ?>
 					</div>
 					<p><?php echo $p['description']; ?></p>
@@ -146,7 +150,7 @@
                     <a href="#" class="option--edit">Edit</a>
                     <form action="postEdit.php" method="POST" class="form--edit">
                       <input type="hidden" value="<?php echo $v['id']; ?>" name="file_id">
-                      <textarea name="descriptionEdit"><?php echo $v['description']; ?></textarea>
+                      <textarea name="descriptionEdit"><?php echo $v['description']; ?></textarea><br>
                       <input type="submit" name="update" value="Update">
                     </form>
                   </div>
