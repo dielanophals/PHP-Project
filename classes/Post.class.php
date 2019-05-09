@@ -187,4 +187,17 @@ class Post
             return false;
         }
     }
+
+    public function getLikesOfPost($postId)
+    {
+        try{
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT user_id FROM `likes_post` WHERE post_id = $postId AND active = '1'");
+            $likes = $statement->execute();
+
+            foreach($likes as $like){
+                
+            }
+        }
+    }
 }
