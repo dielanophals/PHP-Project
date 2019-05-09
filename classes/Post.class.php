@@ -206,13 +206,15 @@ class Post
             $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = $userId AND active = '1'");
             $users = $statement->execute();
 
-            foreach($likes as $key => $value){
-                if(is_array($list)){
+            var_dump($users);
+
+            //foreach($users as $key => $value){
+                /*if(is_array($list)){
                     if($value !== $userId){
                         //array_push($listOfIds, $value);
                     }
-                }
-            }
+                }*/
+            //}
         }
         catch{
             return false;
