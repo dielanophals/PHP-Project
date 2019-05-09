@@ -90,14 +90,6 @@ nav form input{
     right: 10px;
 }
 
-.btn__change__view{
-    background-color : #31B0D5;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    border-color: #46b8da;
-}
-
 .search .container{
   background-color: rgba(148, 148, 148, 0.1);
   border-radius: 10px;
@@ -253,6 +245,21 @@ p.timeAgo {
   text-decoration: none;
   padding-bottom: 20px;
   display: block;
+}
+
+/*Button on search page*/
+
+.btn__change__view{
+    display: block;
+    position: absolute;
+    right: 1em;
+    margin-top: 1em;
+    background-color : white;
+    z-index: 5;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 5px solid #46b8da;
 }
 
 @media only screen and (min-width: 600px) {

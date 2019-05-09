@@ -188,7 +188,7 @@
     </section>
     <!--Image map-->
     <section class="search__map" style="display:<?php echo $isMapSearch; ?>;">
-        <div id='map' style="width: 100vw; height: 80vh;"></div>
+        <div id='map' style="width: 100vw; height: 100vh;"></div>
     </section>
 	<!--If there is a search for color X, show posts with the same color. -->
     <?php if(!empty($_GET['color'])): ?>
