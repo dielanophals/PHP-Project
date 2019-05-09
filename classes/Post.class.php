@@ -194,10 +194,28 @@ class Post
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT user_id FROM `likes_post` WHERE post_id = $postId AND active = '1'");
             $likes = $statement->execute();
+        }
+        //add catch
+    }
 
-            foreach($likes as $like){
-                
+    public function getUsersOfLikesOfPost($userId){
+        try{
+            $allUsers = array();
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = $userId AND active = '1'");
+            $users = $statement->execute();
+
+            foreach($likes as $key => $value){
+                if(is_array($list)){
+                    if($value !== $userId){
+                        //array_push($listOfIds, $value);
+                    }
+                }
             }
+        }
+        catch{
+            return false;
         }
     }
 }
