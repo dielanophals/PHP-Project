@@ -122,7 +122,7 @@
 
                 date_default_timezone_set('Europe/Brussels');
                 $timestamp = date('Y-m-d H:i:s');
-                $statement = $conn->prepare('INSERT INTO users (firstname, lastname, username, email, password, timestamp) VALUES (:firstname, :lastname, :username, :email, :password, :timestamp)');
+                $statement = $conn->prepare('INSERT INTO users (firstname, lastname, username, email, password, timestamp, active) VALUES (:firstname, :lastname, :username, :email, :password, :timestamp, 1)');
                 $statement->bindParam(':firstname', $this->firstname);
                 $statement->bindParam(':lastname', $this->lastname);
                 $statement->bindParam(':username', $this->username);
