@@ -8,7 +8,8 @@
 
     if (!empty($_POST)) {
         $imagePost = $_FILES['fileToUpload'];
-        $description = htmlspecialchars($_POST['description']);
+		$description = htmlspecialchars($_POST['description']);
+		$filter = $_POST['filter'];
         if (empty($description)) {
             $feedback = 'Please add a description.';
         } else {
@@ -23,7 +24,7 @@
                     if ($post->fileExists() === false) {
                         $feedback = 'Sorry, this file already exists. Please try again.';
                     } else {
-                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID']);
+                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
                         $post = Post::getLastInsertedId();
                         foreach ($post as $p) {
                             $id = $p['id'];
@@ -48,6 +49,7 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/vendor/cssgram.min.css">
     <title>InstaPet - Profile</title>
     <style>
 
@@ -61,7 +63,15 @@
 
       .searchPost {
         margin-bottom: 20px;
-      }
+	  }
+	  
+	  .previewImg {
+		margin-top: 20px;
+		width: 200px;
+		height: auto;
+		background: white;
+		padding: 20px;  
+	  }
 
       .likes {
         display: flex;
@@ -108,12 +118,11 @@
 			<?php foreach (User::getUserPosts($_SESSION['userID']) as $p): ?>
 				<?php $time = User::timeAgo($p['timestamp']); ?>
 				<a class="post__full" href="?image=<?php echo $p['id']; ?>">
-					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
-						<img src="<?php echo $p['image']; ?>">
-            <p class="timeAgo"><?php echo $time; ?></p>
+					<div class="userPosts">
+						<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
+            			<p class="timeAgo"><?php echo $time; ?></p>
 					</div>
 				</a>
-			<?php endforeach; ?>
 			<div class="likes">
 				<?php $like = Post::like($_SESSION['userID'], $p['id']); ?>
 
@@ -155,6 +164,7 @@
 					</div>
 				</div>
 			<?php endif; ?>
+		<?php endforeach; ?>
     </div>
 	</main>
     <!--Pop up sceen-->
@@ -163,7 +173,7 @@
 		<?php foreach ($post->showImage($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
-					<img src="<?php echo $p['image']; ?>">
+					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>
@@ -188,12 +198,43 @@
         ?>
 	<div class="popup">
         <div class="imageUpload">
-        	<form action="#" method="post" enctype="multipart/form-data">
+        	<form action="#" method="post" enctype="multipart/form-data" id="uploadForm">
             	<label for="fileToUpload">Select image to upload:</label>
 				<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 				<label for="description">Description:</label>
 				<input type="text" name="description" id="description" required><br><br>
 				<input type="submit" value="Upload Image" name="submit">
+				<label for="filter">Filter</label>
+				<select name="filter" id="filter">
+					<option value="" selected>Select filter...</option>
+					<option value="1977">1977</option>
+					<option value="aden">aden</option>
+					<option value="brannan">brannan</option>
+					<option value="brooklyn">brooklyn</option>
+					<option value="clarendon">clarendon</option>
+					<option value="earlybird">earlybird</option>
+					<option value="gingham">gingham</option>
+					<option value="hudson">hudson</option>
+					<option value="inkwell">inkwell</option>
+					<option value="kelvin">kelvin</option>
+					<option value="lark">lark</option>
+					<option value="lofi">lofi</option>
+					<option value="maven">maven</option>
+					<option value="mayfair">mayfair</option>
+					<option value="moon">moon</option>
+					<option value="nashville">nashville</option>
+					<option value="perpetua">perpetua</option>
+					<option value="reyes">reyes</option>
+					<option value="rise">rise</option>
+					<option value="slumber">slumber</option>
+					<option value="stinson">stinson</option>
+					<option value="toaster">toaster</option>
+					<option value="valencia">valencia</option>
+					<option value="walden">walden</option>
+					<option value="willow">willow</option>
+					<option value="xpro2">xpro2</option>
+				</select>
+				<div id="filter1977" style="width: 450px; height: 450px; background:red;display:none"><div>
           	</form>
         	<?php
                 if (isset($feedback)) {
@@ -208,5 +249,6 @@
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
+	<script src="js/preview.js"></script>
 </body>
 </html>

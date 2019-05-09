@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 29, 2019 at 07:05 AM
+-- Generation Time: May 02, 2019 at 02:48 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -152,8 +152,8 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user1_id` (`user1_id`) USING BTREE,
-  ADD UNIQUE KEY `user2_id` (`user2_id`);
+  ADD KEY `user1_id` (`user1_id`) USING BTREE,
+  ADD KEY `user2_id` (`user2_id`) USING BTREE;
 
 --
 -- Indexes for table `likes_comments`

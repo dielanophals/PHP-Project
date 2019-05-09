@@ -65,15 +65,16 @@ class Post
         return $target_file;
     }
 
-    public function insertIntoDB($filePath, $des, $userID)
+    public function insertIntoDB($filePath, $des, $userID, $filter)
     {
         try {
             date_default_timezone_set('Europe/Brussels');
             $timestamp = date('Y-m-d H:i:s');
             $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, active) VALUES ('$userID', :path, :des, '$timestamp', 1)");
+            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, filter, active) VALUES ('$userID', :path, :des, '$timestamp', :filter, 1)");
             $statement->bindParam(':path', $filePath);
             $statement->bindParam(':des', $des);
+            $statement->bindParam(':filter', $filter);
             $statement->execute();
         } catch (Throwable $t) {
             return false;
