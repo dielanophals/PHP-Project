@@ -1,8 +1,7 @@
 $( document ).ready(function() {
+    //Variables
+    var markers = Array();
     //Change it with ajax, due to refresh it blocks each other
-	$(".btn__change__view").click((e) => {
-        //show map?
-	});
 
 	//Mapbox - map visualisatie
 	mapboxgl.accessToken = 'pk.eyJ1IjoicjA3MDI0NjUiLCJhIjoiY2p2NnNodnYwMDNydzRkbHZ0bnM0aTQ3aCJ9.aoZTpRItL6OIKxqjC38EWg';
@@ -23,17 +22,35 @@ $( document ).ready(function() {
 	.done(function(res) {
 		if(res.status = "success"){
 			//When ajax is succesful select all images on the map using a marker and popup and extra popup
-		}
+            markers.foreach(function(marker)){
+                var popup = new mapboxgl.Popup({closeOnClick: false})
+                .setHTML(
+                    //Change href due to missing db information
+                    //Change source of image
+                    //Change description (p)
+                    //Change timeago (p)
+                    '<a class="post__full" href="?image="2">' +
+                        '<div class="searchPost">' +
+                            '<img class="post__img" src="https://placeimg.com/200/200/any">' +
+                            '<p class="post__name">Test</p>' +
+                            '<p class="timeAgo"></p>' +
+                        '</div>' +
+                    '</a>'
+                )
+        
+                new mapboxgl.Marker()
+                    .setLngLat([30.5, 50.5])
+                    .setPopup(popup)
+                    .addTo(map); 
+            }
+        }
 	});
 
 	e.preventDefault();*/
 
+    //Delete code below due to being implemented in foreach loop
 	var popup = new mapboxgl.Popup({closeOnClick: false})
 		.setHTML(
-            //Change href due to missing db information
-            //Change source of image
-            //Change description (p)
-            //Change timeago (p)
 			'<a class="post__full" href="search.php?search=dog&map=true&image=2>' +
 				'<div class="searchPost">' +
 					'<img class="post__img" src="https://placeimg.com/200/200/any">' +
@@ -48,7 +65,6 @@ $( document ).ready(function() {
 	  .setPopup(popup)
 	  .addTo(map); 
 
-    //Delete code below due to being implemented in foreach loop
 	var popup1 = new mapboxgl.Popup({closeOnClick: false})
 	.setHTML(
 		'<a class="post__full" href="?image="2">' +
