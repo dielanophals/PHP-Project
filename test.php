@@ -86,9 +86,9 @@
     </header>
 
     <?php
-    $user = new User();
+    Post::getLikesOfPost(2);
+    Post::getUsersOfLikesOfPost(2);
     ?>
-getUsersOfLikesOfPost
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 <script src="js/like.js"></script>

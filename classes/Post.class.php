@@ -188,35 +188,29 @@ class Post
         }
     }
 
-    public function getLikesOfPost($postId)
+    public static function getLikesOfPost($postId)
     {
         try{
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT user_id FROM `likes_post` WHERE post_id = $postId AND active = '1'");
-            $likes = $statement->execute();
+            $statement->execute();
+            $likes = $statement->fetch(PDO::FETCH_ASSOC);
         }
         catch(Throwable $t){
             return false;
         }
     }
 
-    public function getUsersOfLikesOfPost($userId){
+    public static function getUsersOfLikesOfPost($userId){
         try{
-            $allUsers = array();
-
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = $userId AND active = '1'");
-            $users = $statement->execute();
+            $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = $userId AND active = 1");
+            $statement->execute();
+            $users = $statement->fetch(PDO::FETCH_ASSOC);
+
+            //$allUsers = array();
 
             var_dump($users);
-
-            //foreach($users as $key => $value){
-                /*if(is_array($list)){
-                    if($value !== $userId){
-                        //array_push($listOfIds, $value);
-                    }
-                }*/
-            //}
         }
         catch(Throwable $t){
             return false;
