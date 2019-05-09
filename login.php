@@ -25,8 +25,9 @@
 
             //Check if user can log in.
             if($isLogged){
-                Session::create();
-                $_SESSION['userID'] = $u->userID();
+                $u->setEmail($email);
+                $userId = $u->getUserId();
+                Session::create($userId);
                 header("Location: index.php");
             }
             //Unable to log in.

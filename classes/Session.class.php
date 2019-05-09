@@ -5,10 +5,9 @@
             return session_start();
         }
 
-        public static function create(){
-            $randomId = uniqid();
+        public static function create($id){
             self::start();
-            $_SESSION["userID"] = $randomId;
+            $_SESSION["userID"] = $id;
         }
 
         public static function check(){
