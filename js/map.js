@@ -1,6 +1,5 @@
 $( document ).ready(function() {
     var markers = Array();
-    //Change it with ajax, due to refresh it blocks each other
 
 	//Mapbox - map visualisatie
 	mapboxgl.accessToken = 'pk.eyJ1IjoicjA3MDI0NjUiLCJhIjoiY2p2NnNodnYwMDNydzRkbHZ0bnM0aTQ3aCJ9.aoZTpRItL6OIKxqjC38EWg';
@@ -9,10 +8,15 @@ $( document ).ready(function() {
         style: 'mapbox://styles/mapbox/streets-v11',
 		center: [51.0, 4.4]
 	});
-	
+    
     /*
-    Ajax call om of alle posts te laten zien o.b.v. search, laat leeg en het toont alle posts
+        Get posts by search and place them with a marker on the map.
+        The marker is placed based on longitude and latitude.
+        When you click on a marker, a popup is shown of the image.
+        When you click on an image, you see the details of te post.
+    */
 
+    /*
 	$.ajax({
 		method: "GET",
 		url: "ajax/imageMap.php",
