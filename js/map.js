@@ -1,7 +1,6 @@
 $( document ).ready(function() {
 	$(".search__map").toggle();
 	$(".btn__change__view").click((e) => {
-		console.log("klik");
 		if($(".btn__change__view").val() === "View on map"){
 			$(".search").toggle();
 			$(".search__map").toggle();
@@ -25,6 +24,7 @@ $( document ).ready(function() {
 	});
 	
 	//Ajax call om of alle posts te laten zien o.b.v. search, laat leeg en het toont alle posts
+	/*
 	$.ajax({
 		method: "GET",
 		url: "ajax/imageMap.php",
@@ -35,12 +35,31 @@ $( document ).ready(function() {
 			//Maak o.b.v. de locatie een marker + popup
 			//Loop door alle posts
 		}
-	});
+	});*/
 
-	e.preventDefault();
+	//e.preventDefault();
 
 	var popup = new mapboxgl.Popup({closeOnClick: false})
-		.setText('Construction on the Washington Monument began in 1848.');
+	/*
+		<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
+            <div class="searchPost">
+        	    <img class="post__img" src="<?php echo $s["image"]; ?>">
+                <p class="post__name"><?php echo $name; ?></p>
+				<p class="timeAgo"><?php echo $time; ?></p>
+		    </div>
+        </a>
+	*/
+
+	//Popup fix
+		.setHTML(
+			'<a class="post__full" href="?image="2">' +
+				'<div class="searchPost">' +
+					'<img class="post__img" src="https://placeimg.com/200/200/any">' +
+					'<p class="post__name">Test</p>' +
+					'<p class="timeAgo"></p>' +
+				'</div>' +
+			'</a>'
+		)
 	
 	new mapboxgl.Marker()
 	  .setLngLat([50.5, 30.5])
