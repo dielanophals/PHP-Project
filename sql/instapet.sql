@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 09, 2019 at 06:06 PM
--- Server version: 5.6.34-log
--- PHP Version: 7.1.5
+-- Host: 127.0.0.1
+-- Gegenereerd op: 11 mei 2019 om 16:59
+-- Serverversie: 10.1.38-MariaDB
+-- PHP-versie: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `instapet`
+-- Database: `testddd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Tabelstructuur voor tabel `comments`
 --
 
 CREATE TABLE `comments` (
@@ -40,7 +40,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friends`
+-- Tabelstructuur voor tabel `friends`
 --
 
 CREATE TABLE `friends` (
@@ -54,7 +54,7 @@ CREATE TABLE `friends` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likes_comments`
+-- Tabelstructuur voor tabel `likes_comments`
 --
 
 CREATE TABLE `likes_comments` (
@@ -68,7 +68,7 @@ CREATE TABLE `likes_comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likes_post`
+-- Tabelstructuur voor tabel `likes_post`
 --
 
 CREATE TABLE `likes_post` (
@@ -82,7 +82,7 @@ CREATE TABLE `likes_post` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Tabelstructuur voor tabel `posts`
 --
 
 CREATE TABLE `posts` (
@@ -91,6 +91,9 @@ CREATE TABLE `posts` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `filter` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `timestamp` datetime NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -98,7 +101,7 @@ CREATE TABLE `posts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts_color`
+-- Tabelstructuur voor tabel `posts_color`
 --
 
 CREATE TABLE `posts_color` (
@@ -119,10 +122,47 @@ CREATE TABLE `posts_color` (
   `active` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `posts_color`
+--
+
+INSERT INTO `posts_color` (`id`, `posts_id`, `red`, `orange`, `yellow`, `green`, `turquoise`, `blue`, `purple`, `pink`, `white`, `gray`, `black`, `brown`, `active`) VALUES
+(1, 1, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(2, 2, 0, 3, 0, 5, 0, 0, 3, 15, 25, 38, 3, 10, 1),
+(3, 3, 18, 4, 0, 0, 0, 0, 4, 0, 0, 0, 59, 14, 1),
+(4, 4, 18, 4, 0, 0, 0, 0, 4, 0, 0, 0, 59, 14, 1),
+(5, 5, 0, 0, 0, 0, 3, 0, 3, 0, 0, 48, 48, 0, 1),
+(6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 80, 10, 1),
+(7, 7, 0, 5, 0, 0, 0, 0, 0, 15, 5, 60, 5, 10, 1),
+(8, 8, 0, 0, 0, 6, 0, 9, 0, 0, 0, 38, 47, 0, 1),
+(9, 9, 6, 38, 3, 0, 13, 6, 0, 6, 0, 6, 0, 22, 1),
+(10, 10, 0, 0, 0, 0, 7, 82, 4, 4, 0, 0, 4, 0, 1),
+(11, 11, 0, 0, 0, 6, 0, 9, 0, 0, 0, 38, 47, 0, 1),
+(12, 12, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(13, 13, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(14, 14, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(15, 15, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(16, 16, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(17, 17, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(18, 18, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(19, 19, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(20, 20, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(21, 21, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(22, 22, 0, 44, 0, 3, 0, 0, 3, 6, 3, 16, 3, 22, 1),
+(23, 23, 0, 14, 0, 14, 0, 0, 0, 9, 6, 9, 14, 34, 1),
+(24, 23, 0, 14, 0, 14, 0, 0, 0, 9, 6, 9, 14, 34, 1),
+(25, 23, 0, 14, 0, 14, 0, 0, 0, 9, 6, 9, 14, 34, 1),
+(26, 23, 0, 14, 0, 14, 0, 0, 0, 9, 6, 9, 14, 34, 1),
+(27, 23, 0, 14, 0, 14, 0, 0, 0, 9, 6, 9, 14, 34, 1),
+(28, 23, 0, 14, 0, 14, 0, 0, 0, 9, 6, 9, 14, 34, 1),
+(29, 24, 0, 5, 0, 0, 0, 0, 0, 15, 5, 60, 5, 10, 1),
+(30, 26, 0, 0, 0, 0, 0, 3, 0, 0, 0, 10, 88, 0, 1),
+(31, 27, 0, 0, 0, 0, 0, 3, 0, 0, 0, 10, 88, 0, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -139,17 +179,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `comments`
+-- Indexen voor tabel `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `friends`
+-- Indexen voor tabel `friends`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`),
@@ -157,80 +197,87 @@ ALTER TABLE `friends`
   ADD KEY `user2_id` (`user2_id`) USING BTREE;
 
 --
--- Indexes for table `likes_comments`
+-- Indexen voor tabel `likes_comments`
 --
 ALTER TABLE `likes_comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `likes_post`
+-- Indexen voor tabel `likes_post`
 --
 ALTER TABLE `likes_post`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `posts`
+-- Indexen voor tabel `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `posts_color`
+-- Indexen voor tabel `posts_color`
 --
 ALTER TABLE `posts_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `friends`
+-- AUTO_INCREMENT voor een tabel `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `likes_comments`
+-- AUTO_INCREMENT voor een tabel `likes_comments`
 --
 ALTER TABLE `likes_comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `likes_post`
+-- AUTO_INCREMENT voor een tabel `likes_post`
 --
 ALTER TABLE `likes_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
 --
--- AUTO_INCREMENT for table `posts_color`
+-- AUTO_INCREMENT voor een tabel `posts_color`
 --
 ALTER TABLE `posts_color`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `friends`
+-- Beperkingen voor tabel `friends`
 --
 ALTER TABLE `friends`
   ADD CONSTRAINT `user1_foreign_key` FOREIGN KEY (`user1_id`) REFERENCES `users` (`id`),
