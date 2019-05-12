@@ -374,6 +374,28 @@ input[name="update"]:hover {
     border: 5px solid #46b8da;
 }
 
+.likes__users--names{
+    display: none;
+    position: absolute;
+    margin-bottom: 5em;
+    background-color: #f9f9f9;
+    /*min-width: 5em;*/
+    max-width: 15em;
+    max-height: 5em;
+    overflow-y: scroll;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5%;
+    z-index: 1;
+}
+
+.likes__users:hover .likes__users--names{
+    display: block;
+}
+
+.likes-count p{
+    text-decoration: underline;
+}
+
 @media only screen and (min-width: 600px) {
     nav a, nav form{
         flex-flow: row wrap;
