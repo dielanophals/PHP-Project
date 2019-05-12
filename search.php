@@ -193,10 +193,10 @@
 		<?php foreach($post->getPostById($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
-		  <?php
-			$information = User::getUserInfo($p['user_id']);
-			$name = $information['username'];
-		  ?>
+			<?php
+				$information = User::getUserInfo($p['user_id']);
+				$name = $information['username'];
+			?>
 		  <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
 					<div class="popup_img" class="<?php echo $p['filter']; ?>" style="background-image: url('<?php echo $p['image']; ?>')"></div>
 					<!--Show the colors of the image. -->
