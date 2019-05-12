@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 29, 2019 at 07:05 AM
+-- Generation Time: May 12, 2019 at 02:48 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -89,7 +89,11 @@ CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filter` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `timestamp` datetime NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -152,8 +156,8 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user1_id` (`user1_id`) USING BTREE,
-  ADD UNIQUE KEY `user2_id` (`user2_id`);
+  ADD KEY `user1_id` (`user1_id`) USING BTREE,
+  ADD KEY `user2_id` (`user2_id`) USING BTREE;
 
 --
 -- Indexes for table `likes_comments`

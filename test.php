@@ -86,63 +86,14 @@
     </header>
 
     <?php
-$api_key = "e2d2e2e24294fe4b91a4ed0d521d2539";
-$freegeoipjson = file_get_contents("http://api.ipstack.com/193.191.150.3?access_key=e2d2e2e24294fe4b91a4ed0d521d2539");
+      $api_key = "e2d2e2e24294fe4b91a4ed0d521d2539";
+      $freegeoipjson = file_get_contents("http://api.ipstack.com/193.191.150.3?access_key=e2d2e2e24294fe4b91a4ed0d521d2539");
+      $jsondata = json_decode($freegeoipjson);
 
-$jsondata = json_decode($freegeoipjson);
-
-$countryfromip = $jsondata->country_name;
-$cityfromip = $jsondata->city;
-
-echo "City: ". $cityfromip ."";
-echo "<br/>";
-echo "Country: ". $countryfromip ."";
-?>
-	<!--If there is a search for color X, show posts with the same color. -->
-    <?php if(!empty($_GET['color'])): ?>
-		<?php $posts = Color::searchPostsByColor($_GET['color']); ?>
-		<?php foreach($posts as $post): ?>
-			<?php $result = Post::getPostById($post["posts_id"]);?>
-			<?php foreach($result as $r):?>
-				<a href="?image=<?php echo $r["id"]; ?>">
-                    <div id="<?php echo $r["id"]; ?>" class="post">
-                		<img class="post__img" src="<?php echo $r["image"]; ?>">
-					</div>
-                </a>
-			<?php endforeach; ?>
-		<?php endforeach; ?>
-	<?php endif; ?>
-	<!--Pop up sceen-->
-	<?php if(!empty($_GET['image'])): ?>
-		<?php $post = new Post(); $post->showImage($_GET['image']);?>
-		<?php foreach($post->showImage($_GET['image']) as $p): ?>
-			<div class="popup">
-				<div class="post">
-          <?php
-            $information = User::getUserInfo($p['user_id']);
-            $name = $information['firstname'] . ' ' . $information ['lastname'];
-          ?>
-          <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
-					<img src="<?php echo $p['image']; ?>">
-					<!--Show the colors of the image. -->
-					<div class="color">
-						<?php $c = Color::getColors($p['id']); ?>
-                        <!--Loop through all colors to display them from highest value to lowest.-->
-                        <?php foreach($c as $key => $value): ?>
-                            <!--Only show found colors.-->
-                            <?php if($value != 0): ?>
-                                <a href="search.php?search=0&color=<?php echo $key?>">
-                                    <div class="color__item color__item--<?php echo $key; ?>"></div>
-                                </a>
-                            <?php endif; ?>
-						<?php endforeach; ?>
-					</div>
-					<p><?php echo $p['description']; ?></p>
-				</div>
-				<a href="<?php echo $previous; ?>" class="close">X</a>';
-			</div>
-		<?php endforeach; ?>
-	<?php endif; ?>
+      echo $cityfromip = $jsondata->city;
+      echo $lat = $jsondata->latitude;
+      echo $long = $jsondata->longitude;
+    ?>
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 <script src="js/like.js"></script>
