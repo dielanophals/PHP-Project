@@ -112,16 +112,6 @@ class Post
         }
     }
 
-    public function showImage($imageID)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE id = '$imageID'");
-        $statement->execute();
-        $image = $statement->fetchAll();
-
-        return $image;
-    }
-
     public function getSearchPosts($search)
     {
         try {
@@ -131,20 +121,6 @@ class Post
             $posts = $statement->fetchAll();
 
             return $posts;
-        } catch (Throwable $t) {
-            return false;
-        }
-    }
-
-    public static function getLastInsertedId()
-    {
-        try {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare('SELECT * FROM posts ORDER BY id DESC LIMIT 0, 1');
-            $statement->execute();
-            $post = $statement->fetchAll();
-
-            return $post;
         } catch (Throwable $t) {
             return false;
         }
