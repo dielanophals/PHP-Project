@@ -1,5 +1,18 @@
 $( document ).ready(function() {
+	$(".search__map").toggle();
 	$(".btn__change__view").click((e) => {
+		if($(".btn__change__view").html() === "View default search"){
+			$(".btn__change__view").html("View on map");
+			$(".search").toggle();
+			$(".search__map").toggle();
+		}
+		else if($(".btn__change__view").html() === "View on map"){
+			$(".btn__change__view").html("View default search");
+			$(".search").toggle();
+			$(".search__map").toggle();
+		}
+
+		/*
 		var markers = Array();
 
 		//Mapbox - map visualisatie
@@ -17,11 +30,11 @@ $( document ).ready(function() {
 			When you click on an image, you see the details of te post.
 		*/
 	
-	
+	/*
 		$.ajax({
 			method: "GET",
 			url: "ajax/map.php",
-			data: {"searchBy": search}, datatype: 'json'
+			data: {"search": search}, datatype: 'json'
 		})
 		.done(function(res) {
 			if(res.status = "success"){
@@ -47,10 +60,11 @@ $( document ).ready(function() {
 						.setPopup(popup)
 						.addTo(map); 
 				});*/
+				/*
 				console.log(success);
 			}
 		});
 	
-		e.preventDefault();
+		e.preventDefault();*/
 	});
-});
+})

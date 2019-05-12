@@ -14,32 +14,6 @@
 	if(isset($_SERVER['HTTP_REFERER'])) {
 		$previous = $_SERVER['HTTP_REFERER'];
 	}
-
-	//Get the user choses a map or the default search
-	if(!empty($_GET["map"])){
-		$isMapActivated = $_GET["map"];
-		if($isMapActivated === "false"){
-			$valBtnMap = "View on map";
-			$isMapActivated = "true";
-
-			//Display the current choice of the user
-			$isDefaultSearch = "flex";
-			$isMapSearch = "none";
-		}
-		else if($isMapActivated === "true"){
-			$valBtnMap = "View default search";
-			$isMapActivated = "false";
-
-			//Display the current choice of the user
-			$isDefaultSearch = "none";
-			$isMapSearch = "block";
-		}
-	}
-	//Default
-	else{
-		$isMapActivated = "false";
-		$valBtnMap = "View on map";
-	}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,12 +97,9 @@
 		<?php require_once("nav.inc.php"); ?>
 	</header>
 	<main>
-		<form method="GET">
-			<input type="hidden" name="map" value="<?php echo $isMapActivated; ?>">
-			<input type="submit" class="btn__change__view" value="<?php echo $valBtnMap; ?>">
-		</form>
+		<button class="btn__change__view">View on map</button>
 	</main>
-	<section class="search" style="display:<?php echo $isDefaultSearch; ?>;">
+	<section class="search">
 		<div class="container searched">
 	  		<?php if(!empty($search)): ?>
 	  			<?php $searchPosts = new Post();?>

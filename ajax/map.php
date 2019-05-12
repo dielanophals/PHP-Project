@@ -10,7 +10,7 @@
 
             $result = [
                 "status" => "success",
-                "result" => $search
+                "result" => $posts
             ];
         }
         catch(Throwable $t){
