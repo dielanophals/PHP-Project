@@ -132,8 +132,8 @@
 	</main>
     <!--Pop up sceen-->
     <?php if(!empty($_GET['image'])): ?>
-		<?php $post = new Post(); $post->showImage($_GET['image']);?>
-		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+		<?php $post = new Post(); $post->getPostById($_GET['image']);?>
+		<?php foreach($post->getPostById($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
 					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>

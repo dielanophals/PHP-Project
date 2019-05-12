@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2019 at 06:06 PM
+-- Generation Time: May 12, 2019 at 02:48 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -91,6 +91,9 @@ CREATE TABLE `posts` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `filter` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `timestamp` datetime NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

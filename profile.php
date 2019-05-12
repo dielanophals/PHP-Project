@@ -24,13 +24,8 @@
                     if ($post->fileExists() === false) {
                         $feedback = 'Sorry, this file already exists. Please try again.';
                     } else {
-                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
-                        $post = Post::getLastInsertedId();
-                        foreach ($post as $p) {
-                            $id = $p['id'];
-                            $arrColor = Color::findColors($p['image']);
-                            Color::insertIntoDB($id, $arrColor);
-                        }
+                        $post->getLocation();
+						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
                         $feedback = 'File has been uploaded.';
                         header('Location: profile.php');
                     }
@@ -171,8 +166,8 @@
 	</main>
     <!--Pop up sceen-->
     <?php if (!empty($_GET['image'])): ?>
-		<?php $post = new Post(); $post->showImage($_GET['image']); ?>
-		<?php foreach ($post->showImage($_GET['image']) as $p): ?>
+		<?php $post = new Post(); $post->getPostById($_GET['image']); ?>
+		<?php foreach ($post->getPostById($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
 					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">

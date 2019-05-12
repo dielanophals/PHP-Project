@@ -22,6 +22,8 @@
         else{
             $u = new User();
             $isLogged = $u->login($email, $password);
+            $u->setEmail($email);
+            $id = $u->getUserID();
 
             //Check if user can log in.
             if($isLogged){

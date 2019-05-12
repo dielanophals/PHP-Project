@@ -5,6 +5,9 @@ class Post
     protected $newDirectory;
     protected $targetFile;
     protected $randomString;
+    private $lat;
+    private $long;
+    private $city;
 
     public function checkType($imagePost)
     {
@@ -65,17 +68,32 @@ class Post
         return $target_file;
     }
 
-    public function insertIntoDB($filePath, $des, $userID, $filter)
+    public function getLocation(){
+        $api_key = "e2d2e2e24294fe4b91a4ed0d521d2539";
+        $freegeoipjson = file_get_contents("http://api.ipstack.com/193.191.150.3?access_key=e2d2e2e24294fe4b91a4ed0d521d2539");
+        $jsondata = json_decode($freegeoipjson);
+
+        $this->city = $jsondata->city;
+        $this->lat = $jsondata->latitude;
+        $this->long = $jsondata->longitude;
+    }
+
+    public function insertIntoDB($filePath, $des, $userId, $filter)
     {
         try {
             date_default_timezone_set('Europe/Brussels');
             $timestamp = date('Y-m-d H:i:s');
             $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, timestamp, filter, active) VALUES ('$userID', :path, :des, '$timestamp', :filter, 1)");
+            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, latitude, longitude, city, timestamp, filter, active) VALUES ('$userId', :path, :des, '$this->lat', '$this->long', '$this->city','$timestamp', :filter, 1)");
             $statement->bindParam(':path', $filePath);
             $statement->bindParam(':des', $des);
             $statement->bindParam(':filter', $filter);
             $statement->execute();
+
+            //Insert color in db
+            $postId = $this->getPreviouslyInsertedPostId($timestamp, $userId);
+            $arrColor = Color::findColors($filePath);
+            Color::insertIntoDB($postId, $arrColor);
         } catch (Throwable $t) {
             return false;
         }
@@ -94,17 +112,7 @@ class Post
         }
     }
 
-    public function showImage($imageID)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE id = '$imageID'");
-        $statement->execute();
-        $image = $statement->fetchAll();
-
-        return $image;
-    }
-
-    public function getSearchPosts($search)
+    public static function getSearchPosts($search)
     {
         try {
             $conn = Db::getInstance();
@@ -118,16 +126,18 @@ class Post
         }
     }
 
-    public static function getLastInsertedId()
-    {
-        try {
+    public function getPreviouslyInsertedPostId($timestamp, $userId){
+        try{
             $conn = Db::getInstance();
-            $statement = $conn->prepare('SELECT * FROM posts ORDER BY id DESC LIMIT 0, 1');
+            $statement = $conn->prepare("SELECT id FROM `posts` WHERE `timestamp` = :timestamp AND `user_id` = :id");
+            $statement->bindParam(':timestamp', $timestamp);
+            $statement->bindParam(':id', $userId);
             $statement->execute();
-            $post = $statement->fetchAll();
-
-            return $post;
-        } catch (Throwable $t) {
+            $postId = $statement->fetch(PDO::FETCH_ASSOC);
+            $postId = intval($postId["id"]);
+            return $postId;
+        }
+        catch(Throwable $t){
             return false;
         }
     }
@@ -139,7 +149,6 @@ class Post
             $statement = $conn->prepare("SELECT * FROM `posts` WHERE `id` = $id");
             $statement->execute();
             $result = $statement->fetchAll();
-
             return $result;
         } catch (Trowable $t) {
             return false;

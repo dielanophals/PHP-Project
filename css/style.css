@@ -6,6 +6,8 @@ body{
     font-family: 'Quicksand', sans-serif;
 }
 
+/*Navigation*/
+
 nav{
     display: flex;
     background: #000;
@@ -23,6 +25,8 @@ nav a, nav form{
     text-align: center;
     width: 600px;
 }
+
+/*Sign up and sign in form*/
 
 form.login, form.register{
     margin: 100px;
@@ -77,6 +81,17 @@ nav form input{
     top: 7px;
 }
 
+.container_post {
+    width: 350px;
+    position: relative;
+    /* overflow: hidden; */
+    background: #eeeeee;
+    padding: 30px 0 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 60px;
+}
+
 .loadmore {
     background-color : #31B0D5;
     color: white;
@@ -92,7 +107,7 @@ nav form input{
 }
 
 .search .container{
-  background-color: rgba(148, 148, 148, 0.1);
+  /* background-color: rgba(148, 148, 148, 0.1); */
   border-radius: 10px;
   display: flex;
   flex-flow: row wrap;
@@ -108,7 +123,6 @@ nav form input{
 .searchPost{
   height:310px;
 }
-
 
 .popup {
     position: fixed;
@@ -164,6 +178,8 @@ nav form input{
     padding-bottom: 20px;
     display: block;
 }
+
+/*Color filter*/
 
 .color{
     display: flex;
@@ -278,6 +294,14 @@ p.timeAgo {
     text-align: left;
 }
 
+.edit .option--edit {
+    margin-bottom: 0;
+}
+
+.edit_button {
+    padding: 7px 20px;
+}
+
 .edit__options {
     visibility: hidden;
     z-index: 300;
@@ -287,14 +311,13 @@ p.timeAgo {
     position: absolute;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 10px rgba(14, 5, 5, 0.2);
   }
   
 .edit {
-    background: white;
     text-align: left;
     position: absolute;
-    right: 15px;
+    right: -8px;
     top: 10px;
 }
 
@@ -334,6 +357,21 @@ input[name="update"] {
 
 input[name="update"]:hover {
     background: #777;
+}
+
+/*Button on search page*/
+
+.btn__change__view{
+    display: block;
+    position: absolute;
+    right: 1em;
+    margin-top: 1em;
+    background-color : white;
+    z-index: 5;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 5px solid #46b8da;
 }
 
 @media only screen and (min-width: 600px) {
