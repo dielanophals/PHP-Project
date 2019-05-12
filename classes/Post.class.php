@@ -199,27 +199,17 @@ class Post
 
     public static function getLikesOfPost($postId)
     {
+        $usersOfLikes = array();
         try{
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT user_id FROM `likes_post` WHERE post_id = $postId AND active = '1'");
             $statement->execute();
-            $likes = $statement->fetch(PDO::FETCH_ASSOC);
-        }
-        catch(Throwable $t){
-            return false;
-        }
-    }
-
-    public static function getUsersOfLikesOfPost($userId){
-        try{
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM `users` WHERE `id` = $userId AND active = 1");
-            $statement->execute();
-            $users = $statement->fetch(PDO::FETCH_ASSOC);
-
-            //$allUsers = array();
-
-            var_dump($users);
+            $likes = $statement->fetchAll();
+            foreach($likes as $like){
+                $user = User::getUsernameOfDb($like["user_id"]);
+                array_push($usersOfLikes, $user);
+            }
+            return $usersOfLikes;
         }
         catch(Throwable $t){
             return false;

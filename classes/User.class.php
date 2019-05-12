@@ -258,6 +258,21 @@
             return $posts;
         }
 
+        public static function getUsernameOfDb($id){
+            try{
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("SELECT username FROM `users` WHERE `id` = :id AND active = 1");
+                $statement->bindParam(':id', $id);
+                $statement->execute();
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
+                $user = $user["username"];
+                return $user;
+            }
+            catch(Throwable $t){
+                return false;
+            }
+        }
+
         public static function timeAgo($timestamp)
         {
             date_default_timezone_set('Europe/Brussels');
