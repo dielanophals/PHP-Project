@@ -16,16 +16,16 @@ $( document ).ready(function() {
         When you click on an image, you see the details of te post.
     */
 
-    /*
+
 	$.ajax({
 		method: "GET",
-		url: "ajax/imageMap.php",
+		url: "ajax/map.php",
 		data: {"searchBy": searchBy}, datatype: 'json'
 	})
 	.done(function(res) {
 		if(res.status = "success"){
 			//When ajax is succesful select all images on the map using a marker and popup and extra popup
-            markers.foreach(function(marker)){
+            /*markers.foreach(function(marker){
                 var popup = new mapboxgl.Popup({closeOnClick: false})
                 .setHTML(
                     //Change href due to missing db information
@@ -45,11 +45,12 @@ $( document ).ready(function() {
                     .setLngLat([30.5, 50.5])
                     .setPopup(popup)
                     .addTo(map); 
-            }
+			});*/
+			console.log(success);
         }
 	});
 
-	e.preventDefault();*/
+	e.preventDefault();
 
     //Delete code below due to being implemented in foreach loop
 	var popup = new mapboxgl.Popup({closeOnClick: false})
