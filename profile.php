@@ -1,5 +1,5 @@
 <?php
-    require_once 'bootstrap.php';
+    require_once("bootstrap.php");
 
     $s = Session::check();
     if ($s === false) {
