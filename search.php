@@ -97,7 +97,10 @@
 		<?php require_once("nav.inc.php"); ?>
 	</header>
 	<main>
-		<button class="btn__change__view">View on map</button>
+	  	<form>
+	  		<input type="hidden" class="btn__change__view--value" value="<?php echo $search; ?>">
+			<input type="button" class="btn__change__view" value="View on map">
+		</form>
 	</main>
 	<section class="search">
 		<div class="container searched">

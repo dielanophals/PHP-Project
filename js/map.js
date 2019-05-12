@@ -1,19 +1,18 @@
 $( document ).ready(function() {
 	$(".search__map").toggle();
 	$(".btn__change__view").click((e) => {
-		if($(".btn__change__view").html() === "View default search"){
-			$(".btn__change__view").html("View on map");
+		if($(".btn__change__view").val() === "View default search"){
+			$(".btn__change__view").val("View on map");
 			$(".search").toggle();
 			$(".search__map").toggle();
 		}
-		else if($(".btn__change__view").html() === "View on map"){
-			$(".btn__change__view").html("View default search");
+		else if($(".btn__change__view").val() === "View on map"){
+			$(".btn__change__view").val("View default search");
 			$(".search").toggle();
 			$(".search__map").toggle();
 		}
 
-		/*
-		var markers = Array();
+		let search = $(".btn__change__view--value").val();
 
 		//Mapbox - map visualisatie
 		mapboxgl.accessToken = 'pk.eyJ1IjoicjA3MDI0NjUiLCJhIjoiY2p2NnNodnYwMDNydzRkbHZ0bnM0aTQ3aCJ9.aoZTpRItL6OIKxqjC38EWg';
@@ -22,15 +21,8 @@ $( document ).ready(function() {
 			style: 'mapbox://styles/mapbox/streets-v11',
 			center: [51.0, 4.4]
 		});
-		
-		/*
-			Get posts by search and place them with a marker on the map.
-			The marker is placed based on longitude and latitude.
-			When you click on a marker, a popup is shown of the image.
-			When you click on an image, you see the details of te post.
-		*/
 	
-	/*
+
 		$.ajax({
 			method: "GET",
 			url: "ajax/map.php",
@@ -38,33 +30,32 @@ $( document ).ready(function() {
 		})
 		.done(function(res) {
 			if(res.status = "success"){
-				//When ajax is succesful select all images on the map using a marker and popup and extra popup
-				/*markers.foreach(function(marker){
+				let result = (JSON.parse(res));
+				//Only give result not the status.
+				result = result.result;
+				let amountOfResults = Object.keys(result).length;
+
+				for(let i = 0; i < amountOfResults; i++){
+					//columns of table posts are: id, user_id, image, filter, desc, lat, long, city, timestamp, active
+
 					var popup = new mapboxgl.Popup({closeOnClick: false})
 					.setHTML(
-						//Change href due to missing db information
-						//Change source of image
-						//Change description (p)
-						//Change timeago (p)
-						'<a class="post__full" href="?image="2">' +
-							'<div class="searchPost">' +
-								'<img class="post__img" src="https://placeimg.com/200/200/any">' +
-								'<p class="post__name">Test</p>' +
-								'<p class="timeAgo"></p>' +
-							'</div>' +
-						'</a>'
+						`<a class="post__full" href="?image=${result[i][0]}">
+							<div class="searchPost">
+								<img class="post__img" src="${result[i][2]}">
+								<p class="post__name">${result[i][4]}</p>
+							</div>
+						</a>`
 					)
 			
 					new mapboxgl.Marker()
 						.setLngLat([30.5, 50.5])
 						.setPopup(popup)
 						.addTo(map); 
-				});*/
-				/*
-				console.log(success);
+				}
 			}
 		});
 	
-		e.preventDefault();*/
+		e.preventDefault();
 	});
 })
