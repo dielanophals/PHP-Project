@@ -80,49 +80,27 @@
 	</div>
 	<main class="profilePosts">
 		<div class="container">
-			<?php foreach(User::getUserPosts($id) as $p): ?>
-				<a href="?id=<?php echo $id ?>&image=<?php echo $p['id']; ?>">
+			<?php foreach(User::getUserPosts($id) as $post): ?>
+				<a href="?id=<?php echo $id ?>&image=<?php echo $post['id']; ?>">
 					<div class="userPosts">
-						<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
+						<img src="<?php echo $post['image']; ?>" class="<?php echo $post['filter']; ?>">
 					</div>
 				</a>
 			<?php endforeach; ?>
-			<div class="likes">
-				<?php $like = Post::like($id, $p['id']); ?>
-
-				<?php if ($like['active'] == 1): ?>
-					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn fas fa-heart"></span>
-					<span data-id="<?php echo $p['id']; ?>" class="like like-btn hide far fa-heart"></span>
-				<?php endif; ?>
-
-				<?php if ($like['active'] == 0): ?>
-					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
-					<span data-id="<?php echo $p['id']; ?>" class="like like-btn far fa-heart"></span>
-				<?php endif; ?>
-
-				<?php $likeCount = Post::likeCount($p['id']); ?>
-
-				<?php if ( $likeCount == 1 ): ?>
-					<span class="likes-count"><?php echo $likeCount; ?> like</span>
-				<?php endif; ?>
-
-				<?php if ( $likeCount == 0 || $likeCount > 1) : ?>
-					<span class="likes-count"><?php echo $likeCount; ?> likes</span>
-				<?php endif; ?>
-			</div>
-			<?php if ($_SESSION['userID'] == $p['user_id']): ?>
+			<?php require("likes.inc.php"); ?>
+			<?php if ($_SESSION['userID'] == $post['user_id']): ?>
 				<div class="edit">
 					<a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
 					<div class="edit__options">
 						<a href="#" class="option--delete">Delete</a>
 						<form action="postDelete.php" method="POST" class="form--delete">
-							<input type="hidden" value="<?php echo $p['image']; ?>" name="delete_file"/>
+							<input type="hidden" value="<?php echo $post['image']; ?>" name="delete_file"/>
 							<input type="submit" name="delete" value="Delete">
 						</form>
 						<a href="#" class="option--edit">Edit</a>
 						<form action="postEdit.php" method="POST" class="form--edit">
-							<input type="hidden" value="<?php echo $p['id']; ?>" name="file_id">
-							<textarea name="descriptionEdit"><?php echo $p['description']; ?></textarea>
+							<input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
+							<textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea>
 							<input type="submit" name="update" value="Update">
 						</form>
 					</div>

@@ -107,15 +107,15 @@
 	  		<?php if(!empty($search)): ?>
 	  			<?php $searchPosts = new Post();?>
 				<?php
-					foreach($searchPosts->getSearchPosts($search) as $s):
-						$information = User::getUserInfo($s['user_id']);
+					foreach($searchPosts->getSearchPosts($search) as $post):
+						$information = User::getUserInfo($post['user_id']);
 						$name = $information['username'];
 				?>
 				<div class="container_post">
-					<?php $time = User::timeAgo($s['timestamp']); ?>
-						<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $s["id"]; ?>" class="post-image">
+					<?php $time = User::timeAgo($post['timestamp']); ?>
+						<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $post["id"]; ?>" class="post-image">
 							<div class="searchPost">
-								<div class="post__img" class="<?php echo $s['filter']; ?>  post__img" style="background-image: url('<?php echo $s['image']; ?>')"></div>
+								<div class="post__img" class="<?php echo $post['filter']; ?>  post__img" style="background-image: url('<?php echo $post['image']; ?>')"></div>
 								<p class="post__name"><?php echo $name; ?></p>
 								<p class="timeAgo"><?php echo $time; ?></p>
 							</div>
@@ -123,19 +123,19 @@
 
 					<?php require("likes.inc.php"); ?>
 
-					<?php if ($_SESSION['userID'] == $s['user_id']): ?>
+					<?php if ($_SESSION['userID'] == $post['user_id']): ?>
 						<div class="edit">
 							<a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
 							<div class="edit__options">
 								<a href="#" class="option--delete">Delete</a>
 								<form action="postDelete.php" method="POST" class="form--delete">
-									<input type="hidden" value="<?php echo $s['image']; ?>" name="delete_file"/>
+									<input type="hidden" value="<?php echo $post['image']; ?>" name="delete_file"/>
 									<input type="submit" name="delete" value="Delete">
 								</form>
 								<a href="#" class="option--edit">Edit</a>
 								<form action="postEdit.php" method="POST" class="form--edit">
-									<input type="hidden" value="<?php echo $s['id']; ?>" name="file_id">
-									<textarea name="descriptionEdit"><?php echo $s['description']; ?></textarea><br>
+									<input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
+									<textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea><br>
 									<input type="submit" name="update" value="Update">
 								</form>
 							</div>
