@@ -2,11 +2,13 @@
 	require('../bootstrap.php');
 
 	if(!empty($_GET)){
-    //geen search => toon alles
-    //wel search => toon correcte search
+        //geen search => toon alles
+        //wel search => toon correcte search
+        $search = $_GET["search"];
+        
 		try{
 			//looking for certain result depending on search
-            $posts = Posts::getSearchPosts($search);
+            $posts = Post::getSearchPosts($search);
 
             $result = [
                 "status" => "success",
