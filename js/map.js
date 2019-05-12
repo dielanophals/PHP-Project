@@ -52,38 +52,5 @@ $( document ).ready(function() {
 		});
 	
 		e.preventDefault();
-	
-		//Delete code below due to being implemented in foreach loop
-		var popup = new mapboxgl.Popup({closeOnClick: false})
-			.setHTML(
-				'<a class="post__full" href="search.php?search=dog&map=true&image=2>' +
-					'<div class="searchPost">' +
-						'<img class="post__img" src="https://placeimg.com/200/200/any">' +
-						'<p class="post__name">Test</p>' +
-						'<p class="timeAgo"></p>' +
-					'</div>' +
-				'</a>'
-			)
-		
-		new mapboxgl.Marker()
-		  .setLngLat([50.5, 30.5])
-		  .setPopup(popup)
-		  .addTo(map); 
-	
-		var popup1 = new mapboxgl.Popup({closeOnClick: false})
-		.setHTML(
-			'<a class="post__full" href="?image="2">' +
-				'<div class="searchPost">' +
-					'<img class="post__img" src="https://placeimg.com/200/200/any">' +
-					'<p class="post__name">Test</p>' +
-					'<p class="timeAgo"></p>' +
-				'</div>' +
-			'</a>'
-		)
-	  
-		new mapboxgl.Marker()
-			.setLngLat([30.5, 50.5])
-			.setPopup(popup1)
-			.addTo(map); 
 	});
 });
