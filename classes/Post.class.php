@@ -112,7 +112,7 @@ class Post
         }
     }
 
-    public function getSearchPosts($search)
+    public static function getSearchPosts($search)
     {
         try {
             $conn = Db::getInstance();
