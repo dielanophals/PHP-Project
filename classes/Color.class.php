@@ -67,10 +67,10 @@
 				$statement = $conn->prepare(
 					"INSERT INTO `posts_color`(`posts_id`, `red`, `orange`, `yellow`, `green`, `turquoise`, `blue`, `purple`, `pink`, `white`, `gray`, `black`, `brown`, `active`)
 					VALUES ($id, :red, :orange, :yellow, :green, :turquoise, :blue, :purple, :pink, :white, :gray, :black, :brown, 1)");
-				foreach($colorArr as $key => &$value){
-					$key = ":{$key}";
-					$statement->bindParam($key, intval($value));
-				}
+					foreach($colorArr as $key => &$value){
+						$key = ":{$key}";
+						$statement->bindParam($key, intval($value));
+					}
 				$statement->execute();
 			}
 			catch(Throwable $t){

@@ -25,13 +25,7 @@
                         $feedback = 'Sorry, this file already exists. Please try again.';
                     } else {
                         $post->getLocation();
-                        $post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
-                        $post = Post::getLastInsertedId();
-                        foreach ($post as $p) {
-                            $id = $p['id'];
-                            $arrColor = Color::findColors($p['image']);
-                            Color::insertIntoDB($id, $arrColor);
-                        }
+						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
                         $feedback = 'File has been uploaded.';
                         header('Location: profile.php');
                     }
