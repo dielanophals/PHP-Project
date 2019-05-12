@@ -36,6 +36,7 @@ $( document ).ready(function() {
 				let amountOfResults = Object.keys(result).length;
 
 				for(let i = 0; i < amountOfResults; i++){
+					console.log(result[i]);
 					//columns of table posts are: id, user_id, image, filter, desc, lat, long, city, timestamp, active
 
 					var popup = new mapboxgl.Popup({closeOnClick: false})
@@ -49,7 +50,7 @@ $( document ).ready(function() {
 					)
 			
 					new mapboxgl.Marker()
-						.setLngLat([30.5, 50.5])
+						.setLngLat([result[i][6], result[i][5]])
 						.setPopup(popup)
 						.addTo(map); 
 				}
