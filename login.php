@@ -79,7 +79,6 @@
         <input type="password" name="password" id="password"><br>
 
         <input type="submit" value="Sign in"><br>
-        <input type="checkbox"><label for="rememberMe" id="submit">Remember me</label><br>
 
         <a href="register.php" class="link_register">No account yet? Register now!</a>
     </form>
