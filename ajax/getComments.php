@@ -5,7 +5,7 @@ Session::check();
 $connect = Db::getInstance();
 
 $query = "
-SELECT comments.id, parent_comment_id, comments.user_id, users.firstname, users.lastname, comments.comment, comments.date FROM comments, users 
+SELECT comments.id, parent_comment_id, comments.user_id, users.username, comments.comment, comments.date FROM comments, users 
 WHERE comments.user_id = users.id
 AND parent_comment_id = '0' 
 ORDER BY comments.id DESC
@@ -21,7 +21,7 @@ foreach($result as $row)
 {
  $output .= '
  <div class="panel panel-default">
-  <div class="panel-heading">By <b>'.$row["firstname"].'</b> on <i>'.$row["date"].'</i></div>
+  <div class="panel-heading">By <b>'.$row["username"].'</b> on <i>'.$row["date"].'</i></div>
   <div class="panel-body">'.$row["comment"].'</div>
   <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Reply</button></div>
  </div>
@@ -34,7 +34,7 @@ echo $output;
 function get_reply_comment($connect, $parent_id = 0, $marginleft = 0)
 {
  $query = "
- SELECT comments.id, parent_comment_id, comments.user_id, users.firstname, users.lastname, comments.comment, comments.date 
+ SELECT comments.id, parent_comment_id, comments.user_id, users.username, comments.comment, comments.date 
  FROM comments, users 
  WHERE comments.user_id = users.id
  AND parent_comment_id = '".$parent_id."'
@@ -58,7 +58,7 @@ function get_reply_comment($connect, $parent_id = 0, $marginleft = 0)
   {
    $output .= '
    <div class="panel panel-default" style="margin-left:'.$marginleft.'px">
-    <div class="panel-heading">By <b>'.$row["firstname"].'</b> on <i>'.$row["date"].'</i></div>
+    <div class="panel-heading">By <b>'.$row["username"].'</b> on <i>'.$row["date"].'</i></div>
     <div class="panel-body">'.$row["comment"].'</div>
     <div class="panel-footer" align="right"><button type="button" class="btn btn-default reply" id="'.$row["id"].'">Reply</button></div>
    </div>
