@@ -82,7 +82,7 @@
 		<div class="container">
 			<?php foreach(User::getUserPosts($id) as $post): ?>
 				<a href="?id=<?php echo $id ?>&image=<?php echo $post['id']; ?>">
-					<div class="userPosts">
+					<div class="container_post">
 						<img src="<?php echo $post['image']; ?>" class="<?php echo $post['filter']; ?>">
 					</div>
 				</a>
