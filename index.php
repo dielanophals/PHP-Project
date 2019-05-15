@@ -78,13 +78,13 @@
 				foreach($allPosts as $posts => $post):
                   $information = User::getUserInfo($post['user_id']);
                   $name = $information['username'];
-            ?>
+			?>
             <?php $time = User::timeAgo($post['timestamp']); ?>
                 <a class="post__full" href="?image=<?php echo $post["id"]; ?>">
-                    <div id="<?php echo $post["id"]; ?>" class="post">
-                        <div class="post__img" class="<?php echo $r['filter']; ?>  post__img" style="background-image: url('<?php echo $post['image']; ?>')"></div>
-                        <p class="post__name"><?php echo $name; ?></p>
-                        <p class="timeAgo"><?php echo $time; ?></p>
+					<div id="<?php echo $post["id"]; ?>" class="post">
+					<img class="<?php echo $post['filter']; ?>  post__img" src="<?php echo $post['image']; ?>">
+                    <p class="post__name"><?php echo $name; ?></p>
+                    <p class="timeAgo"><?php echo $time; ?></p>
                     </div>
                 </a>
             <?php endforeach; ?>
@@ -100,8 +100,8 @@
             $information = User::getUserInfo($post['user_id']);
             $name = $information['username'];
           ?>
-          <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo $name; ?></a>
-					<div class="popup_img" class="<?php echo $post['filter']; ?>" style="background-image: url('<?php echo $post['image']; ?>')"></div>
+		  <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo $name; ?></a>
+		  			<img class="popup_img" class="<?php echo $post['filter']; ?>" src="<?php echo $post['image']; ?>" class="<?php echo $post['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
 				  	<?php $c = Color::getColors($post['id']); ?>

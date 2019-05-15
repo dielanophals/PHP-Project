@@ -115,7 +115,7 @@
 					<?php $time = User::timeAgo($p['timestamp']); ?>
 				<a class="post__full" href="?image=<?php echo $p['id']; ?>">
 					<div class="userPosts">
-						<div class="post__img" class="<?php echo $p['filter']; ?>" style="background-image: url('<?php echo $p['image']; ?>')"></div>
+						<img class="post__img <?php echo $p['filter']; ?>" src="<?php echo $p['image']; ?>">
             			<p class="timeAgo"><?php echo $time; ?></p>
 					</div>
 				</a>
