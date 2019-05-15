@@ -24,8 +24,8 @@
                     if ($post->fileExists() === false) {
                         $feedback = 'Sorry, this file already exists. Please try again.';
                     } else {
-                        $post->getLocation();
-						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter);
+						$post->setCity();
+						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter, $_SESSION['lat'], $_SESSION['long']);
                         $feedback = 'File has been uploaded.';
                         header('Location: profile.php');
                     }
@@ -247,5 +247,6 @@
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
 	<script src="js/preview.js"></script>
+	<script src="js/location.js"></script>
 </body>
 </html>

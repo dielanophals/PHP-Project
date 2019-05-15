@@ -68,23 +68,41 @@ class Post
         return $target_file;
     }
 
-    public function getLocation(){
-        $api_key = "e2d2e2e24294fe4b91a4ed0d521d2539";
-        $freegeoipjson = file_get_contents("http://api.ipstack.com/193.191.150.3?access_key=e2d2e2e24294fe4b91a4ed0d521d2539");
-        $jsondata = json_decode($freegeoipjson);
-
-        $this->city = $jsondata->city;
-        $this->lat = $jsondata->latitude;
-        $this->long = $jsondata->longitude;
+    public function getLocation($lat, $long){
+        $this->lat = $lat;
+        $this->long = $long;
     }
 
-    public function insertIntoDB($filePath, $des, $userId, $filter)
+    public function setCity(){
+        $curl = curl_init('https://eu1.locationiq.com/v1/reverse.php?key=9664f5d406ed85&lat=' . $_SESSION["lat"] . '&lon=' . $_SESSION["long"] . '&format=json');
+
+        curl_setopt_array($curl, array(
+        CURLOPT_RETURNTRANSFER    =>  true,
+        CURLOPT_FOLLOWLOCATION    =>  true,
+        CURLOPT_MAXREDIRS         =>  10,
+        CURLOPT_TIMEOUT           =>  30,
+        CURLOPT_CUSTOMREQUEST     =>  'GET',
+        ));
+        
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+    
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            $json = json_decode($response);
+        }
+        $this->city = $json->address->city_district;
+    }
+
+    public function insertIntoDB($filePath, $des, $userId, $filter, $lat, $long)
     {
         try {
+            echo $this->lat;
             date_default_timezone_set('Europe/Brussels');
             $timestamp = date('Y-m-d H:i:s');
             $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, latitude, longitude, city, timestamp, filter, active) VALUES ('$userId', :path, :des, '$this->lat', '$this->long', '$this->city','$timestamp', :filter, 1)");
+            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, latitude, longitude, city, timestamp, filter, active) VALUES ('$userId', :path, :des, '$lat', '$long', '$this->city','$timestamp', :filter, 1)");
             $statement->bindParam(':path', $filePath);
             $statement->bindParam(':des', $des);
             $statement->bindParam(':filter', $filter);
@@ -116,7 +134,7 @@ class Post
     {
         try {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' AND active = '1' ORDER BY id DESC");
+            $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' OR city LIKE '%$search%' AND active = '1' ORDER BY id DESC");
             $statement->execute();
             $posts = $statement->fetchAll();
 
