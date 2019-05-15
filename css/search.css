@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePosts{
+    margin-top: 20px;
+}
+  
+.profilePosts .container{
+    background-color: rgba(148, 148, 148, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    padding:25px 15px;
+    max-width:100%;
+}
+
+.container_post {
+    width: 350px;
+    position: relative;
+    /* overflow: hidden; */
+    background: #eeeeee;
+    padding: 30px 0 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 60px;
+    height: 358px;
+    margin-bottom: 100px;
+}
+
+.option--delete {
+    margin-bottom: 10px;
+}
+
+.profilePosts a{
+    width:48%;
+    margin-bottom: 10px;
+}
+  
+a.post__full {
+    position: initial;
+}
+
+.searchPost {
+    margin-bottom: 0;
+}
+
+.likes {
+    padding-top: 10px;
+    background: white;
+    position: relative;
+    top: -6px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

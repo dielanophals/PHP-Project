@@ -13,7 +13,7 @@
             foreach($list as $key => $value){
                 $posts = Friend::getNextFriendsPosts($value, $lastId);
                 foreach($posts as $k => $v){
-                    $allPosts[] = [$v['id'], $v['image']];
+                    $allPosts[] = [$v['id'], $v['username'], $v['image']];
                 }
             }
 

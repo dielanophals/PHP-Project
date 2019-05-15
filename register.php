@@ -28,7 +28,8 @@ if(!empty($_POST)) {
                 $user->setPassword($password);
 
                     if ( $user->register() ) {
-                        Session::create();
+                        $userId = $user->getUserID();
+                        Session::create($userId);
                         header("Location: index.php");
                     } else {
                         $errLogin = "Sign up failed.";
@@ -94,7 +95,8 @@ if(!empty($_POST)) {
                 <label for="password_confirmation">Confirm your password</label>
                 <input type="password" id="password_confirmation" name="password_confirmation"><br>
           
-                <input type="submit" value="Sign me up!" class="btn btn--primary">  
+                <input type="submit" value="Sign me up!" class="btn btn--primary"><br>
+                <a href="login.php" class="link_register">Already have an account?</a>
     </form>
 </body>
 </html>

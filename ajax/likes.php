@@ -16,7 +16,8 @@
         $timestamp = date('Y-m-d H:i:s');
 
         $conn = Db::getInstance();
-        $statement = $conn->prepare("INSERT INTO likes_post (user_id, post_id, active) VALUES ($userid, $postid, 1)");
+        $statement = $conn->prepare("INSERT INTO likes_post (user_id, post_id, timestamp, active) VALUES ($userid, $postid, :timestamp, 1)");
+        $statement->bindParam(':timestamp', $timestamp);
         $statement->execute();
 
         $likes = count($result)+1;

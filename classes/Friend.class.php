@@ -35,37 +35,56 @@ Abstract class Friend{
         $statement->execute();
     }
 
+    //user Removes new friend
     public static function removeFriend($userID, $friendId){
-        //user adds new friend
-        $timestamp = date('Y-m-d H:i:s');
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("DELETE FROM friends WHERE user1_id = '$userID' AND user2_id = '$friendId'");
-        $statement->execute();
+        try{
+            $timestamp = date('Y-m-d H:i:s');
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("DELETE FROM friends WHERE user1_id = '$userID' AND user2_id = '$friendId'");
+            $statement->execute();
+        }
+        catch(Throwable $t){
+            return false;
+        }
     }
 
     public static function checkFriend($userID, $friendId){
-      $conn = Db::getInstance();
-      $statement = $conn->prepare("SELECT * FROM friends WHERE user1_id = '$userID' && user2_id='$friendId'");
-      $statement->execute();
-      $statement->fetch(PDO::FETCH_ASSOC);
-      return $statement->rowCount();
+        try{
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM friends WHERE user1_id = '$userID' && user2_id='$friendId'");
+            $statement->execute();
+            $statement->fetch(PDO::FETCH_ASSOC);
+            return $statement->rowCount();
+        }
+        catch(Throwable $t){
+            return false;
+        }
     }
 
     public static function getFriendsPosts($id, $limit){
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $limit");
-        $statement->execute();
-        $posts = $statement->fetchAll();
-        return $posts;
+        try{
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $limit");
+            $statement->execute();
+            $posts = $statement->fetchAll();
+            return $posts;
+        }
+        catch(Throwable $t){
+            return false;
+        }
     }
 
 
-    static function getNextFriendsPosts($id, $lastId){
-        $lastId -= 1;
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE user_id = '$id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20");
-        $statement->execute();
-        $posts = $statement->fetchAll();
-        return $posts;
+    public static function getNextFriendsPosts($id, $lastId){
+        try{
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT posts.*, users.username FROM posts, users WHERE user_id = '$id' AND users.id = '$id' ORDER BY 'timestamp' DESC LIMIT $lastId, 20 ");
+            $statement->execute();
+            $posts = $statement->fetchAll();
+            return $posts;
+        }
+        catch(Throwable $t){
+            return false;
+        }
     }
 }

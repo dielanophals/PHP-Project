@@ -25,8 +25,13 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/vendor/cssgram.min.css">
     <title>InstaPet - Feed</title>
     <style>
+
+      body {
+        background: #ddd;
+      }
 
       a.post-image {
         text-decoration: none;
@@ -71,15 +76,17 @@
         <?php endif; ?>
         <?php foreach($list as $key => $value): ?>
             <?php
-                $posts = Friend::getFriendsPosts($value, $limit);
-                foreach($posts as $k => $v):
-                  $information = User::getUserInfo($v['user_id']);
-                  $name = $information['firstname'] . ' ' . $information ['lastname'];
+                $allPosts = Friend::getFriendsPosts($value, $limit);
+				foreach($allPosts as $posts => $post):
+                  $information = User::getUserInfo($post['user_id']);
+                  $name = $information['username'];
             ?>
-                <a class="post__full" href="?image=<?php echo $v["id"]; ?>">
-                    <div id="<?php echo $v["id"]; ?>" class="post">
-                        <img class="post__img" src="<?php echo $v["image"]; ?>">
+            <?php $time = User::timeAgo($post['timestamp']); ?>
+                <a class="post__full" href="?image=<?php echo $post["id"]; ?>">
+                    <div id="<?php echo $post["id"]; ?>" class="post">
+                        <div class="post__img" class="<?php echo $r['filter']; ?>  post__img" style="background-image: url('<?php echo $post['image']; ?>')"></div>
                         <p class="post__name"><?php echo $name; ?></p>
+                        <p class="timeAgo"><?php echo $time; ?></p>
                     </div>
                 </a>
             <?php endforeach; ?>
@@ -87,65 +94,44 @@
 
         <!--Pop up sceen-->
         <?php if(!empty($_GET['image'])): ?>
-		<?php $post = new Post(); $post->showImage($_GET['image']);?>
-		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+		<?php $newPost = new Post(); $newPost->getPostById($_GET['image']);?>
+		<?php foreach($newPost->getPostById($_GET['image']) as $post): ?>
 			<div class="popup">
 				<div class="post">
           <?php
-            $information = User::getUserInfo($p['user_id']);
-            $name = $information['firstname'] . ' ' . $information ['lastname'];
+            $information = User::getUserInfo($post['user_id']);
+            $name = $information['username'];
           ?>
-          <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
-					<img src="<?php echo $p['image']; ?>">
+          <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo $name; ?></a>
+					<div class="popup_img" class="<?php echo $post['filter']; ?>" style="background-image: url('<?php echo $post['image']; ?>')"></div>
 					<!--Show the colors of the image. -->
 					<div class="color">
-						<?php $c = Color::getColors($p['id']); ?>
-                        <!--Loop through all colors to display them from highest value to lowest.-->
-                        <?php foreach($c as $key => $value): ?>
-                            <!--Only show found colors.-->
-                            <?php if($value != 0): ?>
-                                <a href="search.php?color=<?php echo $key?>">
-                                    <div class="color__item color__item--<?php echo $key; ?>"></div>
-                                </a>
-                            <?php endif; ?>
+				  	<?php $c = Color::getColors($post['id']); ?>
+              <!--Loop through all colors to display them from highest value to lowest.-->
+              <?php foreach($c as $key => $value): ?>
+                <!--Only show found colors.-->
+                <?php if($value != 0): ?>
+                  <a href="search.php?color=<?php echo $key?>">
+                    <div class="color__item color__item--<?php echo $key; ?>"></div>
+                  </a>
+                <?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $p['description']; ?></p>
-                    <div class="likes">
-                        <?php $like = Post::like($_SESSION['userID'], $v['id']); ?>
-                            <?php if ($like['active'] == 1): ?>
-                            <span data-id="<?php echo $v['id']; ?>" class="unlike like-btn fas fa-heart"></span>
-                            <span data-id="<?php echo $v['id']; ?>" class="like like-btn hide far fa-heart"></span>
-                            <?php endif; ?>
-
-                            <?php if ($like['active'] == 0): ?>
-                            <span data-id="<?php echo $v['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
-                            <span data-id="<?php echo $v['id']; ?>" class="like like-btn far fa-heart"></span>
-                            <?php endif; ?>
-
-                            <?php $likeCount = Post::likeCount($v['id']); ?>
-
-                            <?php if ( $likeCount == 1 ): ?>
-                            <span class="likes-count"><?php echo $likeCount; ?> like</span>
-                            <?php endif; ?>
-
-                            <?php if ( $likeCount == 0 || $likeCount > 1) : ?>
-                            <span class="likes-count"><?php echo $likeCount; ?> likes</span>
-                            <?php endif; ?>
-                    </div>
-                    <?php if ($_SESSION['userID'] == $v['user_id']): ?>
+					<p><?php echo $post['description']; ?></p>
+					<?php require("likes.inc.php"); ?>
+                    <?php if ($_SESSION['userID'] == $post['user_id']): ?>
                 <div class="edit">
                   <a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
                   <div class="edit__options">
                     <a href="#" class="option--delete">Delete</a>
                     <form action="postDelete.php" method="POST" class="form--delete">
-                      <input type="hidden" value="<?php echo $v['image']; ?>" name="delete_file"/>
+                      <input type="hidden" value="<?php echo $post['image']; ?>" name="delete_file"/>
                       <input type="submit" name="delete" value="Delete">
                     </form>
                     <a href="#" class="option--edit">Edit</a>
                     <form action="postEdit.php" method="POST" class="form--edit">
-                      <input type="hidden" value="<?php echo $v['id']; ?>" name="file_id">
-                      <textarea name="descriptionEdit"><?php echo $v['description']; ?></textarea>
+                      <input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
+                      <textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea><br>
                       <input type="submit" name="update" value="Update">
                     </form>
                   </div>

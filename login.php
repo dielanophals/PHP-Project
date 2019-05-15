@@ -22,11 +22,14 @@
         else{
             $u = new User();
             $isLogged = $u->login($email, $password);
+            $u->setEmail($email);
+            $id = $u->getUserID();
 
             //Check if user can log in.
             if($isLogged){
-                Session::create();
-                $_SESSION['userID'] = $u->userID();
+                $u->setEmail($email);
+                $userId = $u->getUserId();
+                Session::create($userId);
                 header("Location: index.php");
             }
             //Unable to log in.
@@ -76,7 +79,6 @@
         <input type="password" name="password" id="password"><br>
 
         <input type="submit" value="Sign in"><br>
-        <input type="checkbox"><label for="rememberMe" id="submit">Remember me</label><br>
 
         <a href="register.php" class="link_register">No account yet? Register now!</a>
     </form>

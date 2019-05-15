@@ -21,7 +21,8 @@
     <link rel = "stylesheet" type = "text/css" href = "css/style.css"/>
     <link rel = "stylesheet" type = "text/css" href = "css/profile.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <title>InstaPet - Profile</title>
+    <link rel="stylesheet" href="css/vendor/cssgram.min.css">
+		<title>InstaPet - Profile</title>
     <style>
 
       a.post-image {
@@ -69,19 +70,9 @@
           	<div class="information">
             <h2 class="name"><?php echo $profile['username']; ?></h2>
             <p class="bio"><?php echo $profile['description']; ?></p>
-						<?php
-							$friend = Friend::checkFriend($_SESSION['userID'], $id);
-							if($friend == 0){
-								?>
-								<a href="#" class="addfriend" data-friend="<?php echo $id; ?>">Follow</a>
-								<?php
-							}else{
-								?>
-								<a href="#" class="removefriend" data-friend="<?php echo $id; ?>">Unfollow</a>
-
-								<?php
-							}
-						?>
+						<?php $friend = Friend::checkFriend($_SESSION['userID'], $id); ?>
+								<a href="#" class="btn_friend addfriend <?php if($friend == 1){ echo "hide"; } ?>" data-friend="<?php echo $id; ?>">Follow</a>
+								<a href="#" class="btn_friend removefriend <?php if($friend == 0){ echo "hide"; } ?>" data-friend="<?php echo $id; ?>">Unfollow</a>
         	</div>
     	</div>
 		<div class="profile__posts">
@@ -89,49 +80,27 @@
 	</div>
 	<main class="profilePosts">
 		<div class="container">
-			<?php foreach(User::getUserPosts($id) as $p): ?>
-				<a href="?id=<?php echo $id ?>&image=<?php echo $p['id']; ?>">
-					<div class="userPosts" style="background:url('<?php echo $p['image']; ?>'); background-size: cover; background-position: center;">
-						<img src="<?php echo $p['image']; ?>">
+			<?php foreach(User::getUserPosts($id) as $post): ?>
+				<a href="?id=<?php echo $id ?>&image=<?php echo $post['id']; ?>">
+					<div class="userPosts">
+						<img src="<?php echo $post['image']; ?>" class="<?php echo $post['filter']; ?>">
 					</div>
 				</a>
 			<?php endforeach; ?>
-			<div class="likes">
-				<?php $like = Post::like($id, $p['id']); ?>
-
-				<?php if ($like['active'] == 1): ?>
-					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn fas fa-heart"></span>
-					<span data-id="<?php echo $p['id']; ?>" class="like like-btn hide far fa-heart"></span>
-				<?php endif; ?>
-
-				<?php if ($like['active'] == 0): ?>
-					<span data-id="<?php echo $p['id']; ?>" class="unlike like-btn hide fas fa-heart"></span>
-					<span data-id="<?php echo $p['id']; ?>" class="like like-btn far fa-heart"></span>
-				<?php endif; ?>
-
-				<?php $likeCount = Post::likeCount($p['id']); ?>
-
-				<?php if ( $likeCount == 1 ): ?>
-					<span class="likes-count"><?php echo $likeCount; ?> like</span>
-				<?php endif; ?>
-
-				<?php if ( $likeCount == 0 || $likeCount > 1) : ?>
-					<span class="likes-count"><?php echo $likeCount; ?> likes</span>
-				<?php endif; ?>
-			</div>
-			<?php if ($_SESSION['userID'] == $p['user_id']): ?>
+			<?php require("likes.inc.php"); ?>
+			<?php if ($_SESSION['userID'] == $post['user_id']): ?>
 				<div class="edit">
 					<a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
 					<div class="edit__options">
 						<a href="#" class="option--delete">Delete</a>
 						<form action="postDelete.php" method="POST" class="form--delete">
-							<input type="hidden" value="<?php echo $p['image']; ?>" name="delete_file"/>
+							<input type="hidden" value="<?php echo $post['image']; ?>" name="delete_file"/>
 							<input type="submit" name="delete" value="Delete">
 						</form>
 						<a href="#" class="option--edit">Edit</a>
 						<form action="postEdit.php" method="POST" class="form--edit">
-							<input type="hidden" value="<?php echo $p['id']; ?>" name="file_id">
-							<textarea name="descriptionEdit"><?php echo $p['description']; ?></textarea>
+							<input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
+							<textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea>
 							<input type="submit" name="update" value="Update">
 						</form>
 					</div>
@@ -141,12 +110,12 @@
 	</main>
     <!--Pop up sceen-->
     <?php if(!empty($_GET['image'])): ?>
-		<?php $post = new Post(); $post->showImage($_GET['image']);?>
-		<?php foreach($post->showImage($_GET['image']) as $p): ?>
+		<?php $post = new Post(); $post->getPostById($_GET['image']);?>
+		<?php foreach($post->getPostById($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
 					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
-					<img src="<?php echo $p['image']; ?>">
+					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
 						<?php $c = Color::getColors($p['id']); ?>
@@ -191,7 +160,6 @@
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="js/friends.js"></script>
 </body>
 </html>
