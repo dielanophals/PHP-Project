@@ -38,22 +38,6 @@
 			}
 		}
 
-  //check if update is send
-  if(!empty($_POST))
-  {
-    try {
-      $comment = new Comment();
-      $comment->setText($_POST['comment']);
-      var_dump($comment->Save());
-        
-    } catch (\Throwable $th) {
-        //throw $th;
-    }
-  }
-
-  //get all previous comments
-    $comments = Comment::getAll();  
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -217,36 +201,18 @@
           	?>
         </div>
         <a href="profile.php" class="close">X</a>
-      </div>
+    </div>
   <?php
     }
   ?>
 
-  <h2>Comments</h2>
-  <div id="comments">
 
-    <!--COMMENT INPUT -->
-    <input type="text" placeholder="What's on your mind?" id="comment" name="comment" />
-		<input id="btnSubmit" type="submit" value="Add comment" />
-		
-    <!--MAKE A LIST OF COMMENTS-->
-		<ul id="listupdates">
-		<?php 
-			foreach($comments as $c) {
-					echo "<li>". $c->getText() ."</li>";
-			}
-
-		?>
-		</ul>
-
-  </div>
-    </div>
-	<?php  ?>
+   
 
 	<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 	<script src="js/like.js"></script>
 	<script src="js/edit.js"></script>
-	<script src="js/comment.js"></script>
+
 </body>
 
 </html>
