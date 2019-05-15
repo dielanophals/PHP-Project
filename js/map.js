@@ -36,7 +36,6 @@ $( document ).ready(function() {
 				let amountOfResults = Object.keys(result).length;
 
 				for(let i = 0; i < amountOfResults; i++){
-					console.log(result[i]);
 					//columns of table posts are: id, user_id, image, filter, desc, lat, long, city, timestamp, active
 
 					var popup = new mapboxgl.Popup({closeOnClick: false})
