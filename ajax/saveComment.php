@@ -9,8 +9,8 @@ $comment_name = '';
 $comment_content = '';
 
 //get the userID
-$user_id = User::getUserInfo($_SESSION['userID']);
-var_dump($user_id);
+$user_id = User::getUserID();
+echo($user_id);
 
 //check if there is content
 if(empty($_POST["comment_content"]))
