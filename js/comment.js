@@ -1,7 +1,5 @@
 $(document).ready(function(){
  
-    $user_id = User::getUserInfo($_SESSION['userID']);
-
     $('#comment_form').on('submit', function(event){
      event.preventDefault();
      var form_data = $(this).serialize();
@@ -44,3 +42,4 @@ $(document).ready(function(){
     });
     
    });
+
