@@ -233,4 +233,45 @@ class Post
             return false;
         }
     }
+
+    public function savePost($save){
+        $id = $_SESSION["userID"];
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("INSERT INTO saved (user_id, post_id, active) VALUES ($id, :save, 1)");
+        $statement->bindParam(':save', $save);
+        $statement->execute();
+        return $save;
+    }
+
+    public function checkSaved($post){
+        $id = $_SESSION["userID"];
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM saved WHERE user_id = '$id' AND post_id = '$post' AND active = 1");
+        $statement->execute();
+        $total = $statement->rowCount();
+        if($total == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getIdSaved(){
+        $id = $_SESSION["userID"];
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM saved WHERE user_id = '$id' AND active = 1");
+        $statement->execute();
+        return $statement;
+    }
+
+    public function getSavedPosts($id){
+        $id = $_SESSION["userID"];
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE id = '$id' AND active = 1");
+        $statement->execute();
+        return $statement;
+    }
 }

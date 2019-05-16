@@ -80,6 +80,7 @@
                   $name = $information['username'];
 			?>
             <?php $time = User::timeAgo($post['timestamp']); ?>
+            
                 <a class="post__full" href="?image=<?php echo $post["id"]; ?>">
 					<div id="<?php echo $post["id"]; ?>" class="post">
 					<img class="<?php echo $post['filter']; ?>  post__img" src="<?php echo $post['image']; ?>">

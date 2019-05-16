@@ -396,6 +396,14 @@ input[name="update"]:hover {
     text-decoration: underline;
 }
 
+.save{
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    margin: 10px 15px;
+    cursor: pointer;
+}
+
 @media only screen and (min-width: 600px) {
     nav a, nav form{
         flex-flow: row wrap;

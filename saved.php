@@ -104,21 +104,16 @@
 	</main>
 	<section class="search">
 		<div class="container searched">
-	  		<?php if(!empty($search)): ?>
 	  			<?php $searchPosts = new Post();?>
 				<?php
-					foreach($searchPosts->getSearchPosts($search) as $post):
+					foreach($searchPosts->getIdSaved() as $s):
+					foreach($searchPosts->getSavedPosts($s['id']) as $post):
 						$information = User::getUserInfo($post['user_id']);
 						$name = $information['username'];
 				?>
 				<div class="container_post">
 					<?php $time = User::timeAgo($post['timestamp']); ?>
 						<?php $saved = Post::checkSaved($post['id']); ?>
-						<?php if($saved === true){ ?>
-							<p class="save">Saved!</p>
-						<?php }else{ ?>
-							<p class="save" data-save="<?php echo $post['id']; ?>">Save</p>
-						<?php } ?>
 						<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $post["id"]; ?>" class="post-image">
 							<div class="searchPost">
 								<img class="post__img <?php echo $post['filter']; ?>" src="<?php echo $post['image']; ?>">
@@ -149,7 +144,7 @@
 					<?php endif; ?>
 				</div>
 			<?php endforeach; ?>
-			<?php endif; ?>
+			<?php endforeach; ?>
 		</div>
 	</section>
 	<!--Image map-->

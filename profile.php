@@ -103,6 +103,7 @@
             <p class="bio"><?php echo $profile['description']; ?></p>
 				<a href="settings.php">Edit profile</a>
 				<a href="?upload=yes">Upload image</a>
+				<a href="saved.php">Saved images</a>
         	</div>
     	</div>
 		<div class="profile__posts">
