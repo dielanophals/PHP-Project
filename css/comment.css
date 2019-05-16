@@ -1,0 +1,50 @@
+.container{
+    width: 100%;
+}
+.container, #comment_form, #display_comment, #comment_message{
+    display: block;
+}
+
+#comment_message{
+    font-style: bold;
+}
+
+form.comment {
+    margin: 0 auto;
+    width: 95%;
+} 
+
+form.comment .comment_area{
+    display: inline-block;
+    float: left;
+    height: 2.5em;
+    width: 70%;
+    margin-bottom: 20px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #000; 
+}
+
+form.comment input[type=submit]{
+    display: inline;
+    left: 10px;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10%;
+}
+
+.panel-heading{
+    background-color: black;
+    color: white;
+}
+
+.panel-body{}
+
+.panel-footer button.reply{
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10%;
+}
