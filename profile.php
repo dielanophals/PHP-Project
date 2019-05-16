@@ -24,8 +24,27 @@
                     if ($post->fileExists() === false) {
                         $feedback = 'Sorry, this file already exists. Please try again.';
                     } else {
-						$post->setCity();
-						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter, $_SESSION['lat'], $_SESSION['long']);
+						if(!isset($_SESSION['lat'])){
+							$lat = "0";
+						}else{
+							$lat = $_SESSION['lat'];
+						}
+
+						if(!isset($_SESSION['long'])){
+							$long = "0";
+						}else{
+							$long = $_SESSION['long'];
+							$city = $post->setCity();
+						}
+
+						if(!isset($city)){
+							$city = "none";
+						}
+						echo $city;
+						echo $lat;
+						echo $long;
+
+						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter, $lat, $long, $city);
                         $feedback = 'File has been uploaded.';
                         header('Location: profile.php');
                     }

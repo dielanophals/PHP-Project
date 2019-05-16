@@ -92,17 +92,16 @@ class Post
         } else {
             $json = json_decode($response);
         }
-        $this->city = $json->address->city_district;
+        return $json->address->city_district;
     }
 
-    public function insertIntoDB($filePath, $des, $userId, $filter, $lat, $long)
+    public function insertIntoDB($filePath, $des, $userId, $filter, $lat, $long, $city)
     {
         try {
-            echo $this->lat;
             date_default_timezone_set('Europe/Brussels');
             $timestamp = date('Y-m-d H:i:s');
             $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, latitude, longitude, city, timestamp, filter, active) VALUES ('$userId', :path, :des, '$lat', '$long', '$this->city','$timestamp', :filter, 1)");
+            $statement = $conn->prepare("INSERT INTO posts (user_id, image, description, latitude, longitude, city, timestamp, filter, active) VALUES ('$userId', :path, :des, '$lat', '$long', '$city','$timestamp', :filter, 1)");
             $statement->bindParam(':path', $filePath);
             $statement->bindParam(':des', $des);
             $statement->bindParam(':filter', $filter);
