@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 12, 2019 at 02:48 PM
--- Server version: 5.6.34-log
--- PHP Version: 7.1.5
+-- Host: 127.0.0.1
+-- Gegenereerd op: 16 mei 2019 om 10:55
+-- Serverversie: 10.1.38-MariaDB
+-- PHP-versie: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Tabelstructuur voor tabel `comments`
 --
 
 CREATE TABLE `comments` (
@@ -40,7 +40,7 @@ CREATE TABLE `comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friends`
+-- Tabelstructuur voor tabel `friends`
 --
 
 CREATE TABLE `friends` (
@@ -54,7 +54,7 @@ CREATE TABLE `friends` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likes_comments`
+-- Tabelstructuur voor tabel `likes_comments`
 --
 
 CREATE TABLE `likes_comments` (
@@ -68,7 +68,7 @@ CREATE TABLE `likes_comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `likes_post`
+-- Tabelstructuur voor tabel `likes_post`
 --
 
 CREATE TABLE `likes_post` (
@@ -82,7 +82,7 @@ CREATE TABLE `likes_post` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Tabelstructuur voor tabel `posts`
 --
 
 CREATE TABLE `posts` (
@@ -101,7 +101,7 @@ CREATE TABLE `posts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts_color`
+-- Tabelstructuur voor tabel `posts_color`
 --
 
 CREATE TABLE `posts_color` (
@@ -125,7 +125,20 @@ CREATE TABLE `posts_color` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Tabelstructuur voor tabel `saved`
+--
+
+CREATE TABLE `saved` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -142,17 +155,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `comments`
+-- Indexen voor tabel `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `friends`
+-- Indexen voor tabel `friends`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`),
@@ -160,80 +173,99 @@ ALTER TABLE `friends`
   ADD KEY `user2_id` (`user2_id`) USING BTREE;
 
 --
--- Indexes for table `likes_comments`
+-- Indexen voor tabel `likes_comments`
 --
 ALTER TABLE `likes_comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `likes_post`
+-- Indexen voor tabel `likes_post`
 --
 ALTER TABLE `likes_post`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `posts`
+-- Indexen voor tabel `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `posts_color`
+-- Indexen voor tabel `posts_color`
 --
 ALTER TABLE `posts_color`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indexen voor tabel `saved`
+--
+ALTER TABLE `saved`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `friends`
+-- AUTO_INCREMENT voor een tabel `friends`
 --
 ALTER TABLE `friends`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `likes_comments`
+-- AUTO_INCREMENT voor een tabel `likes_comments`
 --
 ALTER TABLE `likes_comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `likes_post`
+-- AUTO_INCREMENT voor een tabel `likes_post`
 --
 ALTER TABLE `likes_post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `posts`
+-- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `posts_color`
+-- AUTO_INCREMENT voor een tabel `posts_color`
 --
 ALTER TABLE `posts_color`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT voor een tabel `saved`
+--
+ALTER TABLE `saved`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `friends`
+-- Beperkingen voor tabel `friends`
 --
 ALTER TABLE `friends`
   ADD CONSTRAINT `user1_foreign_key` FOREIGN KEY (`user1_id`) REFERENCES `users` (`id`),
