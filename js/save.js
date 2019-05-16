@@ -11,7 +11,7 @@ $(document).ready(function(){
                     'save': save
                 },
                 success: function (data) {
-                    console(data)
+                    console.log(data)
                 }
             });
         }
