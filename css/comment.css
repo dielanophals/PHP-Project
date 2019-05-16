@@ -14,7 +14,7 @@ form.comment {
     width: 95%;
 } 
 
-form.comment .comment_area{
+form.comment #comment_content{
     display: inline-block;
     float: left;
     height: 2.5em;
