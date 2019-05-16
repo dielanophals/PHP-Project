@@ -20,10 +20,12 @@
                     $config = self::getConfig();
                     $host = $config['host'];
                     $database = $config['database'];
+                    $port = $config['port'];
+                    $charset = $config['charset'];
                     $user = $config['user'];
                     $password = $config['password'];
     
-                    self::$conn = new PDO("mysql:host=$host;dbname=$database;charset=utf8mb4", $user, $password);
+                    self::$conn = new PDO("mysql:host=$host;port=$port;dbname=$database", $user, $password);
                     return self::$conn;
                 }
                 catch (\PDOException $e) {
