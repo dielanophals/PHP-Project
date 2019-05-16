@@ -133,7 +133,7 @@ class Post
     {
         try {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM posts WHERE description LIKE '%$search%' OR city LIKE '%$search%' AND active = '1' ORDER BY id DESC");
+            $statement = $conn->prepare("SELECT * FROM posts WHERE (description LIKE '%$search%' OR city LIKE '%$search%') AND active = '1' ORDER BY id DESC");
             $statement->execute();
             $posts = $statement->fetchAll();
 
