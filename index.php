@@ -143,27 +143,21 @@
 			</div>
 		<?php endforeach; ?>
       <?php endif; ?>
-      
+
+    <div class="container">
+      <form method="POST" id="comment_form" class="comment">
+      <div class="form-group">
+        <textarea name="comment_content" id="comment_content" class="form-control" placeholder="Enter Comment" rows="5"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="hidden" name="comment_id" id="comment_id" value="0" />
+        <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
+      </div>
+      </form>
+      <span id="comment_message"></span>
       <br />
-  <h2 align="center"><a href="#">Comment System Instapet</a></h2>
-  <br />
-  <div class="container">
-   <form method="POST" id="comment_form">
-    <!--<div class="form-group">
-     <input type="text" name="comment_name" id="comment_name" class="form-control" placeholder="Enter Name" />
-    </div>-->
-    <div class="form-group">
-     <textarea name="comment_content" id="comment_content" class="form-control" placeholder="Enter Comment" rows="5"></textarea>
+      <div id="display_comment"></div>
     </div>
-    <div class="form-group">
-     <input type="hidden" name="comment_id" id="comment_id" value="0" />
-     <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
-    </div>
-   </form>
-   <span id="comment_message"></span>
-   <br />
-   <div id="display_comment"></div>
-  </div>
     </main>
     <footer>
         <div class="btnLoadmore">
