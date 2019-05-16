@@ -3,7 +3,7 @@ $(document).ready(function(){
       let friend = $(this).data('friend');
 
         $.ajax({
-            url: 'ajax/addfriend.php',
+            url: 'ajax/addFriend.php',
             type: 'POST',
             dataType: 'html',
             data: {
@@ -22,7 +22,7 @@ $(document).ready(function(){
       let friend = $(this).data('friend');
 
         $.ajax({
-            url: 'ajax/removefriend.php',
+            url: 'ajax/removeFriend.php',
             type: 'POST',
             dataType: 'html',
             data: {
