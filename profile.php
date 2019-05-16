@@ -123,6 +123,7 @@
 				<a href="settings.php">Edit profile</a>
 				<a href="?upload=yes">Upload image</a>
 				<a href="saved.php">Saved images</a>
+				<a href="followers.php">Followers</a>
         	</div>
     	</div>
 		<div class="profile__posts">

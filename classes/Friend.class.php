@@ -27,6 +27,21 @@ Abstract class Friend{
         }
     }
 
+    public static function getFriends($id) {
+        try{
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT users.id, users.username FROM users INNER JOIN friends ON user1_id = users.id WHERE friends.user2_id = :user_id AND friends.active = 1");
+            $statement->bindParam(":user_id", $id);
+            $statement->execute();
+            $list = $statement->fetchAll();
+
+            return $list;
+        }
+        catch(Throwable $t){
+            return false;
+        }
+    }
+
     public static function addFriend($userID, $friendId){
         //user adds new friend
         $timestamp = date('Y-m-d H:i:s');
