@@ -9,8 +9,7 @@ $comment_name = '';
 $comment_content = '';
 
 //get the userID
-$user_id = User::getUserID();
-echo($user_id);
+$user_id = $_SESSION['userID'];
 
 //check if there is content
 if(empty($_POST["comment_content"]))
@@ -19,7 +18,7 @@ if(empty($_POST["comment_content"]))
 }
 else
 {
- $comment_content = $_POST["comment_content"];
+ $comment_content = htmlspecialchars($_POST["comment_content"]);
 }
 
 //if there's no errors then:
@@ -31,13 +30,10 @@ if($error == '')
  VALUES (:parent_comment_id, :comment, :user_id)
  ";
  $statement = $connect->prepare($query);
- $statement->execute(
-  array(
-   ':parent_comment_id' => $_POST["comment_id"],
-   ':comment'    => $comment_content,
-   ':user_id' => $user_id
-  )
- );
+ $statement->bindParam(":parent_comment_id", $_POST["comment_id"]);
+ $statement->bindParam(":comment", $comment_content);
+ $statement->bindParam(":user_id", $user_id);
+ $statement->execute();
  $error = '<label class="text-success">Comment Added</label>';
 }
 
