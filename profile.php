@@ -46,7 +46,7 @@
 
 						$post->insertIntoDB($post->uploadImage(), $description, $_SESSION['userID'], $filter, $lat, $long, $city);
                         $feedback = 'File has been uploaded.';
-                        header('Location: profile.php');
+                        echo '<script>window.location = "profile.php"</script>';
                     }
                 }
             }
