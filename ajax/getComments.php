@@ -5,9 +5,11 @@ Session::check();
 $connect = Db::getInstance();
 
 $query = "
-SELECT comments.id, parent_comment_id, comments.user_id, users.username, comments.comment, comments.date FROM comments, users 
-WHERE comments.user_id = users.id
-AND parent_comment_id = '0' 
+SELECT comments.id, parent_comment_id, comments.user_id, users.username, comments.comment, comments.date 
+FROM comments 
+INNER JOIN users 
+ON comments.user_id = users.id
+WHERE parent_comment_id = '0' 
 ORDER BY comments.id DESC
 ";
 
@@ -35,9 +37,10 @@ function get_reply_comment($connect, $parent_id = 0, $marginleft = 0)
 {
  $query = "
  SELECT comments.id, parent_comment_id, comments.user_id, users.username, comments.comment, comments.date 
- FROM comments, users 
- WHERE comments.user_id = users.id
- AND parent_comment_id = '".$parent_id."'
+ FROM comments 
+ INNER JOIN users 
+ ON comments.user_id = users.id
+ WHERE parent_comment_id = '".$parent_id."'
  ";
  $output = '';
  $statement = $connect->prepare($query);
