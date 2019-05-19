@@ -159,12 +159,14 @@ nav form input{
 
 .popup .post {
     position: absolute;
-    width: 600px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     background: white;
     margin: 0 auto;
     border-radius: 10px;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .popup .popup_img{
