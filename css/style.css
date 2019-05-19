@@ -144,7 +144,7 @@ nav form input{
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 3;
+    z-index: 6;
     background:rgba(0,0,0,0.6);
 }
 
@@ -187,7 +187,7 @@ nav form input{
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    padding-bottom: 20px;
+    padding: 10px;
     display: block;
 }
 

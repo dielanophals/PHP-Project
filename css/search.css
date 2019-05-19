@@ -6,6 +6,18 @@
 .profilePosts{
     margin-top: 20px;
 }
+
+.search {
+    margin-top: 50px;
+}
+
+.popup .post {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
   
 .profilePosts .container{
     background-color: rgba(148, 148, 148, 0.1);
@@ -54,4 +66,16 @@ a.post__full {
     top: -6px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .profile {
+        min-height: 168px;
+        left: 50%;
+        margin-left: -84px;
+        position: relative;
+      }
+      .popup .post {
+        width:80%;
+      }
 }
