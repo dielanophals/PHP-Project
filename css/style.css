@@ -47,6 +47,17 @@ form.login input[type=submit], form.register input[type=submit]{
     border-radius: 10%;
 }
 
+button[type=submit] {
+    background: white;
+    border: none;
+    padding: 5px 10px;
+}
+
+.search--button {
+    width: 15px;
+    height: auto;
+}
+
 nav form input{
     border: 0;
     outline: 0;
@@ -56,9 +67,9 @@ nav form input{
 }
 
 .container{
-  width:960px;
+  /* width:960px; */
   margin:auto;
-  display:flex;
+  /* display:flex; */
 }
 
 .grid{
@@ -150,10 +161,10 @@ nav form input{
     position: absolute;
     width: 600px;
     background: white;
-    padding: 20px 100px;
     margin: 0 auto;
     border-radius: 10px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .popup .popup_img{
@@ -183,9 +194,10 @@ nav form input{
 /*Color filter*/
 
 .color{
+    margin-top: 15px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .color__item{
@@ -193,7 +205,7 @@ nav form input{
     padding: 0.5em;
     font-weight: bold;
     font-size: 1.5em;
-    flex: 1 1 minmax(0.5em, auto);
+    /* flex: 1 1 minmax(0.5em, auto); */
     height: auto;
 }
 
@@ -314,6 +326,11 @@ p.timeAgo {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(14, 5, 5, 0.2);
   }
+
+  .edit__options {
+    left: -163px;
+    top: 30px;
+  }
   
 .edit {
     text-align: left;
@@ -406,10 +423,21 @@ input[name="update"]:hover {
 }
 
 @media only screen and (min-width: 600px) {
+    
     nav a, nav form{
         flex-flow: row wrap;
         flex: 1 0 10%;
         text-transform: lowercase;
         text-align: center;
     }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .grid {
+        grid-template-columns: initial;
+        grid-auto-rows: minmax(90vw, 25vw)
+    }
+
 }

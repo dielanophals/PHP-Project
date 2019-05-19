@@ -1,5 +1,5 @@
 .container {
-    width: calc(100% - 1000px);
+    width: 300px;
     margin: 50px auto 0;
     padding: 20px;
     display: flex;
@@ -27,3 +27,43 @@
     font-size: 1em;
     font-weight: bold;
 }
+
+a.post-image {
+    text-decoration: none;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .searchPost {
+    margin-bottom: 20px;
+  }
+  
+  .previewImg {
+    margin-top: 20px;
+    width: 200px;
+    height: auto;
+    background: white;
+    padding: 20px;  
+  }
+
+  .likes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  span.like-btn {
+    cursor: pointer;
+    padding: 10px;
+    font-size: 2em;
+    color: red;
+  }
+
+  span.likes-count {
+    text-decoration: none;
+    color: #333;
+        }
+

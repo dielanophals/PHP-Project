@@ -220,7 +220,7 @@
             	<label for="fileToUpload">Select image to upload:</label>
 				<input type="file" name="fileToUpload" id="fileToUpload"><br><br>
 				<label for="description">Description:</label>
-				<input type="text" name="description" id="description" required><br><br>
+				<textarea type="text" name="description" id="description" required></textarea><br><br>
 				<input type="submit" value="Upload Image" name="submit">
 				<label for="filter">Filter</label>
 				<select name="filter" id="filter">

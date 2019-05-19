@@ -23,7 +23,8 @@
 .profile {
     flex: 1 20%;
     background-image: url("http://wowslider.com/sliders/demo-81/data1/images/redkite50498.jpg");
-    height: 168px;
+    max-height: 168px;
+    max-width: 168px;
     border-radius: 50%;
     margin: 20px;
     overflow: hidden;
@@ -118,4 +119,26 @@ input#currentPassword {
 
 i {
     color: blue;
+}
+
+@media screen and (max-width: 1000px) {
+    .profile {
+        min-height: 168px;
+    }
+    .profile__information {
+        width: calc(100% - 50px);
+        flex-flow: column wrap;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile__information {
+        margin-top: 0;
+        width: 100%;
+        flex-flow: column wrap;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
 }

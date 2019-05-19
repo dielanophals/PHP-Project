@@ -13,7 +13,10 @@
 .profile {
     flex: 1 20%;
     background-image: url("http://wowslider.com/sliders/demo-81/data1/images/redkite50498.jpg");
-    height: 168px;
+    max-height: 168px;
+    max-width: 168px;
+    min-height: 168px;
+    min-width: 168px;
     border-radius: 50%;
     margin: 20px;
     overflow: hidden;
@@ -35,7 +38,9 @@
     padding: 10px;
     background-color: #000;
     color: #fff;
-    border-radius: 10%;
+    border-radius: 7px;
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
 .profilePosts{
@@ -115,7 +120,6 @@ a.post__full {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width:80%;
     text-align: center;
 }
 
@@ -157,7 +161,9 @@ a.post__full {
 
 #description{
   width:100%;
-  height:85px;
+  height: 85px;
+  resize: none;
+  border: 1px solid #BFBFBF;
 }
 
 .edit__options,
@@ -173,7 +179,67 @@ a.post__full {
   margin: 5px 0 10px;
 }
 
+.edit__options {
+  left: -163px;
+  top: 30px;
+}
+
 .form--delete,
 .form--edit {
   display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .profile {
+    min-height: 168px;
+    left: 50%;
+    margin-left: -84px;
+    position: relative;
+  }
+  .popup .post {
+    width:80%;
+  }
+
+  .profile__information {
+    margin-top: 0;
+    flex-flow: column wrap;
+  }
+
+  .information {
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+  }
+
+  .information a {
+    width: 130px;
+    text-align: center;
+    margin: 2.5px auto;
+  }
+
+  textarea#description {
+    border: 2px solid #BFBFBF;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+
+  input#fileToUpload {
+    border: 2px solid #BFBFBF;
+    border-radius: 5px;
+  }
+
+  select#filter {
+    border: 2px solid #BFBFBF;
+    border-radius: 5px;
+  }
+
+  input[type="submit"] {
+    border: 2px solid #BFBFBF;
+    border-radius: 5px;
+  }
+
+  p.bio {
+    text-align: center;
+  }
+
 }

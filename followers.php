@@ -19,56 +19,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/vendor/cssgram.min.css">
     <title>InstaPet - Profile</title>
-    <style>
-
-      a.post-image {
-        text-decoration: none;
-      }
-
-      .hide {
-        display: none;
-      }
-
-      .searchPost {
-        margin-bottom: 20px;
-	  }
-	  
-	  .previewImg {
-		margin-top: 20px;
-		width: 200px;
-		height: auto;
-		background: white;
-		padding: 20px;  
-	  }
-
-      .likes {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-      }
-
-      span.like-btn {
-        cursor: pointer;
-        padding: 10px;
-        font-size: 2em;
-        color: red;
-      }
-
-      span.likes-count {
-        text-decoration: none;
-        color: #333;
-			}
-
-
-    </style>
 </head>
 <body>
 	<header>
     	<?php require_once 'nav.inc.php'; ?>
     </header>
     
-    <div class="profile__container">
+    <div class="followers__container">
     	<div class="profile__information">
         	<?php $profile = User::getUserInfo($_SESSION['userID']); ?>
         	<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
@@ -76,7 +33,6 @@
                 <h2 class="name"><?php echo $profile['username']; ?></h2>
                 <p class="bio"><?php echo $profile['description']; ?></p>
                     <a href="settings.php">Edit profile</a>
-                    <a href="?upload=yes">Upload image</a>
                     <a href="saved.php">Saved images</a>
                     <a href="followers.php">Followers</a>
             </div>
