@@ -83,9 +83,9 @@
             
                 <a class="post__full" href="?image=<?php echo $post["id"]; ?>">
 					<div id="<?php echo $post["id"]; ?>" class="post">
-					<img class="<?php echo $post['filter']; ?>  post__img" src="<?php echo $post['image']; ?>">
-                    <p class="post__name"><?php echo $name; ?></p>
-                    <p class="timeAgo"><?php echo $time; ?></p>
+					<img class="<?php echo htmlspecialchars($post['filter']); ?>  post__img" src="<?php echo $post['image']; ?>">
+                    <p class="post__name"><?php echo htmlspecialchars($name); ?></p>
+                    <p class="timeAgo"><?php echo htmlspecialchars($time); ?></p>
                     </div>
                 </a>
             <?php endforeach; ?>
@@ -101,7 +101,7 @@
             $information = User::getUserInfo($post['user_id']);
             $name = $information['username'];
           ?>
-		  <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo $name; ?></a>
+		  <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo htmlspecialchars($name); ?></a>
 		  			<img class="popup_img" class="<?php echo $post['filter']; ?>" src="<?php echo $post['image']; ?>" class="<?php echo $post['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
@@ -116,7 +116,7 @@
                 <?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $post['description']; ?></p>
+					<p><?php echo htmlspecialchars($post['description']); ?></p>
 					<?php require("likes.inc.php"); ?>
                     <?php if ($_SESSION['userID'] == $post['user_id']): ?>
                 <div class="edit">
@@ -130,7 +130,7 @@
                     <a href="#" class="option--edit">Edit</a>
                     <form action="postEdit.php" method="POST" class="form--edit">
                       <input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
-                      <textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea><br>
+                      <textarea name="descriptionEdit"><?php echo htmlspecialchars($post['description']); ?></textarea><br>
                       <input type="submit" name="update" value="Update">
                     </form>
                   </div>

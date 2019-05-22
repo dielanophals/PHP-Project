@@ -31,7 +31,7 @@
 			<div class="likes__users--names">
 				<?php $users = Post::getLikesOfPost($post['id']);?>
 				<?php foreach($users as $user): ?>
-					<p><?php echo $user; ?></p>
+					<p><?php echo htmlspecialchars($user); ?></p>
 				<?php endforeach; ?>
 			</div>
 		</a>
@@ -46,7 +46,7 @@
 			<div class="likes__users--names">
 				<?php $users = Post::getLikesOfPost($post['id']);?>
 				<?php foreach($users as $user): ?>
-					<p><?php echo $user; ?></p>
+					<p><?php echo htmlspecialchars($user); ?></p>
 				<?php endforeach; ?>
 			</div>
 		</a>

@@ -30,8 +30,8 @@
         	<?php $profile = User::getUserInfo($_SESSION['userID']); ?>
         	<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-                <h2 class="name"><?php echo $profile['username']; ?></h2>
-                <p class="bio"><?php echo $profile['description']; ?></p>
+                <h2 class="name"><?php echo htmlspecialchars($profile['username']); ?></h2>
+                <p class="bio"><?php echo htmlspecialchars($profile['description']); ?></p>
                     <a href="settings.php">Edit profile</a>
                     <a href="saved.php">Saved images</a>
                     <a href="followers.php">Followers</a>
@@ -46,7 +46,7 @@
         <?php foreach ( $friends as $friend ): ?>
             <a href="friend.php?id=<?php echo $friend['id']; ?>" class="friend">
                 <div>
-                    <p><?php echo $friend['username']; ?></p>
+                    <p><?php echo htmlspecialchars($friend['username']); ?></p>
                 </div>
             </a>
         <?php endforeach; ?>

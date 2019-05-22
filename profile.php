@@ -118,8 +118,8 @@
         	<?php $profile = User::getUserInfo($_SESSION['userID']); ?>
         		<div class="profile" style="background-image: url('<?php echo $profile['picture']; ?>');"></div>
           	<div class="information">
-            <h2 class="name"><?php echo $profile['username']; ?></h2>
-            <p class="bio"><?php echo $profile['description']; ?></p>
+            <h2 class="name"><?php echo htmlspecialchars($profile['username']); ?></h2>
+            <p class="bio"><?php echo htmlspecialchars($profile['description']); ?></p>
 				<a href="settings.php">Edit profile</a>
 				<a href="?upload=yes">Upload image</a>
 				<a href="saved.php">Saved images</a>
@@ -175,7 +175,7 @@
 						<a href="#" class="option--edit">Edit</a>
 						<form action="postEdit.php" method="POST" class="form--edit">
 							<input type="hidden" value="<?php echo $p['id']; ?>" name="file_id">
-							<textarea name="descriptionEdit"><?php echo $p['description']; ?></textarea><br>
+							<textarea name="descriptionEdit"><?php echo htmlspecialchars($p['description']); ?></textarea><br>
 							<input type="submit" name="update" value="Update">
 						</form>
 					</div>
@@ -205,7 +205,7 @@
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $p['description']; ?></p>
+					<p><?php echo htmlspecialchars($p['description']); ?></p>
 				</div>
 				<a href="profile.php" class="close">X</a>';
 			</div>

@@ -98,7 +98,7 @@
 	</header>
 	<main>
 	  	<form>
-	  		<input type="hidden" class="btn__change__view--value" value="<?php echo $search; ?>">
+	  		<input type="hidden" class="btn__change__view--value" value="<?php echo htmlspecialchars($search); ?>">
 			<input type="button" class="btn__change__view" value="View on map">
 		</form>
 	</main>
@@ -114,11 +114,11 @@
 				<div class="container_post">
 					<?php $time = User::timeAgo($post['timestamp']); ?>
 						<?php $saved = Post::checkSaved($post['id']); ?>
-						<a class="post__full" href="search.php?search=<?php echo $search; ?>&image=<?php echo $post["id"]; ?>" class="post-image">
+						<a class="post__full" href="search.php?search=<?php echo htmlspecialchars($search); ?>&image=<?php echo $post["id"]; ?>" class="post-image">
 							<div class="searchPost">
-								<img class="post__img <?php echo $post['filter']; ?>" src="<?php echo $post['image']; ?>">
-								<p class="post__name"><?php echo $name; ?></p>
-								<p class="timeAgo"><?php echo $time; ?></p>
+								<img class="post__img <?php echo htmlspecialchars($post['filter']); ?>" src="<?php echo $post['image']; ?>">
+								<p class="post__name"><?php echo htmlspecialchars($name); ?></p>
+								<p class="timeAgo"><?php echo htmlspecialchars($time); ?></p>
 							</div>
 						</a>
 
@@ -136,7 +136,7 @@
 								<a href="#" class="option--edit">Edit</a>
 								<form action="postEdit.php" method="POST" class="form--edit">
 									<input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
-									<textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea><br>
+									<textarea name="descriptionEdit"><?php echo htmlspecialchars($post['description']); ?></textarea><br>
 									<input type="submit" name="update" value="Update">
 								</form>
 							</div>
@@ -159,7 +159,7 @@
 			<?php foreach($result as $r):?>
 				<a href="?image=<?php echo $r["id"]; ?>">
 					<div id="<?php echo $r["id"]; ?>" class="post">
-						<img class="post__img <?php echo $r['filter']; ?>" src="<?php echo $r["image"]; ?>">
+						<img class="post__img <?php echo htmlspecialchars($r['filter']); ?>" src="<?php echo $r["image"]; ?>">
 					</div>
 				</a>
 			<?php endforeach; ?>
@@ -175,7 +175,7 @@
 				$information = User::getUserInfo($p['user_id']);
 				$name = $information['username'];
 			?>
-		  <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo $name; ?></a>
+		  <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo htmlspecialchars($name); ?></a>
 		  			<img class="post__img <?php echo $p['filter']; ?>" src="<?php echo $p['image']; ?>">	
 					<!--Show the colors of the image. -->
 					<div class="color">
@@ -184,13 +184,13 @@
 						<?php foreach($c as $key => $value): ?>
 							<!--Only show found colors.-->
 							<?php if($value != 0): ?>
-								<a href="search.php?search=0&color=<?php echo $key?>">
-									<div class="color__item color__item--<?php echo $key; ?>"></div>
+								<a href="search.php?search=0&color=<?php echo htmlspecialchars($key)?>">
+									<div class="color__item color__item--<?php echo htmlspecialchars($key); ?>"></div>
 								</a>
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $p['description']; ?></p>
+					<p><?php echo htmlspecialchars($p['description']); ?></p>
 				</div>
 				<a href="<?php echo $previous; ?>" class="close">X</a>';
 			</div>

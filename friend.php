@@ -42,6 +42,8 @@
         align-items: center;
         justify-content: center;
         width: 100%;
+				position: relative;
+				z-index: 10;
       }
 
       span.like-btn {
@@ -81,13 +83,13 @@
 	<main class="profilePosts">
 		<div class="container">
 			<?php foreach(User::getUserPosts($id) as $post): ?>
-				<a href="?id=<?php echo $id ?>&image=<?php echo $post['id']; ?>">
-					<div class="container_post">
+				<div class="container_post">
+					<a href="?id=<?php echo $id ?>&image=<?php echo $post['id']; ?>">
 						<img src="<?php echo $post['image']; ?>" class="post__img <?php echo $post['filter']; ?>">
-					</div>
-				</a>
+					</a>
+					<?php require("likes.inc.php"); ?>
+				</div>
 			<?php endforeach; ?>
-			<?php require("likes.inc.php"); ?>
 			<?php if ($_SESSION['userID'] == $post['user_id']): ?>
 				<div class="edit">
 					<a href="#" class="edit_button"><i class="fas fa-ellipsis-h"></i></a>
@@ -100,7 +102,7 @@
 						<a href="#" class="option--edit">Edit</a>
 						<form action="postEdit.php" method="POST" class="form--edit">
 							<input type="hidden" value="<?php echo $post['id']; ?>" name="file_id">
-							<textarea name="descriptionEdit"><?php echo $post['description']; ?></textarea>
+							<textarea name="descriptionEdit"><?php echo htmlspecialchars($post['description']); ?></textarea>
 							<input type="submit" name="update" value="Update">
 						</form>
 					</div>
@@ -114,7 +116,7 @@
 		<?php foreach($post->getPostById($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
-					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo $profile['firstname'] . ' ' . $profile['lastname']; ?></a>
+					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo htmlspecialchars($profile['firstname']) . ' ' . htmlspecialchars($profile['lastname']); ?></a>
 					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
@@ -129,7 +131,7 @@
 							<?php endif; ?>
 						<?php endforeach; ?>
 					</div>
-					<p><?php echo $p['description']; ?></p>
+					<p><?php echo htmlspecialchars($p['description']); ?></p>
 				</div>
 				<a href="?id=<?php echo $id; ?>" class="close">X</a>
 			</div>
