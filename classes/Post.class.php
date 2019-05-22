@@ -266,8 +266,6 @@ class Post
     }
 
     public function getSavedPosts($id){
-        $id = $_SESSION["userID"];
-
         $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT * FROM posts WHERE id = '$id' AND active = 1");
         $statement->execute();

@@ -107,7 +107,7 @@
 	  			<?php $searchPosts = new Post();?>
 				<?php
 					foreach($searchPosts->getIdSaved() as $s):
-					foreach($searchPosts->getSavedPosts($s['id']) as $post):
+					foreach($searchPosts->getSavedPosts($s['post_id']) as $post):
 						$information = User::getUserInfo($post['user_id']);
 						$name = $information['username'];
 				?>
