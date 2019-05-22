@@ -33,7 +33,7 @@ a.post-image {
   }
 
   .hide {
-    display: none;
+    display: none !important;
   }
 
   .searchPost {

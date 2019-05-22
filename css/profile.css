@@ -193,6 +193,10 @@ a.post__full {
   display: none;
 }
 
+.hide {
+  display: none !important;
+}
+
 @media screen and (max-width: 600px) {
   .profile {
     min-height: 168px;
