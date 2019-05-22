@@ -42,8 +42,6 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-				position: relative;
-				z-index: 10;
       }
 
       span.like-btn {
@@ -84,8 +82,10 @@
 		<div class="container">
 			<?php foreach(User::getUserPosts($id) as $post): ?>
 				<div class="container_post">
+					<?php $time = User::timeAgo($post['timestamp']); ?>
 					<a href="?id=<?php echo $id ?>&image=<?php echo $post['id']; ?>">
 						<img src="<?php echo $post['image']; ?>" class="post__img <?php echo $post['filter']; ?>">
+						<p class="timeAgo"><?php echo $time; ?></p>
 					</a>
 					<?php require("likes.inc.php"); ?>
 				</div>
