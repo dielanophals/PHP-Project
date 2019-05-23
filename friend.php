@@ -117,6 +117,7 @@
 			<div class="popup">
 				<div class="post">
 					<a class="popup_name" href="friend.php?id=<?php echo $profile['id'] ?>"><?php echo htmlspecialchars($profile['firstname']) . ' ' . htmlspecialchars($profile['lastname']); ?></a>
+      		<p class="city"><?php echo $p['city']; ?></p>
 					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">

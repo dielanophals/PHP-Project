@@ -181,6 +181,7 @@
 				$name = $information['username'];
 			?>
 		  <a class="popup_name" href="friend.php?id=<?php echo $p['user_id'] ?>"><?php echo htmlspecialchars($name); ?></a>
+      <p class="city"><?php echo $p['city']; ?></p>
 		  			<img class="post__img <?php echo htmlspecialchars($p['filter']); ?>" src="<?php echo $p['image']; ?>">	
 					<!--Show the colors of the image. -->
 					<div class="color">

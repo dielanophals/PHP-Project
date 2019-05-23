@@ -101,7 +101,8 @@
             $information = User::getUserInfo($post['user_id']);
             $name = $information['username'];
           ?>
-		  <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo htmlspecialchars($name); ?></a>
+      <a class="popup_name" href="friend.php?id=<?php echo $post['user_id'] ?>"><?php echo htmlspecialchars($name); ?></a>
+      <p class="city"><?php echo $post['city']; ?></p>
 		  			<img class="popup_img" class="<?php echo $post['filter']; ?>" src="<?php echo $post['image']; ?>" class="<?php echo $post['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">

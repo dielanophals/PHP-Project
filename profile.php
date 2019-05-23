@@ -191,6 +191,7 @@
 		<?php foreach ($post->getPostById($_GET['image']) as $p): ?>
 			<div class="popup">
 				<div class="post">
+      				<p class="city"><?php echo $p['city']; ?></p>
 					<img src="<?php echo $p['image']; ?>" class="<?php echo $p['filter']; ?>">
 					<!--Show the colors of the image. -->
 					<div class="color">
